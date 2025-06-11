@@ -9,6 +9,7 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
+    /* background: linear-gradient(to left, #C4FFF9, #92FFC0); green */
     background: linear-gradient(to left, #D0C0F0, #A0BFF2);
     overflow-x: hidden;
     height: 100vh; 
@@ -42,6 +43,7 @@ nav {
 }
 
 header {
+    /* background: linear-gradient(to right, #37d492, #9df7de); green */
     background: linear-gradient(to right, #f5e8ff, #e2f2ff);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -53,7 +55,7 @@ header {
 .headername {
     font-weight: bold;
     font-size: clamp(18px, 3.5vw, 22px);
-    color: rgb(26, 13, 143);
+    color: rgb(26, 13, 143);;
     transition: all 0.3s ease;
     text-wrap: nowrap;
 }
@@ -200,4 +202,131 @@ footer {
 
 .footercontainer p {
     padding-bottom: 8px;
+}
+
+.loginmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 1vw;
+}
+
+#loginpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 35px;
+    border-radius: 10px;
+    width: clamp(300px, 55vw, 460px);
+    background: linear-gradient(to left, #e1d8f5, #ebd8ff);
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(11, 11, 122);
+    animation: BorderColorChange 5s linear infinite;
+}
+
+@keyframes BorderColorChange {
+    0%   { border-color: #423d7d; }  /* muted indigo */
+    25%  { border-color: #8c62ed; }  /* soft purple */
+    50%  { border-color: #2e55b0; }  /* periwinkle blue */
+    75%  { border-color: #7d32f6; }  /* medium blue */
+    100% { border-color: #423d7d; }
+}
+
+#loginpage h1 {
+    font-size: clamp(30px, 2.4vw, 36px);
+    margin-bottom: 20px;
+    color: #2B1B73;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 1s forwards;
+}
+
+#loginpage h2 {
+    font-size: clamp(26px, 2.2vw, 32px);
+    margin-bottom: 10px;
+    color: #2B1B73;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 1s forwards;
+}
+
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loginform {
+    width: 100%;
+}
+
+@media (min-width: 650px) {
+    .loginform {
+        width: 95%;
+    }
+}
+
+.formgroup {
+    display: flex;
+    flex-direction: column;
+    margin-top: clamp(25px, 2.5vw, 30px);
+}
+
+.formgroup label {
+    font-weight: bold;
+    margin-bottom: clamp(8px, 1vw, 12px);
+    font-size: clamp(20px, 2vw, 24px);
+    color: #2B1B73;
+}
+
+.formgroup input,
+.formgroup textarea {
+    padding: 10px 12px;
+    background-color: #e8e5ff;
+    border: 1.5px solid #9780f9; 
+    border-radius: 8px;
+    font-size: clamp(16px, 1.5vw, 18px);
+    resize: vertical;
+    transition: border-color 0.3s;
+    width: 100%;
+}
+
+.formgroup input:focus,
+.formgroup textarea:focus {
+    border-color: #4a42de;
+    border-width: 1.8px;
+    outline: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    background-color: #d6cbf0 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #d6cbf0 inset !important;
+    color: #000 !important;
+}
+
+.formgroupbtn {
+    text-align: center;
+}
+
+.submitbtn {
+    background-color: #c5aff8;
+    padding: 10px 15px;
+    margin: 25px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.submitbtn:hover {
+    background-color: #b995f3;
+}
+
+.formlinks a {
+    font-size: clamp(15px, 1.3vw, 18px);
+    text-decoration: none;
+    text-align: center;
 }

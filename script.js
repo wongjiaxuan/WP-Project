@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const currentYear = new Date().getFullYear();
+    document.querySelectorAll('#current-year').forEach(el => {
+        el.textContent = currentYear;
+    });
+});
+
 const menuIcon = document.getElementById('menuicon');
 const menu = document.querySelector('.menu');
 const nav = document.querySelector('nav');
@@ -13,11 +20,4 @@ document.addEventListener('click', (event) => {
         menu.classList.remove('show');
         menuIcon.classList.remove('rotate');
     }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const currentYear = new Date().getFullYear();
-    document.querySelectorAll('#current-year').forEach(el => {
-        el.textContent = currentYear;
-    });
 });
