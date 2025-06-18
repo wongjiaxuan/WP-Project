@@ -1,0 +1,42 @@
+📁 Inserted Data Summary (For Testing & Reference)
+--------------------------------------------------
+
+✅ USERS TABLE (5 entries)
+
+| ID | Username | Email               | Password     | Role  |
+|----|----------|---------------------|--------------|-------|
+| 1  | admin    | admin@example.com   | admin1234    | admin |
+| 2  | sara     | sara@gmail.com      | sara4321     | user  |
+| 3  | john     | john.doe@gmail.com  | johnpass     | user  |
+| 4  | fatimah  | fatimah@gmail.com   | fatimah88    | user  |
+| 5  | azmi     | azmi@hotmail.com    | azmi321      | user  |
+
+(Hashed passwords inserted using password_hash())
+
+✅ CATEGORIES TABLE
+
+- Food
+- Transport
+- Utilities
+- Entertainment
+- Healthcare
+
+✅ TRANSACTIONS TABLE
+
+| User | Category     | Type    | Amount | Note            | Date       |
+|------|--------------|---------|--------|------------------|------------|
+| 1    | Food         | expense | 45.00  | Lunch at cafe    | 2025-06-01 |
+| 2    | Transport    | expense | 12.50  | Grab ride        | 2025-06-02 |
+| 3    | Utilities    | expense | 120.00 | Electricity bill | 2025-06-05 |
+| 4    | Entertainment| income  | 250.00 | Freelance gig    | 2025-06-06 |
+| 5    | Healthcare   | expense | 65.00  | Pharmacy visit   | 2025-06-07 |
+
+✅ BUDGETS TABLE (Per user & category for June)
+
+| User | Category     | Limit (RM) |
+|------|--------------|------------|
+| 1    | Food         | 300.00     |
+| 2    | Transport    | 100.00     |
+| 3    | Utilities    | 150.00     |
+| 4    | Entertainment| 200.00     |
+| 5    | Healthcare   | 180.00     |
