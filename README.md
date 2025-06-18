@@ -130,11 +130,11 @@ Otherwise, your database queries will not work!
 
 ## 📌 FINAL REMINDERS
 
-✔️ Clone the repo into `htdocs`
-✔️ Import the SQL files in phpMyAdmin
-✔️ Include `db.php` in your PHP backend files
-✔️ Start your XAMPP server before testing
-✔️ Ask me if anything breaks!
+✔️ Clone the repo into `htdocs` <br>
+✔️ Import the SQL files in phpMyAdmin <br>
+✔️ Include `db.php` in your PHP backend files <br>
+✔️ Start your XAMPP server before testing <br>
+✔️ Ask me if anything breaks! <br>
 
 ---
 
