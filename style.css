@@ -159,6 +159,8 @@ header {
         transition: all 0.3s ease;
         background-color: #9B59B6;
     }
+    
+    }
 
     .menu a:hover::after {
         width: 100%;
@@ -167,7 +169,7 @@ header {
     .menu li:hover {
         transform: scale(1);
     }
-}
+
 
 main {
     display: flex;
@@ -179,7 +181,7 @@ main {
 
 #homepage,
 #dashboard,
-#input,
+
 #overview {
     width: 100%;
 }
@@ -330,3 +332,99 @@ textarea:-webkit-autofill {
     text-decoration: none;
     text-align: center;
 }
+
+.menu a.active {
+    color: #9B59B6;
+    border-bottom: 3px solid #9B59B6;
+}
+
+/* Center the form container on the page */
+.inputmain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full screen height */
+}
+
+/* Style the form box */
+.inputmain form {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Optional: Make inputs look nicer */
+.inputmain label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.inputmain input,
+.inputmain select,
+.inputmain textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.inputmain button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.inputmain button:hover {
+  background-color: #3a539b;
+}
+
+/* Table Styling */
+table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: clamp(16px, 2vw, 20px);
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table Header */
+table thead {
+    background-color: #a18aff;
+    color: white;
+    text-align: left;
+}
+
+/* Table Cells */
+table th,
+table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #ddd;
+    min-width: 120px; /* Ensures consistent width */
+    height: 60px;      /* Ensures consistent height */
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Last row border fix */
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover effect for rows */
+table tbody tr:hover {
+    background-color: #f3f3ff;
+}
+
