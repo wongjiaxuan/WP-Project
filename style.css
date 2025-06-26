@@ -428,3 +428,164 @@ table tbody tr:hover {
     background-color: #f3f3ff;
 }
 
+/* =================== SET BUDGET PAGE  =================== */
+
+.set-budget-page .layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  gap: 30px;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+
+.set-budget-page .intro-card,
+.set-budget-page .form-card,
+.set-budget-page .tips-card {
+  width: 100%;
+  max-width: 1400px;  
+  margin: 0 auto;
+}
+
+
+.set-budget-page .intro-card {
+  background: linear-gradient(135deg, #81c784, #388e3c);
+  color: white;
+  padding: 30px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.set-budget-page .intro-card::after {
+ content: "💰";
+
+  font-size: 100px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  opacity: 0.2;
+}
+
+.set-budget-page .intro-card h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.set-budget-page .intro-card p {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+
+.set-budget-page .form-card {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.set-budget-page .form-card:hover {
+  transform: translateY(-5px);
+}
+
+.set-budget-page .form-group {
+  margin-bottom: 20px;
+}
+
+.set-budget-page .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.set-budget-page .form-group input,
+.set-budget-page .form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.set-budget-page .btn-primary {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.set-budget-page .btn-primary:hover {
+  background-color: #1b5e20;
+}
+
+
+.set-budget-page .tips-card {
+  background: #fff3cd;
+  border-left: 6px solid #ffc107;
+  padding: 20px 30px;
+  border-radius: 10px;
+  color: #856404;
+}
+
+.set-budget-page .tips-card h3 {
+  margin-top: 0;
+}
+
+.set-budget-page .tips-card ul {
+  padding-left: 20px;
+}
+
+.set-budget-page .tips-card li {
+  margin-bottom: 10px;
+}
+
+
+.set-budget-page .content {
+  /**flex: 1;**/
+  padding: 20px;
+  width: 100%;
+  max-width: none;  
+}
+.set-budget-page .intro-content {
+  background: linear-gradient(135deg, #81c784, #388e3c);
+  padding: 30px;
+  border-radius: 16px;
+  color: white;
+  position: relative;
+}
+
+.set-budget-page .content::after {
+  
+  font-size: 100px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  opacity: 0.2;
+}
+
+
+
+@media (max-width: 768px) {
+  .set-budget-page .layout {
+    padding: 20px 10px;
+  }
+
+  .set-budget-page .intro-card::after {
+    display: none;
+  }
+
+  .set-budget-page .intro-card,
+  .set-budget-page .form-card,
+  .set-budget-page .tips-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+}
+
