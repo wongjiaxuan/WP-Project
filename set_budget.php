@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+include 'includes/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     die("User not logged in.");
