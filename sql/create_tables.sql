@@ -7,10 +7,11 @@ CREATE TABLE IF NOT EXISTS users (
     role ENUM('user', 'admin') DEFAULT 'user'
 );
 
--- CATEGORIES TABLE
+-- CATEGORIES TABLE (with the new 'type' column)
 CREATE TABLE IF NOT EXISTS categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    name VARCHAR(50) NOT NULL,
+    type VARCHAR(50) NOT NULL -- Added type column
 );
 
 -- TRANSACTIONS TABLE
