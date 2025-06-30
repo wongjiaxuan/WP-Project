@@ -129,6 +129,11 @@ header {
     white-space: nowrap;
 }
 
+.menu a.active {
+    color: #9B59B6;
+    border-bottom: 3px solid #9B59B6;
+}
+
 /* Larger Devices */
 @media (min-width: 1200px) {
     #menuicon {
@@ -159,6 +164,8 @@ header {
         transition: all 0.3s ease;
         background-color: #9B59B6;
     }
+    
+    }
 
     .menu a:hover::after {
         width: 100%;
@@ -167,7 +174,7 @@ header {
     .menu li:hover {
         transform: scale(1);
     }
-}
+
 
 main {
     display: flex;
@@ -179,7 +186,7 @@ main {
 
 #homepage,
 #dashboard,
-#input,
+
 #overview {
     width: 100%;
 }
@@ -204,6 +211,7 @@ footer {
     padding-bottom: 8px;
 }
 
+/* ====================== LOGIN PAGE  ===================== */
 .loginmain {
     display: flex;
     justify-content: center;
@@ -215,8 +223,8 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 35px;
-    border-radius: 10px;
+    padding: 45px 35px;
+    border-radius: 15px;
     width: clamp(300px, 55vw, 460px);
     background: linear-gradient(to left, #e1d8f5, #ebd8ff);
     border-width: 3px;
@@ -234,8 +242,8 @@ footer {
 }
 
 #loginpage h1 {
-    font-size: clamp(30px, 2.4vw, 36px);
-    margin-bottom: 20px;
+    font-size: clamp(30px, 2.6vw, 36px);
+    margin-bottom: 18px;
     color: #2B1B73;
     opacity: 0;
     transform: translateY(20px);
@@ -243,7 +251,7 @@ footer {
 }
 
 #loginpage h2 {
-    font-size: clamp(26px, 2.2vw, 32px);
+    font-size: clamp(26px, 2.3vw, 32px);
     margin-bottom: 10px;
     color: #2B1B73;
     opacity: 0;
@@ -268,6 +276,18 @@ footer {
     }
 }
 
+.alert {
+    background-color: #f6d1d1;
+    color: #e22e2e;
+    border: 1px solid #e22e2e;
+    font-size: clamp(18px, 1.5vw, 21px);
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 20px 0;
+}
+
 .formgroup {
     display: flex;
     flex-direction: column;
@@ -282,26 +302,32 @@ footer {
 }
 
 .formgroup input,
-.formgroup textarea {
+.formgroup select {
     padding: 10px 12px;
     background-color: #e8e5ff;
-    border: 1.5px solid #9780f9; 
+    border: 2px solid #9780f9; 
     border-radius: 8px;
-    font-size: clamp(16px, 1.5vw, 18px);
+    font-size: clamp(18px, 1.5vw, 21px);
     resize: vertical;
     transition: border-color 0.3s;
     width: 100%;
 }
 
+.formgroup select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' stroke='%239780f9' stroke-width='23' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
 .formgroup input:focus,
-.formgroup textarea:focus {
-    border-color: #4a42de;
-    border-width: 1.8px;
+.formgroup select:focus {
+    border-color: #3830ca;
     outline: none;
 }
 
-input:-webkit-autofill,
-textarea:-webkit-autofill {
+input:-webkit-autofill {
     background-color: #d6cbf0 !important;
     -webkit-box-shadow: 0 0 0px 1000px #d6cbf0 inset !important;
     color: #000 !important;
@@ -313,9 +339,10 @@ textarea:-webkit-autofill {
 
 .submitbtn {
     background-color: #c5aff8;
-    padding: 10px 15px;
+    padding: 12px 18px;
     margin: 25px;
-    font-size: clamp(15px, 1.3vw, 18px);
+    margin-bottom: 35px;
+    font-size: clamp(18px, 1.5vw, 21px);
     border: none;
     border-radius: 8px;
     transition: background-color 0.3s;
@@ -326,7 +353,287 @@ textarea:-webkit-autofill {
 }
 
 .formlinks a {
-    font-size: clamp(15px, 1.3vw, 18px);
+    font-size: clamp(18px, 1.5vw, 21px);
     text-decoration: none;
     text-align: center;
+    display: flex;
+    justify-content: center;
+}
+/* ====================== LOGIN PAGE  ===================== */
+
+/* ====================== INPUT PAGE  ===================== */
+/* Center the form container on the page */
+.inputmain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full screen height */
+}
+
+/* Style the form box */
+.inputmain form {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Optional: Make inputs look nicer */
+.inputmain label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.inputmain input,
+.inputmain select,
+.inputmain textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.inputmain button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.inputmain button:hover {
+  background-color: #3a539b;
+}
+
+/* Table Styling */
+table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: clamp(16px, 2vw, 20px);
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table Header */
+table thead {
+    background-color: #a18aff;
+    color: white;
+    text-align: left;
+}
+
+/* Table Cells */
+table th,
+table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #ddd;
+    min-width: 120px; /* Ensures consistent width */
+    height: 60px;      /* Ensures consistent height */
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Last row border fix */
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover effect for rows */
+table tbody tr:hover {
+    background-color: #f3f3ff;
+}
+/* ====================== INPUT PAGE  ===================== */
+
+/* =================== SET BUDGET PAGE  =================== */
+
+.set-budget-page .layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  gap: 30px;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+
+.set-budget-page .intro-card,
+.set-budget-page .form-card,
+.set-budget-page .tips-card {
+  width: 100%;
+  max-width: 1400px;  
+  margin: 0 auto;
+}
+
+
+.set-budget-page .intro-card {
+  background: linear-gradient(135deg, #81c784, #388e3c);
+  color: white;
+  padding: 30px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.set-budget-page .intro-card::after {
+  content: "💰";
+
+  font-size: 100px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  opacity: 0.2;
+}
+
+.set-budget-page .intro-card h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.set-budget-page .intro-card p {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+
+.set-budget-page .form-card {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.set-budget-page .form-card:hover {
+  transform: translateY(-5px);
+}
+
+.set-budget-page .form-group {
+  margin-bottom: 20px;
+}
+
+.set-budget-page .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.set-budget-page .form-group input,
+.set-budget-page .form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.set-budget-page .btn-primary {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.set-budget-page .btn-primary:hover {
+  background-color: #1b5e20;
+}
+
+
+.set-budget-page .tips-card {
+  background: #fff3cd;
+  border-left: 6px solid #ffc107;
+  padding: 20px 30px;
+  border-radius: 10px;
+  color: #856404;
+}
+
+.set-budget-page .tips-card h3 {
+  margin-top: 0;
+}
+
+.set-budget-page .tips-card ul {
+  padding-left: 20px;
+}
+
+.set-budget-page .tips-card li {
+  margin-bottom: 10px;
+}
+
+
+.set-budget-page .content {
+  /**flex: 1;**/
+  padding: 20px;
+  width: 100%;
+  max-width: none;  
+}
+.set-budget-page .intro-content {
+  background: linear-gradient(135deg, #81c784, #388e3c);
+  padding: 30px;
+  border-radius: 16px;
+  color: white;
+  position: relative;
+}
+
+.set-budget-page .content::after {
+  
+  font-size: 100px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  opacity: 0.2;
+}
+
+
+
+@media (max-width: 768px) {
+  .set-budget-page .layout {
+    padding: 20px 10px;
+  }
+
+  .set-budget-page .intro-card::after {
+    display: none;
+  }
+
+  .set-budget-page .intro-card,
+  .set-budget-page .form-card,
+  .set-budget-page .tips-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+}
+
+.alert {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-left: 6px solid #ffc107;
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.progress-bar-container {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 8px;
+    height: 14px;
+}
+
+.progress-bar {
+    background-color: #ffc107;
+    height: 100%;
+    transition: width 0.6s ease;
 }
