@@ -21,3 +21,4 @@ document.addEventListener('click', (event) => {
         menuIcon.classList.remove('rotate');
     }
 });
+

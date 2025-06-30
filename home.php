@@ -15,7 +15,7 @@
             <div class="headername">Jimat Master</div>
             <i class="fa-solid fa-bars" id="menuicon"></i>
             <ul class="menu">
-                <li><a href="JimatHome.html" class="active">Home</a></li>
+                <li><a href="home.php" class="active">Home</a></li>
                 <li><a href="input.php">Transaction Input</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.html">Finance Dashboard</a></li>
@@ -29,7 +29,10 @@
 
     <footer>
         <div class="footercontainer">
-            <p>&copy; <span id="current-year"></span> SECV2223-05 Web Programming Group 4</p>
+            <p>
+                <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
+                <span class="footergroup">Web Programming Group 4</span>
+            </p>
         </div>
     </footer>
 </body>
