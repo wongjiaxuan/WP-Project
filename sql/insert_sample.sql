@@ -6,13 +6,18 @@ INSERT INTO users (username, email, password, role) VALUES
 ('fatimah', 'fatimah@gmail.com', '$2y$10$tg1L0W2mlV1sLyAC1Ehgzu8m7QkqHz.xVfe2EhhS8rEyzGQo38OPW', 'user'),
 ('azmi', 'azmi@hotmail.com', '$2y$10$zUmbBCaUVx65nfEkvueY0uSwQJQfdbobrMaD9k4IwukGQdHSrf3Du', 'user');
 
--- CATEGORIES TABLE (5 sample categories)
-INSERT INTO categories (name) VALUES
-('Food'), 
-('Transport'), 
-('Utilities'), 
-('Entertainment'), 
-('Healthcare');
+-- Insert into categories table with updated type values
+INSERT INTO categories (name, type) VALUES
+('Food', 'expense'),
+('Transport', 'expense'),
+('Utilities', 'expense'),
+('Entertainment', 'expense'),
+('Healthcare', 'expense'),
+('Others', 'expense'),
+('Salary', 'income'),
+('Bonus', 'income'),
+('Investment', 'income'),
+('Others', 'income');
 
 -- TRANSACTIONS TABLE (5 sample entries)
 INSERT INTO transactions (user_id, category_id, type, amount, note, date) VALUES

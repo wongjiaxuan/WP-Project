@@ -23,43 +23,82 @@
         </nav>
     </header>
         
-<!--I do ehhhhhhhh-->
     <main class="inputmain">
         <section id="input">
-            <form method="POST" action="insert_transaction.php">
-                
-                <label for="amount">Amount:</label>
-                <input type="number" name="amount" required><br>
-                
-                <label for="type">Type:</label>
-                <select name="type" required>
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select><br>
-                
-                <label for="category_id">Category:</label>
-                <select name="category_id" required>
-                    <!-- Categories will be loaded dynamically from DB -->
-                    <?php
-                        include 'includes/db.php';
-                        $result = $conn->query("SELECT * FROM categories");
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row['category_id'] . "'>" . $row['name'] . "</option>";
-                        }
-                    ?>
-                </select><br>
+            <!-- Dropdown to choose between Income and Expense -->
+            <label for="type">Select Transaction Type:</label>
+            <select id="transactionType" onchange="togglePanels()">
+                <option value="income" <?php echo (isset($_POST['type']) && $_POST['type'] == 'income') ? 'selected' : ''; ?>>Income</option>
+                <option value="expense" <?php echo (isset($_POST['type']) && $_POST['type'] == 'expense') ? 'selected' : ''; ?>>Expense</option>
+            </select>
 
-                <label for="date">Date:</label>
-                <input type="date" name="date" required><br>
-                
-                <label for="note">Note:</label>
-                <textarea name="note"></textarea><br>
-                
-                <button type="submit">Add Transaction</button><br>
-            </form>
+            <!-- Income Form Panel -->
+            <div id="incomeForm" style="display: none;">
+                <br>
+                <form method="POST" action="insert_transaction.php">
+                    <input type="hidden" name="type" value="income"> <!-- Hidden field for type -->
+
+                    <label for="amount">Amount:</label>
+                    <input type="number" name="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
+                    
+                    <label for="category_id">Category:</label>
+                    <select name="category_id" id="category_id" required>
+                        <?php
+                        include 'includes/db.php';
+
+                        // Fetch categories based on 'income'
+                        $result = $conn->query("SELECT * FROM categories WHERE type = 'income'");
+                        while ($row = $result->fetch_assoc()) {
+                            $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';
+                            echo "<option value='" . $row['category_id'] . "' $selected>" . $row['name'] . "</option>";
+                        }
+                        ?>
+                    </select><br>
+
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
+
+                    <label for="note">Note:</label>
+                    <textarea name="note"><?php echo isset($_POST['note']) ? $_POST['note'] : ''; ?></textarea><br>
+                    
+                    <button type="submit">Add Income Transaction</button><br>
+                </form>
+            </div>
+
+            <!-- Expense Form Panel -->
+            <div id="expenseForm" style="display: none;">
+                <br>
+                <form method="POST" action="insert_transaction.php">
+                    <input type="hidden" name="type" value="expense"> <!-- Hidden field for type -->
+
+                    <label for="amount">Amount:</label>
+                    <input type="number" name="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
+                    
+                    <label for="category_id">Category:</label>
+                    <select name="category_id" id="category_id" required>
+                        <?php
+                        include 'includes/db.php';
+
+                        // Fetch categories based on 'expense'
+                        $result = $conn->query("SELECT * FROM categories WHERE type = 'expense'");
+                        while ($row = $result->fetch_assoc()) {
+                            $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';
+                            echo "<option value='" . $row['category_id'] . "' $selected>" . $row['name'] . "</option>";
+                        }
+                        ?>
+                    </select><br>
+
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
+
+                    <label for="note">Note:</label>
+                    <textarea name="note"><?php echo isset($_POST['note']) ? $_POST['note'] : ''; ?></textarea><br>
+                    
+                    <button type="submit">Add Expense Transaction</button><br>
+                </form>
+            </div>
         </section>
     </main>
-<!--I do ehhhhhhhh-->
 
     <footer>
         <div class="footercontainer">
@@ -69,5 +108,28 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // Function to toggle between the Income and Expense panels based on selected type
+        function togglePanels() {
+            var selectedType = document.getElementById('transactionType').value;
+            var incomeForm = document.getElementById('incomeForm');
+            var expenseForm = document.getElementById('expenseForm');
+            
+            if (selectedType === 'income') {
+                incomeForm.style.display = 'block';
+                expenseForm.style.display = 'none';
+            } else if (selectedType === 'expense') {
+                incomeForm.style.display = 'none';
+                expenseForm.style.display = 'block';
+            }
+        }
+
+        // Initialize by showing the correct form based on the default or selected type
+        window.onload = function() {
+            togglePanels();  // Toggle the panels based on the initial selection
+        };
+    </script>
+
 </body>
 </html>
