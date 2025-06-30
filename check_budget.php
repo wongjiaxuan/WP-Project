@@ -31,15 +31,14 @@ while ($row = $budgets->fetch_assoc()) {
     $spent = (float)($spent_result->fetch_assoc()['total_spent'] ?? 0);
 
     if ($limit > 0 && $spent >= 0.8 * $limit) {
-    $percent = number_format(($spent / $limit) * 100, 0);
-    echo "
-    <div class='alert'>
-        ⚠ You’ve used $percent% of your <strong>$category_name</strong> budget!
-        <div class='progress-bar-container'>
-            <div class='progress-bar' style='width: $percent%;'></div>
-        </div>
-    </div>";
-}
-
+        $percent = number_format(($spent / $limit) * 100, 0);
+        echo "
+        <div class='alert'>
+            ⚠ You’ve used $percent% of your <strong>$category_name</strong> budget!
+            <div class='progress-bar-container'>
+                <div class='progress-bar' style='width: $percent%;'></div>
+            </div>
+        </div>";
+    }
 }
 ?>
