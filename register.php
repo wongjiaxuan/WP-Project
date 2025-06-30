@@ -12,52 +12,59 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $data = htmlspecialchars($data);
             return $data;
         }
-    
+
+        $username = test_input($_POST['username']);
         $email = test_input($_POST['email']);
         $password = test_input($_POST['password']);
+        $confirmpassword = test_input($_POST['confirmpassword']);
         $role = test_input($_POST['role']);
-
-        if (empty($email)) {
-            header("Location: index.php?error=Email is required.");
+        
+        if (empty($username)) {
+            header("Location: register.php?error=Username is required.");
+            exit();
+        } else if (empty($email)) {
+            header("Location: register.php?error=Email is required.");
             exit();
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: index.php?error=Invalid email format.");
+            header("Location: register.php?error=Invalid email format.");
             exit();
         } else if (empty($password)) {
-            header("Location: index.php?error=Password is required.");
+            header("Location: register.php?error=Password is required.");
+            exit();
+        } else if (empty($confirmpassword)) {
+            header("Location: register.php?error=Confirm Password is required.");
+            exit();
+        } else if ($password !== $confirmpassword) {
+            header("Location: register.php?error=Passwords do not match.");
             exit();
         } else if (empty($role)) {
-            header("Location: index.php?error=Role is required.");
+            header("Location: register.php?error=Role is required.");
             exit();
         } else {
-            $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $checkStmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
+            $checkStmt->bind_param("s", $email);
+            $checkStmt->execute();
+            $checkStmt->store_result();
 
-            if ($result->num_rows === 1) {
+            if ($checkStmt->num_rows > 0) {
+                header("Location: register.php?error=This email is already registered.");
+                exit();
+            }
 
-                $row = $result->fetch_assoc();
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $email, $hashedPassword, $role);
 
-                if (password_verify($password, $row['password'])) {
-                    if ($row['role'] === $role) {
-                        $_SESSION['user_id'] = $row['user_id'];
-                        $_SESSION['username'] = $row['username'];
-                        $_SESSION['email'] = $row['email'];
-                        $_SESSION['role'] = $row['role'];
-    
-                        header("Location: home.php");
-                        exit();
-                    } else {
-                        header("Location: index.php?error=Incorrect role selected.");
-                        exit();
-                    }
-                } else {
-                    header("Location: index.php?error=Inccorect email or password.");
-                    exit();
-                }
+            if ($stmt->execute()) {
+                $_SESSION['user_id'] = $stmt->insert_id;
+                $_SESSION['username'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = $role;
+
+                header("Location: home.php");
+                exit();
             } else {
-                header("Location: index.php?error=Inccorect email or password.");
+                header("Location: register.php?error=Registration failed. Please try again.");
                 exit();
             }
         }
@@ -68,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Jimat Master Login Page</title>
+    <title>Jimat Master Register Page</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An online budget tracker simplifies user's work on managing income, expenses and savings.">
@@ -77,16 +84,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <main class="loginmain">
-        <section id="loginpage">
+    <main class="registermain">
+        <section id="registerpage">
             <h1>Jimat Master</h1>
-            <h2>Login</h2>
+            <h2>Register</h2>
             <?php if (isset($_GET['error'])) { ?>
                 <div class="alert" role="alert">
                     <?= $_GET['error'] ?>
                 </div>
             <?php } ?>
-            <form method="post" class="loginform" action="">
+            <form method="post" class="registerform" action="">
+                <div class="formgroup">
+                    <label for="email">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Your Username">
+                </div>
                 <div class="formgroup">
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="Your Email">
@@ -94,6 +105,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="formgroup">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Your Password">
+                </div>
+                <div class="formgroup">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Your Confirm Password">
                 </div>
                 <div class="formgroup">
                     <label for="role">Role</label>
@@ -104,10 +119,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </select>
                 </div>
                 <div class="formgroupbtn">
-                    <button type="submit" class="submitbtn">Login</button>
+                    <button type="submit" class="submitbtn">Register</button>
                 </div>
                 <div class="formlinks">
-                    <p>Don't have an account?<a href="register.php">Register</a></p>
+                    <p>Already have an account?<a href="index.php">Login here</a></p>
                 </div>
             </form>
         </section>

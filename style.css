@@ -36,7 +36,7 @@ main {
 nav {
     width: 100%;
     font-size: clamp(15px, 3vw, 18px);
-    padding: 15px 5%;
+    padding: 20px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +54,7 @@ header {
 
 .headername {
     font-weight: bold;
-    font-size: clamp(18px, 3.5vw, 22px);
+    font-size: clamp(24px, 3.3vw, 28px);
     color: rgb(26, 13, 143);;
     transition: all 0.3s ease;
     text-wrap: nowrap;
@@ -67,18 +67,18 @@ header {
 
 #menuicon {
     display: block;
-    font-size: 22px;
+    font-size: 25px;
     color: rgb(26, 13, 143);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 #menuicon:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 #menuicon.rotate {
     transform: rotate(90deg);
-    color: rgb(70, 56, 199);
+    color: rgb(137, 52, 183);
 }
 
 .menu.show {
@@ -95,14 +95,14 @@ header {
     flex-direction: column;
     align-items: center;
     list-style-type: none;
-    font-size: clamp(16px, 3vw, 18px);
-    gap: 10px;
+    font-size: clamp(20px, 2.5vw, 22px);
+    gap: 15px;
     background: linear-gradient(to right, rgba(245, 232, 255, 0.8), rgba(226, 242, 255, 0.8));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     top: 50px;
     left: 0;
-    padding: 10px;
-    padding-top: 15px;
+    padding: 20px;
+    padding-top: 45px;
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -131,7 +131,10 @@ header {
 
 .menu a.active {
     color: #9B59B6;
-    border-bottom: 3px solid #9B59B6;
+}
+
+.menu a.active {
+    color: #9B59B6;
 }
 
 /* Larger Devices */
@@ -153,28 +156,26 @@ header {
         opacity: 1;
         transform: translateY(0);
     }
+}
 
-    .menu a::after { /* Line */
-        content: '';
-        position: absolute;
-        height: 2px; /* Line Thickness */
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        transition: all 0.3s ease;
-        background-color: #9B59B6;
-    }
-    
-    }
+.menu a::after { /* Line */
+    content: '';
+    position: absolute;
+    height: 2px; /* Line Thickness */
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    transition: all 0.3s ease;
+    background-color: #9B59B6;
+}
 
-    .menu a:hover::after {
-        width: 100%;
-    }
+.menu a:hover::after {
+    width: 100%;
+}
 
-    .menu li:hover {
-        transform: scale(1);
-    }
-
+.menu li:hover {
+    transform: scale(1);
+}
 
 main {
     display: flex;
@@ -184,9 +185,6 @@ main {
     padding: 0 clamp(2rem, 1vw, 6rem);
 }
 
-#homepage,
-#dashboard,
-
 #overview {
     width: 100%;
 }
@@ -194,11 +192,34 @@ main {
 footer {
     position: sticky;
     flex-shrink: 0;
-    font-size: clamp(15px, 1.5vw, 18px);
+    font-size: 19px;
     width: 100%;
-    padding: 13px 0;
+    padding: 15px 0;
+    padding-top: 20px;
     z-index: 20;
     background: linear-gradient(to right, #F2E6FF, #E6D9F7); 
+}
+
+.footeryear,
+.footergroup {
+    display: block;
+    text-align: center;
+}
+
+.footeryear {
+    margin-bottom: 6px;
+}
+
+/* Larger Devices */
+@media (min-width: 550px) {
+    .footeryear,
+    .footergroup {
+      display: inline;
+    }
+
+    footer {
+        font-size: clamp(21.3px, 2.5vw, 22px);
+    }
 }
 
 .footercontainer {
@@ -212,20 +233,22 @@ footer {
 }
 
 /* ====================== LOGIN PAGE  ===================== */
-.loginmain {
+.loginmain,
+.registermain {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5vh 1vw;
 }
 
-#loginpage {
+#loginpage,
+#registerpage {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 45px 35px;
     border-radius: 15px;
-    width: clamp(300px, 55vw, 460px);
+    width: clamp(380px, 55vw, 460px);
     background: linear-gradient(to left, #e1d8f5, #ebd8ff);
     border-width: 3px;
     border-style: solid;
@@ -241,8 +264,9 @@ footer {
     100% { border-color: #423d7d; }
 }
 
-#loginpage h1 {
-    font-size: clamp(30px, 2.6vw, 36px);
+#loginpage h1,
+#registerpage h1 {
+    font-size: clamp(30px, 2.9vw, 36px);
     margin-bottom: 18px;
     color: #2B1B73;
     opacity: 0;
@@ -250,8 +274,9 @@ footer {
     animation: fadeSlideUp 1s forwards;
 }
 
-#loginpage h2 {
-    font-size: clamp(26px, 2.3vw, 32px);
+#loginpage h2,
+#registerpage h2 {
+    font-size: clamp(26px, 2.6vw, 32px);
     margin-bottom: 10px;
     color: #2B1B73;
     opacity: 0;
@@ -266,7 +291,8 @@ footer {
     }
 }
 
-.loginform {
+.loginform,
+.registerform {
     width: 100%;
 }
 
@@ -280,7 +306,7 @@ footer {
     background-color: #f6d1d1;
     color: #e22e2e;
     border: 1px solid #e22e2e;
-    font-size: clamp(18px, 1.5vw, 21px);
+    font-size: clamp(20px, 2vw, 24px);
     font-weight: bold;
     padding: 15px 25px;
     border-radius: 6px;
@@ -297,7 +323,7 @@ footer {
 .formgroup label {
     font-weight: bold;
     margin-bottom: clamp(8px, 1vw, 12px);
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(21px, 2.2vw, 24px);
     color: #2B1B73;
 }
 
@@ -307,7 +333,7 @@ footer {
     background-color: #e8e5ff;
     border: 2px solid #9780f9; 
     border-radius: 8px;
-    font-size: clamp(18px, 1.5vw, 21px);
+    font-size: clamp(19px, 1.5vw, 21px);
     resize: vertical;
     transition: border-color 0.3s;
     width: 100%;
@@ -342,7 +368,7 @@ input:-webkit-autofill {
     padding: 12px 18px;
     margin: 25px;
     margin-bottom: 35px;
-    font-size: clamp(18px, 1.5vw, 21px);
+    font-size: clamp(21px, 2vw, 22px);
     border: none;
     border-radius: 8px;
     transition: background-color 0.3s;
@@ -352,12 +378,26 @@ input:-webkit-autofill {
     background-color: #b995f3;
 }
 
-.formlinks a {
-    font-size: clamp(18px, 1.5vw, 21px);
-    text-decoration: none;
-    text-align: center;
+.formlinks {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+    font-size: clamp(20.5px, 2vw, 22px);
+}
+
+.formlinks p {
+    color: #2B1B73;
+    text-align: center;
+}
+
+.formlinks a {
+    display: inline-block;
+    text-decoration: none;
+    color: #7135e9;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-left: 8px;
 }
 /* ====================== LOGIN PAGE  ===================== */
 

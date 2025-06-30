@@ -29,7 +29,10 @@
 
     <footer>
         <div class="footercontainer">
-            <p>&copy; <span id="current-year"></span> SECV2223-05 Web Programming Group 4</p>
+            <p>
+                <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
+                <span class="footergroup">Web Programming Group 4</span>
+            </p>
         </div>
     </footer>
 </body>
