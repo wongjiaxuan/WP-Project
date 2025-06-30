@@ -674,3 +674,231 @@ table tbody tr:hover {
     height: 100%;
     transition: width 0.6s ease;
 }
+
+//dashboard.php styling
+
+summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+
+.progress-container {
+  width: 80%;
+  max-width: 500px;
+  padding-top: 5px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.progress-card {
+  background-color: #ffffff; 
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.card-month {
+  margin-bottom: 15px;
+} 
+
+#month-select {
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #3b99f6;
+  background: transparent;
+  appearance: none;
+  padding: 5px 25px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+} 
+
+#month-select:hover {
+  background-color: #f9f9f9;
+  border-color: #3b99f6;
+}
+
+#month-select:focus {
+  background-color: #f9f9f9;
+  border-color: #8756f9;
+  outline: none;
+}
+ 
+.monthly-progress-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+
+.progress-labels {
+  display: flex;
+  width: 500px; 
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.progress-label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  width: 50%;
+  text-align: center;
+}
+
+.progress-label-right {
+  color: red;
+}
+
+.progress-bar-fill {
+  width: 500px; 
+  height: 25px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-expense,
+.progress-remain {
+  height: 25px;
+  border-radius: 20px;
+}
+
+.progress-expense {
+  background: blue;
+  border-radius: 20px 0 0 20px;
+}
+
+.progress-remain {
+  background: darkred;
+  border-radius: 0 20px 20px 0;
+}
+
+.income-budget-summary {
+  display: flex;
+  gap: 20px;
+  margin: 10px 20px;
+  justify-content: flex-start;
+}
+
+.income-budget-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  width: 260px; /* Half of a typical 560px progress card */
+}
+
+
+.category-summary {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  column-gap: 2rem;
+  row-gap: 1rem;  
+}
+
+.category-card {
+background: white;
+border-radius: 12px;
+padding: 16px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+text-align: center;
+flex-shrink: 0; 
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 150px;
+height: 130px;
+}
+
+.category-card:hover {
+transform: translateY(-4px);
+}
+
+.category-card img, .income-budget-card img {
+width: 50px;
+height: 50px;
+object-fit: contain;
+margin-bottom: 10px;
+}
+
+.category-info h3 {
+font-size: 16px;
+color: #333;
+margin-bottom: 6px;
+}
+
+.category-info p {
+font-size: 14px;
+font-weight: bold;
+color: darkred;
+}
+
+.category-card.full-width {
+grid-column: span 2;
+}
+
+.monthlysummary, .transactionhistory {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  align-items: center;
+  row-gap: 1rem;
+  
+}
+
+@media (max-width: 768px) {
+  .summary {
+    flex-direction: column;
+  }
+}
+
+
+.transactiontable {
+  width: 90%;
+  max-width: 90%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: left;
+}
+
+.transactiontable th {
+  border-top: none;
+  border-bottom: 1px solid #333;
+}
+
+.transactiontable_icon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.table_expense {
+  color: darkred;
+}
+
+.table_income {
+  color: green;
+}
