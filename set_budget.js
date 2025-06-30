@@ -1,13 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const successMsg = document.getElementById('success-msg');
-    const params = new URLSearchParams(window.location.search);
-
-    if (params.get("success") === "1") {
-        if (successMsg) {
-            successMsg.style.display = 'block';
-        }
-
-        // Show popup alert
-        alert("✅ Budget saved successfully!");
+document.addEventListener("DOMContentLoaded", function () {
+  const msg = localStorage.getItem("budgetMsg");
+  if (msg) {
+    const alertBox = document.getElementById("alert-box");
+    if (alertBox) {
+      alertBox.textContent = msg;
+      alertBox.style.display = "block";
     }
+
+    localStorage.removeItem("budgetMsg");
+  }
 });
