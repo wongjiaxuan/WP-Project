@@ -677,7 +677,7 @@ table tbody tr:hover {
 
 //dashboard.php styling
 
-summary {
+.summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
