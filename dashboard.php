@@ -78,7 +78,7 @@ $history_result = $conn->query($sql_history);
             <div class="headername">Jimat Master</div>
             <i class="fa-solid fa-bars" id="menuicon"></i>
             <ul class="menu">
-                <li><a href="jimatmaster.html">Home</a></li>
+                <li><a href="home.php">Home</a></li>
                 <li><a href="input.php">Transaction Input</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.php" class="active">Finance Dashboard</a></li>
@@ -190,10 +190,11 @@ $history_result = $conn->query($sql_history);
     
     <footer>
         <div class="footercontainer">
-            <p>&copy; <span id="current-year"></span> SECV2223-05 Web Programming Group 4</p>
+            <p>
+                <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
+                <span class="footergroup">Web Programming Group 4</span>
+            </p>
         </div>
     </footer>
-
-
 </body>
 </html>

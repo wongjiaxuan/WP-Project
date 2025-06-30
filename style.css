@@ -10,7 +10,8 @@ html, body {
     padding: 0;
     width: 100%;
     /* background: linear-gradient(to left, #C4FFF9, #92FFC0); green */
-    background: linear-gradient(to left, #D0C0F0, #A0BFF2);
+    /* background: linear-gradient(to left, #D0C0F0, #A0BFF2); */
+    background: linear-gradient(to left, #c3f9e2, #bfdafa);
     overflow-x: hidden;
     height: 100vh; 
     display: flex;
@@ -44,7 +45,8 @@ nav {
 
 header {
     /* background: linear-gradient(to right, #37d492, #9df7de); green */
-    background: linear-gradient(to right, #f5e8ff, #e2f2ff);
+    /* background: linear-gradient(to right, #f5e8ff, #e2f2ff); */
+    background: linear-gradient(to left, #bcf7c4, #ace8fb);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -55,21 +57,21 @@ header {
 .headername {
     font-weight: bold;
     font-size: clamp(24px, 3.3vw, 28px);
-    color: rgb(26, 13, 143);;
+    color: rgb(4, 34, 99);
     transition: all 0.3s ease;
     text-wrap: nowrap;
 }
 
 .headername:hover {
-    color: rgb(11, 11, 122);
-    transform: scale(1.05);
+    color: rgb(4, 73, 92);
+    transform: scale(1.08);
 }
 
 #menuicon {
     display: block;
     font-size: 25px;
     padding: 5px;
-    color: rgb(26, 13, 143);
+    color: rgb(4, 34, 99);
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -80,7 +82,7 @@ header {
 
 #menuicon.rotate {
     transform: rotate(90deg);
-    color: rgb(137, 52, 183);
+    color: rgb(4, 73, 92);
 }
 
 .menu.show {
@@ -99,12 +101,12 @@ header {
     list-style-type: none;
     font-size: clamp(20px, 2.5vw, 22px);
     gap: 18px;
-    background: linear-gradient(to right, rgba(245, 232, 255, 0.8), rgba(226, 242, 255, 0.8));
+    /* background: linear-gradient(to right, rgba(245, 232, 255, 0.8), rgba(226, 242, 255, 0.8)); */
+    background: linear-gradient(to left, rgba(188, 247, 196, 0.8), rgba(172, 232, 251, 0.8));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    top: 50px;
+    top: 70px;
     left: 0;
     padding: 20px;
-    padding-top: 45px;
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -112,7 +114,7 @@ header {
 
 .menu a {
     text-decoration: none;
-    color: rgb(26, 13, 143);
+    color: rgb(4, 34, 99);
     font-weight: bold;
     position: relative;    
 }
@@ -128,18 +130,18 @@ header {
 }
 
 .menu a.active {
-    color: #9B59B6;
+    color: #117263;
 }
 
 .menu a:not(.active)::after { /* Line */
     content: '';
     position: absolute;
-    height: 2px; /* Line Thickness */
+    height: 3px; /* Line Thickness */
     bottom: -4px;
     left: 0;
     width: 0;
     transition: all 0.3s ease;
-    background-color: #9B59B6;
+    background-color: #117263;
 }
 
 .menu a:hover::after {
@@ -194,7 +196,8 @@ footer {
     padding: 15px 0;
     padding-top: 20px;
     z-index: 20;
-    background: linear-gradient(to right, #F2E6FF, #E6D9F7); 
+    /* background: linear-gradient(to right, #F2E6FF, #E6D9F7);  */
+    background: linear-gradient(to left, #99e7b7, #a7d0ff);
 }
 
 .footeryear,
@@ -246,26 +249,27 @@ footer {
     padding: 45px 35px;
     border-radius: 15px;
     width: clamp(380px, 55vw, 460px);
-    background: linear-gradient(to left, #e1d8f5, #ebd8ff);
+    /* background: linear-gradient(to left, #d3e9f8, #ebd8ff); */
+    background: linear-gradient(to left, #d6f5f1, #e3fdea);
     border-width: 3px;
     border-style: solid;
-    border-color: rgb(11, 11, 122);
+    border-color: #2caa41;
     animation: BorderColorChange 5s linear infinite;
 }
 
 @keyframes BorderColorChange {
-    0%   { border-color: #423d7d; }  /* muted indigo */
-    25%  { border-color: #8c62ed; }  /* soft purple */
-    50%  { border-color: #2e55b0; }  /* periwinkle blue */
-    75%  { border-color: #7d32f6; }  /* medium blue */
-    100% { border-color: #423d7d; }
+    0%   { border-color: #2caa41; } 
+    25%  { border-color: #1e938f; } 
+    50%  { border-color: #20679d; }  
+    75%  { border-color: #16724a; }
+    100% { border-color: #2caa41; }
 }
 
 #loginpage h1,
 #registerpage h1 {
     font-size: clamp(30px, 2.9vw, 36px);
     margin-bottom: 18px;
-    color: #2B1B73;
+    color: #095a29;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeSlideUp 1s forwards;
@@ -275,7 +279,7 @@ footer {
 #registerpage h2 {
     font-size: clamp(26px, 2.6vw, 32px);
     margin-bottom: 10px;
-    color: #2B1B73;
+    color: #095a29;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeSlideUp 1s forwards;
@@ -299,14 +303,14 @@ footer {
     }
 }
 
-.alert {
-    background-color: #f6d1d1;
+#loginpage .alert {
+    background-color: #fde5e5;
     color: #e22e2e;
     border: 1px solid #e22e2e;
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(20px, 2vw, 22px);
     font-weight: bold;
     padding: 15px 25px;
-    border-radius: 6px;
+    border-radius: 8px;
     text-align: center;
     margin: 20px 0;
 }
@@ -321,14 +325,14 @@ footer {
     font-weight: bold;
     margin-bottom: clamp(8px, 1vw, 12px);
     font-size: clamp(21px, 2.2vw, 24px);
-    color: #2B1B73;
+    color: #115b27;
 }
 
 .formgroup input,
 .formgroup select {
     padding: 10px 12px;
-    background-color: #e8e5ff;
-    border: 2px solid #9780f9; 
+    background-color: #e2fef5;
+    border: 2px solid #115b27; 
     border-radius: 8px;
     font-size: clamp(19px, 1.5vw, 21px);
     resize: vertical;
@@ -338,7 +342,7 @@ footer {
 
 .formgroup select {
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' stroke='%239780f9' stroke-width='23' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' stroke='%23115b27' stroke-width='23' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
@@ -346,12 +350,11 @@ footer {
 
 .formgroup input:focus,
 .formgroup select:focus {
-    border-color: #3830ca;
+    border-color: #115b27;
     outline: none;
 }
 
 input:-webkit-autofill {
-    background-color: #d6cbf0 !important;
     -webkit-box-shadow: 0 0 0px 1000px #d6cbf0 inset !important;
     color: #000 !important;
 }
@@ -361,18 +364,18 @@ input:-webkit-autofill {
 }
 
 .submitbtn {
-    background-color: #c5aff8;
-    padding: 12px 18px;
+    background-color: #1aca2e;
+    padding: 11px 18px;
     margin: 25px;
     margin-bottom: 35px;
-    font-size: clamp(21px, 2vw, 22px);
+    font-size: clamp(20px, 2vw, 21px);
     border: none;
     border-radius: 8px;
     transition: background-color 0.3s;
 }
 
 .submitbtn:hover {
-    background-color: #b995f3;
+    background-color: #72eb97;
 }
 
 .formlinks {
@@ -385,16 +388,21 @@ input:-webkit-autofill {
 }
 
 .formlinks p {
-    color: #2B1B73;
+    color: #084219;
     text-align: center;
 }
 
 .formlinks a {
     display: inline-block;
     text-decoration: none;
-    color: #7135e9;
+    color: #1c8e46;
     transition: color 0.3s ease, transform 0.3s ease;
-    margin-left: 8px;
+    margin-left: 10px;
+}
+
+.formlinks a:hover {
+    color: #0c6527;
+    transform: scale(1.1);
 }
 /* ====================== LOGIN PAGE  ===================== */
 
@@ -587,7 +595,6 @@ table tbody tr:hover {
   background-color: #1b5e20;
 }
 
-
 .set-budget-page .tips-card {
   background: #fff3cd;
   border-left: 6px solid #ffc107;
@@ -624,15 +631,12 @@ table tbody tr:hover {
 }
 
 .set-budget-page .content::after {
-  
   font-size: 100px;
   position: absolute;
   top: 10px;
   right: 30px;
   opacity: 0.2;
 }
-
-
 
 @media (max-width: 768px) {
   .set-budget-page .layout {
@@ -651,7 +655,7 @@ table tbody tr:hover {
   }
 }
 
-.alert {
+/* .alert {
     background-color: #fff3cd;
     color: #856404;
     padding: 10px;
@@ -659,7 +663,7 @@ table tbody tr:hover {
     margin-bottom: 15px;
     font-weight: bold;
     border-radius: 4px;
-}
+} */
 
 .progress-bar-container {
     background-color: #e9ecef;
@@ -675,7 +679,7 @@ table tbody tr:hover {
     transition: width 0.6s ease;
 }
 
-//dashboard.php styling
+/* dashboard.php styling */
 
 .summary {
   display: grid;

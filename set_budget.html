@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Set Budget – Budget Planner</title>
+  <title>Jimat Master Set Budget – Budget Planner Page</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2e0e6a30e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+  <script src="script.js" defer></script>
 </head>
 <body class="set-budget-page">
   <header>
-    <nav aria-label="Main Navigation">
-      <div class="headername">Jimat Master</div>
-      <i class="fa-solid fa-bars" id="menuicon"></i>
-      <ul class="menu">
-           <li><a href="home.php">Home</a></li>
-    
+        <nav aria-label="Main Navigation">
+            <div class="headername">Jimat Master</div>
+            <i class="fa-solid fa-bars" id="menuicon"></i>
+            <ul class="menu">
+                <li><a href="home.php">Home</a></li>
                 <li><a href="input.php">Transaction Input</a></li>
                 <li><a href="set_budget.html" class="active">Monthly Budget</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
-                <li><a href="dashboard.php" >Finance Dashboard</a></li>
+                <li><a href="dashboard.html">Finance Dashboard</a></li>
       </ul>
     </nav>
   </header>
@@ -38,16 +39,15 @@
         <form action="set_budget.php" method="POST">
           <div class="form-group">
             <label for="category">Choose Category:</label>
-           <select name="category_id" id="category" required>
-             <option disabled selected>Select one</option>
-             <option value="1">🍔 Food</option>
-             <option value="2">🚗 Transport</option>
-             <option value="3">💡 Utilities</option>
-             <option value="4">🎮 Entertainment</option>
-             <option value="5">🧑‍⚕️ Healthcare</option>
-             <option value="6">🗂️ Others</option>
-</select>
-
+            <select name="category_id" id="category" required>
+              <option disabled selected>Select one</option>
+              <option value="1">🍔 Food</option>
+              <option value="2">🚗 Transport</option>
+              <option value="3">💡 Utilities</option>
+              <option value="4">🎮 Entertainment</option>
+              <option value="5">🧑‍⚕️ Healthcare</option>
+              <option value="6">🗂️ Others</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -75,6 +75,15 @@
 
     </div> 
   </main>
+
+  <footer>
+      <div class="footercontainer">
+          <p>
+              <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
+              <span class="footergroup">Web Programming Group 4</span>
+          </p>
+      </div>
+  </footer>
   <script src="set_budget.js"></script>
 
 </body>
