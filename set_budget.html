@@ -13,10 +13,11 @@
       <div class="headername">Jimat Master</div>
       <i class="fa-solid fa-bars" id="menuicon"></i>
       <ul class="menu">
-        <li><a href="jimatmaster.html">Home</a></li>
-        <li><a href="input.php">Transaction Input</a></li>
-        <li><a href="overview.php">Transaction Overview</a></li>
-        <li><a href="dashboard.html" class="active">Finance Dashboard</a></li>
+           <li><a href="home.php">Home</a></li>
+                <li><a href="set_budget" class="active">Budget</a></li>
+                <li><a href="input.php">Transaction Input</a></li>
+                <li><a href="overview.php">Transaction Overview</a></li>
+                <li><a href="dashboard.html" >Finance Dashboard</a></li>
       </ul>
     </nav>
   </header>
@@ -32,10 +33,11 @@
       </section>
 
       <section class="form-card">
+        <div id="alert-box" style="display:none; padding:10px; margin-bottom:15px; border-left:5px solid green; background:#e9ffe9; color:#333; font-weight: 500;"></div>
         <form action="set_budget.php" method="POST">
           <div class="form-group">
             <label for="category">Choose Category:</label>
-            <select name="category_id" id="category" required>
+           <select name="category_id" id="category" required>
              <option disabled selected>Select one</option>
              <option value="1">🍔 Food</option>
              <option value="2">🚗 Transport</option>
@@ -71,5 +73,8 @@
 
     </div> 
   </main>
+  <script src="set_budget.js"></script>
+
 </body>
 </html>
+
