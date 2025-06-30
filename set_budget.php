@@ -8,12 +8,18 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $category_id = $_POST['category_id'] ?? null;
-$amount_limit = $_POST['amount_limit'] ?? null;
-$month = $_POST['month'] ?? null; // format: YYYY-MM
+$amount_limit = $_POST['amount'] ?? null;
+$month = $_POST['month'] ?? null;
 
 if (!$category_id || !$amount_limit || !$month) {
-    die("Missing input. Please go back and fill all fields.");
+    echo "
+    <script>
+      localStorage.setItem('budgetMsg', 'Missing input. Please fill all fields.');
+      window.location.href = 'set_budget.html';
+    </script>";
+    exit;
 }
+
 
 $sql_check = "SELECT budget_id FROM budgets WHERE user_id = ? AND category_id = ? AND month = ?";
 $stmt = $conn->prepare($sql_check);
@@ -33,6 +39,12 @@ if ($result->num_rows > 0) {
     $stmt_insert->execute();
 }
 
-header("Location: dashboard.php?msg=Budget+saved+successfully");
+
+echo "
+<script>
+  localStorage.setItem('budgetMsg', 'Budget saved successfully');
+  window.location.href = 'set_budget.html';
+</script>";
 exit;
 ?>
+
