@@ -17,7 +17,7 @@
             <ul class="menu">
                 <li><a href="home.php" class="active">Home</a></li>
                 <li><a href="input.php">Transaction Input</a></li>
-                <li><a href="set_budget">Monthly Budget</a></li>
+                <li><a href="set_budget.html">Monthly Budget</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.html">Finance Dashboard</a></li>
             </ul>
