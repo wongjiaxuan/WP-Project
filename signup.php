@@ -20,25 +20,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $role = test_input($_POST['role']);
         
         if (empty($username)) {
-            header("Location: register.php?error=Username is required.");
+            header("Location: signup.php?error=Username is required.");
             exit();
         } else if (empty($email)) {
-            header("Location: register.php?error=Email is required.");
+            header("Location: signup.php?error=Email is required.");
             exit();
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: register.php?error=Invalid email format.");
+            header("Location: signup.php?error=Invalid email format.");
             exit();
         } else if (empty($password)) {
-            header("Location: register.php?error=Password is required.");
+            header("Location: signup.php?error=Password is required.");
             exit();
         } else if (empty($confirmpassword)) {
-            header("Location: register.php?error=Confirm Password is required.");
+            header("Location: signup.php?error=Confirm Password is required.");
             exit();
         } else if ($password !== $confirmpassword) {
-            header("Location: register.php?error=Passwords do not match.");
+            header("Location: signup.php?error=Passwords do not match.");
             exit();
         } else if (empty($role)) {
-            header("Location: register.php?error=Role is required.");
+            header("Location: signup.php?error=Role is required.");
             exit();
         } else {
             $checkStmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $checkStmt->store_result();
 
             if ($checkStmt->num_rows > 0) {
-                header("Location: register.php?error=This email is already registered.");
+                header("Location: signup.php?error=This email is already registered.");
                 exit();
             }
 
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 header("Location: home.php");
                 exit();
             } else {
-                header("Location: register.php?error=Registration failed. Please try again.");
+                header("Location: signup.php?error=Registration failed. Please try again.");
                 exit();
             }
         }

@@ -68,7 +68,9 @@ header {
 #menuicon {
     display: block;
     font-size: 25px;
+    padding: 5px;
     color: rgb(26, 13, 143);
+    cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -96,7 +98,7 @@ header {
     align-items: center;
     list-style-type: none;
     font-size: clamp(20px, 2.5vw, 22px);
-    gap: 15px;
+    gap: 18px;
     background: linear-gradient(to right, rgba(245, 232, 255, 0.8), rgba(226, 242, 255, 0.8));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     top: 50px;
@@ -121,10 +123,6 @@ header {
     transition: transform 0.3s ease;
 }
 
-.menu li:hover {
-    transform: scale(1.1);
-}
-
 .menu li a {
     white-space: nowrap;
 }
@@ -133,32 +131,7 @@ header {
     color: #9B59B6;
 }
 
-.menu a.active {
-    color: #9B59B6;
-}
-
-/* Larger Devices */
-@media (min-width: 1200px) {
-    #menuicon {
-        display: none;
-    }
-
-    .menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        position: static;
-        background: none;
-        box-shadow: none;
-        font-size: clamp(15px, 3vw, 18px);
-        padding: 0;
-        gap: clamp(10px, 6vw, 80px);
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.menu a::after { /* Line */
+.menu a:not(.active)::after { /* Line */
     content: '';
     position: absolute;
     height: 2px; /* Line Thickness */
@@ -175,6 +148,30 @@ header {
 
 .menu li:hover {
     transform: scale(1);
+}
+
+/* Larger Devices */
+@media (min-width: 1300px) {
+    #menuicon {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        position: static;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        gap: clamp(10px, 6vw, 80px);
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .menu a:not(.active)::after {
+        height: 3px;
+    }
 }
 
 main {
