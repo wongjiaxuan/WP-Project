@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set Budget – Budget Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0e6a30e.js" crossorigin="anonymous"></script>
+</head>
+<body class="set-budget-page">
+  <header>
+    <nav aria-label="Main Navigation">
+      <div class="headername">Jimat Master</div>
+      <i class="fa-solid fa-bars" id="menuicon"></i>
+      <ul class="menu">
+        <li><a href="jimatmaster.html">Home</a></li>
+        <li><a href="input.php">Transaction Input</a></li>
+        <li><a href="overview.php">Transaction Overview</a></li>
+        <li><a href="dashboard.html" class="active">Finance Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="layout"> 
+
+      
+      <section class="intro-card">
+        <div class="intro-content">
+          <h1>Set Your Monthly Budget</h1>
+          <p>Plan smarter, save more. Assign your budget across categories below.</p>
+          
+        </div>
+      </section>
+
+      <section class="form-card">
+        <form action="set_budget.php" method="POST">
+          <div class="form-group">
+            <label for="category">Choose Category:</label>
+            <select name="category" id="category" required>
+              <option disabled selected>Select one</option>
+              <option value="Food">🍔 Food</option>
+              <option value="Transport">🚗 Transport</option>
+              <option value="Entertainment">🎮 Entertainment</option>
+              <option value="Utilities">💡 Utilities</option>
+              <option value="Healthcare">🧑‍⚕️ Healthcare</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Budget Amount (RM):</label>
+            <input type="number" name="amount" id="amount" min="0" placeholder="Enter amount" required>
+          </div>
+
+          <div class="form-group">
+           <label for="month">Select Month:</label>
+           <input type="month" name="month" id="month" value="2025-06" required>
+          </div>
+
+          <button type="submit" class="btn-primary"><i class="fas fa-check-circle"></i> Save Budget</button>
+        </form>
+      </section>
+
+      <section class="tips-card">
+        <h3>💡 Tips for Smart Budgeting</h3>
+        <ul>
+          <li>Limit entertainment spending to max 30% of your income.</li>
+          <li>Keep at least 20% for savings or emergencies.</li>
+          <li>Track small expenses—they sneak up fast!</li>
+        </ul>
+      </section>
+
+    </div> 
+  </main>
+</body>
+</html>
