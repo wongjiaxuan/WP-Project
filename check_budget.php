@@ -8,7 +8,7 @@ include 'includes/db.php';
 if (!isset($_SESSION['user_id'])) return;
 
 $user_id = $_SESSION['user_id'];
-$current_month = date('Y-m'); // e.g., "2025-07"
+$current_month = date('Y-m'); // Example: "2025-07"
 
 $sql = "SELECT b.category_id, b.amount_limit, b.month, c.name AS category_name
         FROM budgets b
@@ -24,9 +24,10 @@ $messages = [];
 while ($row = $budgets->fetch_assoc()) {
     $category_id = $row['category_id'];
     $limit = (float)$row['amount_limit'];
-    $budget_month = $row['month']; // e.g., "2025-07"
+    $budget_month = $row['month']; // Format: "YYYY-MM"
     $category_name = $row['category_name'];
 
+    // Calculate total spent in this category for the month
     $sql_spent = "SELECT SUM(amount) AS total_spent
                   FROM transactions
                   WHERE user_id = ? 
@@ -40,11 +41,18 @@ while ($row = $budgets->fetch_assoc()) {
     $spent = (float)($spent_result->fetch_assoc()['total_spent'] ?? 0);
 
     if ($limit > 0 && $spent >= 0.8 * $limit) {
-        $percent = number_format(($spent / $limit) * 100, 0);
-        $monthName = DateTime::createFromFormat('Y-m', $budget_month)->format('F');
-        $messages[] = "⚠ You’ve exceeded $percent% of your \"$category_name\" budget for $monthName.";
+        $percent = ($spent / $limit) * 100;
+        $monthName = DateTime::createFromFormat('Y-m', $budget_month)->format('F'); // e.g., "July"
+
+        if ($percent >= 100) {
+            $messages[] = "❗ You’ve exceeded 100% of your \"$category_name\" budget for $monthName.";
+        } else {
+            $rounded = number_format($percent, 0);
+            $messages[] = "⚠ You’ve used $rounded% of your \"$category_name\" budget for $monthName.";
+        }
     }
 }
+
 
 if (!empty($messages)) {
     $combinedMessage = implode("\\n", array_map('addslashes', $messages));
