@@ -1,4 +1,7 @@
 <?php
+session_start();
+include 'includes/db.php';
+
 if (!isset($_SESSION['user_id'])) return;
 
 $user_id = $_SESSION['user_id'];
