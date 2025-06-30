@@ -7,6 +7,47 @@
     <meta name="description" content="An online budget tracker simplifies user's work on managing income, expenses and savings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <script src="script.js" defer></script>
+    <style>
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .btn-edit, .btn-delete, .btn-confirm, .btn-cancel {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-edit {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-confirm {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+        .edit-input {
+            width: 100%;
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .edit-select {
+            width: 100%;
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,7 +79,6 @@
     
     <main class="overviewmain">
         <section id="overview">
-            <!--Added by me-->
             <h2>Transaction History</h2>
 
             <!-- Dropdown to choose transaction type -->
@@ -82,6 +122,15 @@
                     ?>
                 </select>
 
+                <!-- Date Filter (available for all transaction types) -->
+                <label for="date_filter">Date Filter:</label>
+                <select name="date_filter" id="date_filter">
+                    <option value="" <?php echo (!isset($_GET['date_filter']) || $_GET['date_filter'] == '') ? 'selected' : ''; ?>>All Time</option>
+                    <option value="7" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '7') ? 'selected' : ''; ?>>Last 7 Days</option>
+                    <option value="14" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '14') ? 'selected' : ''; ?>>Last 14 Days</option>
+                    <option value="30" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '30') ? 'selected' : ''; ?>>Last 30 Days</option>
+                </select>
+
                 <button type="submit">Filter</button>
             </form>
 
@@ -103,6 +152,7 @@
                                 <th>Category</th>
                                 <th>Amount (RM)</th>
                                 <th>Note</th>
+                                <th>Actions</th>
                             </tr>
                           </thead>";
                     echo "<tbody>";
@@ -119,6 +169,14 @@
                     if (!empty($_GET['category'])) {
                         $sql .= " AND t.category_id = ?";
                         $params[] = $_GET['category'];
+                        $types .= "i";
+                    }
+
+                    // Add date filter if provided (only for "All" type)
+                    if (!empty($_GET['date_filter']) && is_numeric($_GET['date_filter'])) {
+                        $days = (int)$_GET['date_filter'];
+                        $sql .= " AND t.date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)";
+                        $params[] = $days;
                         $types .= "i";
                     }
 
@@ -139,26 +197,32 @@
                             // Output the transactions
                             while ($row = $result->fetch_assoc()) {
                                 $total += $row['amount'];
-                                echo "<tr>
-                                        <td>" . htmlspecialchars($row['date']) . "</td>
-                                        <td>" . htmlspecialchars($row['category_name']) . "</td>
-                                        <td>RM " . number_format($row['amount'], 2) . "</td>
-                                        <td>" . htmlspecialchars($row['note']) . "</td>
+                                echo "<tr id='row-{$row['transaction_id']}'>
+                                        <td class='date-cell'>" . htmlspecialchars($row['date']) . "</td>
+                                        <td class='category-cell' data-category-id='" . htmlspecialchars($row['category_id']) . "'>" . htmlspecialchars($row['category_name']) . "</td>
+                                        <td class='amount-cell'>" . number_format($row['amount'], 2) . "</td>
+                                        <td class='note-cell'>" . htmlspecialchars($row['note']) . "</td>
+                                        <td class='action-cell'>
+                                            <div class='action-buttons'>
+                                                <button class='btn-edit' onclick='editTransaction({$row['transaction_id']})'>Edit</button>
+                                                <button class='btn-delete' onclick='deleteTransaction({$row['transaction_id']})'>Delete</button>
+                                            </div>
+                                        </td>
                                       </tr>";
                             }
                             // Add total row
                             echo "<tr style='font-weight: bold; background-color: #f0f0f0;'>
-                                    <td colspan='2'>Total " . ucfirst($currentType) . "</td>
+                                    <td colspan='3'>Total " . ucfirst($currentType) . "</td>
                                     <td>RM " . number_format($total, 2) . "</td>
                                     <td></td>
                                   </tr>";
                         } else {
-                            echo "<tr><td colspan='4' style='text-align: center; padding: 20px;'>No " . $currentType . " transactions found.</td></tr>";
+                            echo "<tr><td colspan='5' style='text-align: center; padding: 20px;'>No " . $currentType . " transactions found.</td></tr>";
                         }
 
                         $stmt->close();
                     } else {
-                        echo "<tr><td colspan='4' style='text-align: center; padding: 20px; color: red;'>Error preparing query: " . htmlspecialchars($conn->error) . "</td></tr>";
+                        echo "<tr><td colspan='5' style='text-align: center; padding: 20px; color: red;'>Error preparing query: " . htmlspecialchars($conn->error) . "</td></tr>";
                     }
                     
                     echo "</tbody>";
@@ -175,6 +239,7 @@
                             <th>Category</th>
                             <th>Amount (RM)</th>
                             <th>Note</th>
+                            <th>Actions</th>
                         </tr>
                       </thead>";
                 echo "<tbody>";
@@ -200,6 +265,14 @@
                     $types .= "s";
                 }
 
+                // Add date filter if provided (for all transaction types)
+                if (!empty($_GET['date_filter']) && is_numeric($_GET['date_filter'])) {
+                    $days = (int)$_GET['date_filter'];
+                    $sql .= " AND t.date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)";
+                    $params[] = $days;
+                    $types .= "i";
+                }
+
                 // Add ORDER BY to sort by date (latest to oldest), then by transaction_id
                 $sql .= " ORDER BY t.date DESC, t.transaction_id DESC";
 
@@ -215,21 +288,27 @@
                     if ($result->num_rows > 0) {
                         // Output the transactions
                         while ($row = $result->fetch_assoc()) {
-                            echo "<tr>
-                                    <td>" . htmlspecialchars($row['date']) . "</td>
-                                    <td>" . htmlspecialchars(ucfirst($row['type'])) . "</td>
-                                    <td>" . htmlspecialchars($row['category_name']) . "</td>
-                                    <td>RM " . number_format($row['amount'], 2) . "</td>
-                                    <td>" . htmlspecialchars($row['note']) . "</td>
+                            echo "<tr id='row-{$row['transaction_id']}'>
+                                    <td class='date-cell'>" . htmlspecialchars($row['date']) . "</td>
+                                    <td class='type-cell'>" . htmlspecialchars(ucfirst($row['type'])) . "</td>
+                                    <td class='category-cell' data-category-id='" . htmlspecialchars($row['category_id']) . "'>" . htmlspecialchars($row['category_name']) . "</td>
+                                    <td class='amount-cell'>" . number_format($row['amount'], 2) . "</td>
+                                    <td class='note-cell'>" . htmlspecialchars($row['note']) . "</td>
+                                    <td class='action-cell'>
+                                        <div class='action-buttons'>
+                                            <button class='btn-edit' onclick='editTransaction({$row['transaction_id']})'>Edit</button>
+                                            <button class='btn-delete' onclick='deleteTransaction({$row['transaction_id']})'>Delete</button>
+                                        </div>
+                                    </td>
                                   </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='5' style='text-align: center; padding: 20px;'>No transactions found.</td></tr>";
+                        echo "<tr><td colspan='6' style='text-align: center; padding: 20px;'>No transactions found.</td></tr>";
                     }
 
                     $stmt->close();
                 } else {
-                    echo "<tr><td colspan='5' style='text-align: center; padding: 20px; color: red;'>Error preparing query: " . htmlspecialchars($conn->error) . "</td></tr>";
+                    echo "<tr><td colspan='6' style='text-align: center; padding: 20px; color: red;'>Error preparing query: " . htmlspecialchars($conn->error) . "</td></tr>";
                 }
                 
                 echo "</tbody>";
@@ -253,10 +332,173 @@
 
         // Form auto-submit on type change for better UX
         document.getElementById('transactionType').addEventListener('change', function() {
-            // Reset category selection when type changes
+            // Reset category and date filter selections when type changes
             document.getElementById('category').value = '';
+            document.getElementById('date_filter').value = '';
             this.form.submit();
         });
+
+        // Delete transaction function
+        function deleteTransaction(transactionId) {
+            if (confirm("Are you sure that you want to delete this transaction?")) {
+                fetch('delete_transaction.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'transaction_id=' + transactionId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Remove the row from the table
+                        document.getElementById('row-' + transactionId).remove();
+                        alert('Transaction deleted successfully!');
+                        // Reload the page to update totals
+                        location.reload();
+                    } else {
+                        alert('Error deleting transaction: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting transaction');
+                });
+            }
+        }
+
+// Edit transaction function
+        function editTransaction(transactionId) {
+            const row = document.getElementById('row-' + transactionId);
+            const dateCell = row.querySelector('.date-cell');
+            const categoryCell = row.querySelector('.category-cell');
+            const amountCell = row.querySelector('.amount-cell');
+            const noteCell = row.querySelector('.note-cell');
+            const actionCell = row.querySelector('.action-cell');
+
+            // Store original values
+            const originalDate = dateCell.textContent.trim();
+            const originalCategoryId = categoryCell.getAttribute('data-category-id');
+            const originalCategoryName = categoryCell.textContent.trim();
+            const originalAmount = amountCell.textContent.replace(/,/g, '').trim(); // Remove commas
+            const originalNote = noteCell.textContent.trim();
+
+            // Determine transaction type based on which table this row is in
+            let transactionType = 'all'; // default
+            const tables = document.querySelectorAll('table');
+            
+            for (let table of tables) {
+                if (table.contains(row)) {
+                    // Check the h3 heading above this table to determine type
+                    let currentElement = table.previousElementSibling;
+                    while (currentElement && currentElement.tagName !== 'H3') {
+                        currentElement = currentElement.previousElementSibling;
+                    }
+                    if (currentElement && currentElement.textContent) {
+                        if (currentElement.textContent.toLowerCase().includes('income')) {
+                            transactionType = 'income';
+                        } else if (currentElement.textContent.toLowerCase().includes('expense')) {
+                            transactionType = 'expense';
+                        }
+                    }
+                    break;
+                }
+            }
+
+            // Create input fields
+            dateCell.innerHTML = `<input type="date" class="edit-input" value="${originalDate}" id="edit-date-${transactionId}">`;
+            
+            // Fetch categories filtered by transaction type
+            const categoryUrl = transactionType !== 'all' ? `get_categories.php?type=${transactionType}` : 'get_categories.php';
+            
+            fetch(categoryUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(categories => {
+                    if (categories.error) {
+                        throw new Error(categories.error);
+                    }
+                    let categoryOptions = '';
+                    categories.forEach(category => {
+                        const selected = category.category_id == originalCategoryId ? 'selected' : '';
+                        categoryOptions += `<option value="${category.category_id}" ${selected}>${category.name}</option>`;
+                    });
+                    categoryCell.innerHTML = `<select class="edit-select" id="edit-category-${transactionId}">${categoryOptions}</select>`;
+                })
+                .catch(error => {
+                    console.error('Error fetching categories:', error);
+                    alert('Error loading categories: ' + error.message);
+                });
+
+            amountCell.innerHTML = `<input type="number" step="0.01" min="0.01" class="edit-input" value="${originalAmount}" id="edit-amount-${transactionId}">`;
+            noteCell.innerHTML = `<input type="text" class="edit-input" value="${originalNote}" id="edit-note-${transactionId}">`;
+            
+            // Change action buttons
+            actionCell.innerHTML = `
+                <div class="action-buttons">
+                    <button class="btn-confirm" onclick="confirmEdit(${transactionId})">Confirm</button>
+                    <button class="btn-cancel" onclick="cancelEdit(${transactionId}, '${originalDate}', '${originalCategoryId}', '${originalCategoryName.replace(/'/g, "\\'")}', '${originalAmount}', '${originalNote.replace(/'/g, "\\'")}')">Cancel</button>
+                </div>
+            `;
+        }
+
+        // Confirm edit function
+        function confirmEdit(transactionId) {
+            const newDate = document.getElementById(`edit-date-${transactionId}`).value;
+            const newCategoryId = document.getElementById(`edit-category-${transactionId}`).value;
+            const newAmount = document.getElementById(`edit-amount-${transactionId}`).value;
+            const newNote = document.getElementById(`edit-note-${transactionId}`).value;
+
+            fetch('update_transaction.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `transaction_id=${transactionId}&date=${newDate}&category_id=${newCategoryId}&amount=${newAmount}&note=${encodeURIComponent(newNote)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Transaction updated successfully!');
+                    location.reload(); // Reload to show updated data
+                } else {
+                    alert('Error updating transaction: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating transaction');
+            });
+        }
+
+        // Cancel edit function
+        function cancelEdit(transactionId, originalDate, originalCategoryId, originalCategoryName, originalAmount, originalNote) {
+            const row = document.getElementById('row-' + transactionId);
+            const dateCell = row.querySelector('.date-cell');
+            const categoryCell = row.querySelector('.category-cell');
+            const amountCell = row.querySelector('.amount-cell');
+            const noteCell = row.querySelector('.note-cell');
+            const actionCell = row.querySelector('.action-cell');
+
+            // Restore original values
+            dateCell.textContent = originalDate;
+            categoryCell.textContent = originalCategoryName;
+            categoryCell.setAttribute('data-category-id', originalCategoryId);
+            amountCell.textContent = originalAmount;
+            noteCell.textContent = originalNote;
+            
+            // Restore action buttons
+            actionCell.innerHTML = `
+                <div class="action-buttons">
+                    <button class="btn-edit" onclick="editTransaction(${transactionId})">Edit</button>
+                    <button class="btn-delete" onclick="deleteTransaction(${transactionId})">Delete</button>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
