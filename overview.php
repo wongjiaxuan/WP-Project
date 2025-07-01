@@ -7,47 +7,6 @@
     <meta name="description" content="An online budget tracker simplifies user's work on managing income, expenses and savings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <script src="script.js" defer></script>
-    <style>
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-        }
-        .btn-edit, .btn-delete, .btn-confirm, .btn-cancel {
-            padding: 4px 8px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .btn-edit {
-            background-color: #007bff;
-            color: white;
-        }
-        .btn-delete {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-confirm {
-            background-color: #28a745;
-            color: white;
-        }
-        .btn-cancel {
-            background-color: #6c757d;
-            color: white;
-        }
-        .edit-input {
-            width: 100%;
-            padding: 2px 4px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .edit-select {
-            width: 100%;
-            padding: 2px 4px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-    </style>
 </head>
 
 <body>
