@@ -406,6 +406,53 @@ input:-webkit-autofill {
 }
 /* ====================== LOGIN PAGE  ===================== */
 
+/* ====================== HOME PAGE  ===================== */
+
+.homepagemain {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 70vh;
+}
+
+.welcome {
+    width: 100%;
+    padding: 30px;
+}
+
+.welcome p {
+    text-align: left;
+    font-weight: bold;
+    font-size: xx-large;
+    margin-top: 0px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #083c5f;
+}
+
+
+.big-piggy {
+    position: fixed;
+    bottom: 80px; /* Adjust so it doesn’t overlap the footer */
+    right: 40px;
+    z-index: 5;
+    opacity: 0.2; /* Transparent so it doesn’t distract */
+    animation: piggyFloat 5s ease-in-out infinite;
+}
+
+.big-piggy i {
+    font-size: 12vw; /* Roughly 1/8 of screen width */
+    color: #115b27; /* Orange piggy bank */
+}
+
+@keyframes piggyFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* ====================== HOME PAGE  ===================== */
+
+
 /* ====================== INPUT PAGE  ===================== */
 /* Center the form container on the page */
 .inputmain {
@@ -497,6 +544,9 @@ table tbody tr:hover {
     background-color: #f3f3ff;
 }
 /* ====================== INPUT PAGE  ===================== */
+#incomeForm button, #expenseForm button{
+  background-color: #117263;
+}
 
 /* ==================== OVERVIEW PAGE  ==================== */
 #overview h2 {

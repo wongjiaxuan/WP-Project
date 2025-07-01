@@ -10,6 +10,28 @@
 </head>
 
 <body>
+    <?php
+        // Start session and include DB
+        session_start();
+        include 'includes/db.php';
+
+        if (!isset($_SESSION['user_id'])) {
+        header("Location: index.php?error=Please log in first.");
+        exit();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Get username
+        $sql = "SELECT username FROM users WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($username);
+        $stmt->fetch();
+        $stmt->close();
+    ?>
+
     <header>
         <nav aria-label="Main Navigation">
             <div class="headername">Jimat Master</div>
@@ -24,10 +46,18 @@
             </ul>
         </nav>
     </header>
-    <main class="homepagemain">
+        <main class="homepagemain">
+        <div class="welcome">
+            <p>Hi, <?php echo htmlspecialchars($username); ?>! Welcome back to Jimat Master!</p>
+        </div>
+
         <section id="homepage">
+            <div class="big-piggy">
+                <i class="fas fa-piggy-bank"></i>
+            </div>
         </section>
     </main>
+
 
     <footer>
         <div class="footercontainer">
