@@ -14,7 +14,17 @@ $month = $_POST['month'] ?? null;
 if (!$category_id || !$amount_limit || !$month) {
     echo "
     <script>
-      localStorage.setItem('budgetMsg', 'Missing input. Please fill all fields.');
+      localStorage.setItem('budgetMsg', 'Wrong input. Please fill all fields.');
+      window.location.href = 'set_budget.html';
+    </script>";
+    exit;
+}
+
+$current_month = date('Y-m');
+if ($month < $current_month) {
+    echo "
+    <script>
+      localStorage.setItem('budgetMsg', 'Invalid: Cannot set budget for a past month.');
       window.location.href = 'set_budget.html';
     </script>";
     exit;
@@ -38,7 +48,6 @@ if ($result->num_rows > 0) {
     $stmt_insert->bind_param("iisd", $user_id, $category_id, $month, $amount_limit);
     $stmt_insert->execute();
 }
-
 
 echo "
 <script>
