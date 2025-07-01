@@ -58,7 +58,8 @@
 
     // Check if user is logged in
     if (!isset($_SESSION['user_id'])) {
-        die("Please log in first.");
+        header("Location: index.php?error=Please log in first.");
+        exit();
     }
 
     $user_id = $_SESSION['user_id'];
@@ -74,6 +75,7 @@
                 <li><a href="set_budget.html">Monthly Budget</a></li>
                 <li><a href="overview.php" class="active">Transaction Overview</a></li>
                 <li><a href="dashboard.php">Finance Dashboard</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

@@ -10,6 +10,14 @@
 </head>
 
 <body>
+    <?php
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?error=Please log in first.");
+            exit();
+        }
+    ?>
+
     <header>
         <nav aria-label="Main Navigation">
             <div class="headername">Jimat Master</div>
@@ -20,6 +28,7 @@
                 <li><a href="set_budget.html">Monthly Budget</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.php">Finance Dashboard</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

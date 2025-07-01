@@ -4,7 +4,8 @@ session_start();  // Start session to get user_id
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    die("Please log in first.");
+    header("Location: index.php");
+    exit();
 }
 
 $user_id = $_SESSION['user_id']; // Get the logged-in user's ID

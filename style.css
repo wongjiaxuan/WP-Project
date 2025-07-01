@@ -153,7 +153,7 @@ header {
 }
 
 /* Larger Devices */
-@media (min-width: 1300px) {
+@media (min-width: 1500px) {
     #menuicon {
         display: none;
     }
@@ -166,7 +166,7 @@ header {
         background: none;
         box-shadow: none;
         padding: 0;
-        gap: clamp(10px, 6vw, 80px);
+        gap: clamp(20px, 1.5vw, 40px);
         opacity: 1;
         transform: translateY(0);
     }
@@ -355,7 +355,7 @@ footer {
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #d6cbf0 inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px #e2fef5 inset !important;
     color: #000 !important;
 }
 
@@ -456,7 +456,9 @@ input:-webkit-autofill {
 .inputmain button:hover {
   background-color: #3a539b;
 }
+/* ====================== INPUT PAGE  ===================== */
 
+/* ======================== TABLE  ======================== */
 /* Table Styling */
 table {
     width: 60%;
@@ -471,7 +473,7 @@ table {
 
 /* Table Header */
 table thead {
-    background-color: #a18aff;
+    background-color: #41a75c;
     color: white;
     text-align: left;
 }
@@ -496,7 +498,7 @@ table tbody tr:last-child td {
 table tbody tr:hover {
     background-color: #f3f3ff;
 }
-/* ====================== INPUT PAGE  ===================== */
+/* ======================== TABLE  ======================== */
 
 /* =================== SET BUDGET PAGE  =================== */
 
@@ -508,7 +510,6 @@ table tbody tr:hover {
   padding: 40px 20px;
   width: 100%;
 }
-
 
 .set-budget-page .intro-card,
 .set-budget-page .form-card,
@@ -680,13 +681,11 @@ table tbody tr:hover {
 }
 
 /* dashboard.php styling */
-
 .summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
 }
-
 
 .progress-container {
   width: 80%;
@@ -715,7 +714,7 @@ table tbody tr:hover {
   font-size: 18px;
   font-weight: bold;
   border-radius: 8px;
-  border: 2px solid #3b99f6;
+  border: 2px solid #4d77c6;
   background: transparent;
   appearance: none;
   padding: 5px 25px;
@@ -732,7 +731,7 @@ table tbody tr:hover {
 
 #month-select:focus {
   background-color: #f9f9f9;
-  border-color: #8756f9;
+  border-color: #268350;
   outline: none;
 }
  
@@ -813,7 +812,6 @@ table tbody tr:hover {
   width: 260px; /* Half of a typical 560px progress card */
 }
 
-
 .category-summary {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -877,7 +875,6 @@ grid-column: span 2;
     flex-direction: column;
   }
 }
-
 
 .transactiontable {
   width: 90%;

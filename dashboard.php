@@ -84,19 +84,19 @@ include 'check_budget.php';
                 <li><a href="set_budget.html">Monthly Budget</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.php" class="active">Finance Dashboard</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
 
+    <main class="dashboardmain">
         <section id="dashboard">
-
             <div class="summary">
-
                 <div class="monthlysummary" >
                   <h2>Monthly Summary</h2>
-
+    
                   <div class="progress-card">
-
+    
                     <div class="card-month">
                         <form method="GET" id="monthForm">
                             <select name="month" id="month-select" onchange="document.getElementById('monthForm').submit()">
@@ -106,16 +106,16 @@ include 'check_budget.php';
                             </select>
                         </form>
                     </div>
-
+    
                     <div class="progress-container">
                       
                         <div class="monthly-progress-bar">
-
+    
                             <div class="progress-labels">
                                 <span class="progress-label-left">RM<?= number_format($expense, 2) ?> spent</span>
                                 <span class="progress-label-right">RM<?= number_format($remaining, 2) ?> remaining</span>
                             </div>
-
+    
                             <div class="progress-bar-fill">
                                 <div class="progress-expense" style="flex: <?= $spentPercentage ?>;"></div>
                                 <div class="progress-remain" style="flex: <?= 100 - $spentPercentage ?>;"></div>
@@ -124,9 +124,9 @@ include 'check_budget.php';
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="income-budget-summary">
-
+    
                     <div class="income-budget-card">
                         <img src="img/income.png" alt="Income">
                         <div class="category-info">
@@ -134,7 +134,7 @@ include 'check_budget.php';
                             <p class="income">RM<?= number_format($income, 2) ?></p>
                         </div>
                     </div>
-
+    
                     <div class="income-budget-card">
                         <img src="img/budget.png" alt="Budget Limit">
                         <div class="category-info">
@@ -142,9 +142,9 @@ include 'check_budget.php';
                             <p class="budget">RM<?= number_format($totalBudget, 2) ?></p>
                         </div>
                     </div>
-
+    
                 </div>
-
+    
                 <div class="category-summary">
                     <?php foreach ($category_data as $cat): ?>
                         <div class="category-card">
@@ -158,7 +158,7 @@ include 'check_budget.php';
                 </div>
                 
             </div>
-
+    
                 <div class="transactionhistory">
                   <h2>Recent Transactions</h2>
                   
@@ -184,11 +184,11 @@ include 'check_budget.php';
                         <?php endwhile; ?>
                     </tbody>
                   </table>
-
                 </div>
-
             </div>
         </section>
+    </main>
+
     
     <footer>
         <div class="footercontainer">

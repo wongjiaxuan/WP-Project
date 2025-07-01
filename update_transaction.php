@@ -7,8 +7,8 @@ header('Content-Type: application/json');
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'User not logged in']);
-    exit;
+    header("Location: index.php");
+    exit();
 }
 
 // Check if all required fields are provided
