@@ -86,55 +86,64 @@
 
             <!-- Dropdown to choose transaction type -->
             <form method="GET" action="overview.php">
-                <label for="transactionType">Transaction Type:</label>
-                <select id="transactionType" name="type" onchange="this.form.submit()" required>
-                    <?php 
-                    $selectedType = isset($_GET['type']) ? $_GET['type'] : 'all'; // Default to 'all'
-                    ?>
-                    <option value="all" <?php echo ($selectedType == 'all') ? 'selected' : ''; ?>>All</option>
-                    <option value="expense" <?php echo ($selectedType == 'expense') ? 'selected' : ''; ?>>Expense</option>
-                    <option value="income" <?php echo ($selectedType == 'income') ? 'selected' : ''; ?>>Income</option>
-                </select>
+                <div class="filtergroup">
+                    <label for="transactionType">Transaction Type:</label>
+                    <select id="transactionType" name="type" onchange="this.form.submit()" required>
+                        <?php 
+                        $selectedType = isset($_GET['type']) ? $_GET['type'] : 'all'; // Default to 'all'
+                        ?>
+                        <option value="all" <?php echo ($selectedType == 'all') ? 'selected' : ''; ?>>All</option>
+                        <option value="expense" <?php echo ($selectedType == 'expense') ? 'selected' : ''; ?>>Expense</option>
+                        <option value="income" <?php echo ($selectedType == 'income') ? 'selected' : ''; ?>>Income</option>
+                    </select>
+                </div>
 
                 <!-- Category Filter -->
-                <label for="category">Category:</label>
-                <select name="category" id="category">
-                    <option value="">All</option>
-                    <?php
-                    // Get the selected type - default to 'all' if not set
-                    $type = isset($_GET['type']) ? $_GET['type'] : 'all'; 
-
-                    // Dynamically load categories based on the selected type
-                    if ($type == 'income') {
-                        $categoryQuery = "SELECT * FROM categories WHERE type = 'income'";
-                    } elseif ($type == 'expense') {
-                        $categoryQuery = "SELECT * FROM categories WHERE type = 'expense'";
-                    } else {
-                        $categoryQuery = "SELECT * FROM categories";
-                    }
-
-                    $categoryResult = $conn->query($categoryQuery);
-                    
-                    if ($categoryResult) {
-                        // Loop through and display category options
-                        while ($row = $categoryResult->fetch_assoc()) {
-                            $selected = (isset($_GET['category']) && $_GET['category'] == $row['category_id']) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($row['category_id']) . "' $selected>" . htmlspecialchars($row['name']) . "</option>";
+                <div class="filtergroup">
+                    <label for="category">Category:</label>
+                    <select name="category" id="category">
+                        <option value="">All</option>
+                        <?php
+                        // Get the selected type - default to 'all' if not set
+                        $type = isset($_GET['type']) ? $_GET['type'] : 'all'; 
+    
+                        // Dynamically load categories based on the selected type
+                        if ($type == 'income') {
+                            $categoryQuery = "SELECT * FROM categories WHERE type = 'income'";
+                        } elseif ($type == 'expense') {
+                            $categoryQuery = "SELECT * FROM categories WHERE type = 'expense'";
+                        } else {
+                            $categoryQuery = "SELECT * FROM categories";
                         }
-                    }
-                    ?>
-                </select>
+    
+                        $categoryResult = $conn->query($categoryQuery);
+                        
+                        if ($categoryResult) {
+                            // Loop through and display category options
+                            while ($row = $categoryResult->fetch_assoc()) {
+                                $selected = (isset($_GET['category']) && $_GET['category'] == $row['category_id']) ? 'selected' : '';
+                                echo "<option value='" . htmlspecialchars($row['category_id']) . "' $selected>" . htmlspecialchars($row['name']) . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
 
                 <!-- Date Filter (available for all transaction types) -->
-                <label for="date_filter">Date Filter:</label>
-                <select name="date_filter" id="date_filter">
-                    <option value="" <?php echo (!isset($_GET['date_filter']) || $_GET['date_filter'] == '') ? 'selected' : ''; ?>>All Time</option>
-                    <option value="7" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '7') ? 'selected' : ''; ?>>Last 7 Days</option>
-                    <option value="14" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '14') ? 'selected' : ''; ?>>Last 14 Days</option>
-                    <option value="30" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '30') ? 'selected' : ''; ?>>Last 30 Days</option>
-                </select>
+                <div class="filtergroup">
+                    <label for="date_filter">Date Filter:</label>
+                    <select name="date_filter" id="date_filter">
+                        <option value="" <?php echo (!isset($_GET['date_filter']) || $_GET['date_filter'] == '') ? 'selected' : ''; ?>>All Time</option>
+                        <option value="7" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '7') ? 'selected' : ''; ?>>Last 7 Days</option>
+                        <option value="14" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '14') ? 'selected' : ''; ?>>Last 14 Days</option>
+                        <option value="30" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '30') ? 'selected' : ''; ?>>Last 30 Days</option>
+                    </select>
+                </div>
 
-                <button type="submit">Filter</button>
+                <div class="filtergroup">
+                    <button type="submit" class="filterbtn">Filter</button>
+                </div>
+
             </form>
 
             <!-- Display the Transactions Table -->

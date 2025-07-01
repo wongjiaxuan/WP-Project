@@ -456,9 +456,7 @@ input:-webkit-autofill {
 .inputmain button:hover {
   background-color: #3a539b;
 }
-/* ====================== INPUT PAGE  ===================== */
 
-/* ======================== TABLE  ======================== */
 /* Table Styling */
 table {
     width: 60%;
@@ -498,10 +496,98 @@ table tbody tr:last-child td {
 table tbody tr:hover {
     background-color: #f3f3ff;
 }
-/* ======================== TABLE  ======================== */
+/* ====================== INPUT PAGE  ===================== */
+
+/* ==================== OVERVIEW PAGE  ==================== */
+#overview h2 {
+  font-size: clamp(29px, 2.5vw, 32px);
+  color: #095a29;
+  margin-bottom: clamp(16px, 1vw, 20px);
+}
+
+#overview form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#overview .filtergroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (min-width: 1200px)  {
+  #overview form {
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .filterbtn {
+    margin-left: 10px;
+  }
+}
+
+.filtergroup label {
+  font-size: clamp(23px, 2vw, 25px);
+  font-weight: bold;
+  color: #093a21;
+  white-space: nowrap;
+  gap: 50px;
+}
+
+.filtergroup select {
+  padding: 6px 12px;
+  background-color: #e2fef5;
+  border: 2px solid #115b27; 
+  border-radius: 8px;
+  font-size: clamp(19px, 1.5vw, 21px);
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.filtergroup #transactionType,
+.filtergroup #date_filter {
+  width: clamp(150px, 10vw, 200px);
+}
+
+.filtergroup #category {
+  width: clamp(100px, 8vw, 150px);
+}
+
+.filtergroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' stroke='%23115b27' stroke-width='23' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.filtergroup select:focus {
+  border-color: #115b27;
+  outline: none;
+}
+
+.filterbtn {
+  background-color: #1aca2e;
+  padding: 11px 18px;
+  font-size: clamp(20px, 2vw, 21px);
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.filterbtn:hover {
+  background-color: #72eb97;
+}
+
+/* ==================== OVERVIEW PAGE  ==================== */
 
 /* =================== SET BUDGET PAGE  =================== */
-
 .set-budget-page .layout {
   display: flex;
   flex-direction: column;
