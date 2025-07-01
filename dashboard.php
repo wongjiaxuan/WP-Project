@@ -57,6 +57,7 @@ $sql_history = "SELECT t.*, c.name AS category_name
                 ORDER BY t.date DESC";
 
 $history_result = $conn->query($sql_history);
+include 'check_budget.php';
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +81,7 @@ $history_result = $conn->query($sql_history);
             <ul class="menu">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="input.php">Transaction Input</a></li>
+                <li><a href="set_budget.html">Monthly Budget</a></li>
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.php" class="active">Finance Dashboard</a></li>
             </ul>
