@@ -19,6 +19,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 echo "Dashboard - Admin Panel";
             } elseif ($current_page === 'admin_overview.php') {
                 echo "All Transactions - Admin Panel";
+            } elseif ($current_page === 'admin_home.php') {
+                echo "Home - Admin Panel";
             } else {
                 echo "Admin Panel - Jimat Master";
             }
@@ -35,6 +37,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <nav>
         <div class="headername">Admin Panel</div>
         <ul class="menu">
+            <li><a href="admin_home.php" class="<?= $current_page === 'admin_home.php' ? 'active' : '' ?>">Home</a></li>
             <li><a href="admin_overview.php" class="<?= $current_page === 'admin_overview.php' ? 'active' : '' ?>">All Transactions</a></li>
             <li><a href="admin_dashboard.php" class="<?= $current_page === 'admin_dashboard.php' ? 'active' : '' ?>">Finance Statistics</a></li>
             <li><a href="logout.php">Logout</a></li>

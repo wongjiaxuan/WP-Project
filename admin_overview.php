@@ -9,8 +9,8 @@ $date_filter = $_GET['date_filter'] ?? '';
 
 ?>
 
-<div id="piggy-bg"></div>
-<div class="piggy-container" aria-hidden="true"></div>
+    <div id="piggy-bg"></div>
+    <div class="piggy-container" aria-hidden="true"></div>
 
 <main class="overviewmain">
     <section id="overview">
@@ -275,7 +275,7 @@ $date_filter = $_GET['date_filter'] ?? '';
     // Piggy bank background animation
     window.addEventListener("load", function () {
         setTimeout(() => {
-            const piggyCount = 0; // Reduced for input page
+            const piggyCount = 90; // Reduced for input page
             const spacing = 100;
             const positions = [];
             const piggyContainer = document.querySelector('.piggy-container');
@@ -283,7 +283,7 @@ $date_filter = $_GET['date_filter'] ?? '';
                 document.documentElement.scrollHeight,
                 document.body.scrollHeight
             );
-            
+
             function isTooClose(x, y) {
                 return positions.some(pos => {
                     const dx = pos.x - x;
@@ -291,7 +291,7 @@ $date_filter = $_GET['date_filter'] ?? '';
                     return Math.sqrt(dx * dx + dy * dy) < spacing;
                 });
             }
-            
+
             for (let i = 0; i < piggyCount; i++) {
                 let x, y, attempts = 0;
                 do {
@@ -299,9 +299,9 @@ $date_filter = $_GET['date_filter'] ?? '';
                     y = Math.random() * fullHeight;
                     attempts++;
                 } while (isTooClose(x, y) && attempts < 100);
-                
+
                 positions.push({ x, y });
-                
+
                 const piggy = document.createElement("div");
                 piggy.className = "floating-piggy";
                 const size = 2 + Math.random() * 3; // Slightly smaller for input page
@@ -312,7 +312,7 @@ $date_filter = $_GET['date_filter'] ?? '';
                 piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for form page
                 piggyContainer.appendChild(piggy);
             }
-            
+
             // Update piggy positions on scroll for infinite effect
             let ticking = false;
             window.addEventListener('scroll', () => {
@@ -324,7 +324,7 @@ $date_filter = $_GET['date_filter'] ?? '';
                             const currentTop = parseInt(piggy.style.top);
                             const viewportTop = scrollTop - window.innerHeight;
                             const viewportBottom = scrollTop + window.innerHeight * 2;
-                            
+
                             if (currentTop < viewportTop) {
                                 piggy.style.top = (viewportBottom + Math.random() * window.innerHeight) + 'px';
                             } else if (currentTop > viewportBottom) {

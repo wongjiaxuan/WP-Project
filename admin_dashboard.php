@@ -103,6 +103,10 @@ if ($result_income) {
 }
 ?>
 
+<body>
+    <div id="piggy-bg"></div>
+    <div class="piggy-container" aria-hidden="true"></div>
+
     <main id="dashboardmain">
         <section id="dashboardtitle">
             <div class="card-month">
@@ -269,7 +273,7 @@ if ($result_income) {
             </div>
         </section>
     </main>
-    
+
     <footer>
         <div class="footercontainer">
             <p>
