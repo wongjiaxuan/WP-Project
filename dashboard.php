@@ -389,7 +389,7 @@ include 'check_budget.php';
                         ticking = true;
                     }
                 });
-            }, 100);
+            }, 0);
         });
     </script>
 </body>

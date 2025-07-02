@@ -541,7 +541,7 @@
                         ticking = true;
                     }
                 });
-            }, 100);
+            }, 0);
         });
     </script>
 </body>

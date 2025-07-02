@@ -343,7 +343,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                         ticking = true;
                     }
                 });
-            }, 100);
+            }, 0);
         });
     </script>
 </body>
