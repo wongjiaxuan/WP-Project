@@ -167,7 +167,7 @@ header {
         background: none;
         box-shadow: none;
         padding: 0;
-        gap: clamp(20px, 1.5vw, 40px);
+        gap: clamp(30px, 1.5vw, 40px);
         opacity: 1;
         transform: translateY(0);
     }
@@ -252,7 +252,7 @@ footer {
     align-items: center;
     padding: 45px 35px;
     border-radius: 15px;
-    width: clamp(380px, 55vw, 460px);
+    width: clamp(380px, 55vw, 500px);
     /* background: linear-gradient(to left, #d3e9f8, #ebd8ff); */
     background: linear-gradient(to left, #d6f5f1, #e3fdea);
     border-width: 3px;
@@ -307,11 +307,12 @@ footer {
     }
 }
 
-#loginpage .alert {
+#loginpage .alert,
+#registerpage .alert {
     background-color: #fde5e5;
     color: #e22e2e;
     border: 1px solid #e22e2e;
-    font-size: clamp(20px, 2vw, 22px);
+    font-size: clamp(18px, 1.8vw, 20px);
     font-weight: bold;
     padding: 15px 25px;
     border-radius: 8px;
@@ -639,7 +640,7 @@ input:-webkit-autofill {
             background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
             padding: 1.5rem;
             border-radius: 16px;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
             border-left: 5px solid #117263;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             animation: fadeInUp 1s ease-out 0.8s both;
@@ -863,7 +864,7 @@ table tbody tr:hover {
 }
 
 #incomeForm button, #expenseForm button{
-  background-color: #117263;
+    background-color: #117263;
 }
 
 /* ====================== INPUT PAGE  ===================== */
@@ -900,6 +901,16 @@ table tbody tr:hover {
   .filterbtn {
     margin-left: 10px;
   }
+
+  #overview .filtergroup {
+    margin-bottom: 20px;
+  }
+}
+
+#overview h3 {
+  font-size: clamp(23px, 2vw, 25px);
+  font-weight: bold;
+  color: #093a21;
 }
 
 .filtergroup label {
@@ -944,6 +955,7 @@ table tbody tr:hover {
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s;
+  margin-bottom: 20px;
 }
 
 .filterbtn:hover {
