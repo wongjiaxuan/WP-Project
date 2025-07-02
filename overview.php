@@ -47,7 +47,7 @@
             <form method="GET" action="overview.php">
                 <div class="filtergroup">
                     <label for="transactionType">Transaction Type:</label>
-                    <select id="transactionType" name="type" onchange="this.form.submit()" required>
+                    <select id="OtransactionType" name="type" onchange="this.form.submit()" required>
                         <?php 
                         $selectedType = isset($_GET['type']) ? $_GET['type'] : 'all'; // Default to 'all'
                         ?>
@@ -60,7 +60,7 @@
                 <!-- Category Filter -->
                 <div class="filtergroup">
                     <label for="category">Category:</label>
-                    <select name="category" id="category">
+                    <select name="category" id="Ocategory">
                         <option value="">All</option>
                         <?php
                         // Get the selected type - default to 'all' if not set
@@ -91,7 +91,7 @@
                 <!-- Date Filter (available for all transaction types) -->
                 <div class="filtergroup">
                     <label for="date_filter">Date Filter:</label>
-                    <select name="date_filter" id="date_filter">
+                    <select name="date_filter" id="Odate_filter">
                         <option value="" <?php echo (!isset($_GET['date_filter']) || $_GET['date_filter'] == '') ? 'selected' : ''; ?>>All Time</option>
                         <option value="7" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '7') ? 'selected' : ''; ?>>Last 7 Days</option>
                         <option value="14" <?php echo (isset($_GET['date_filter']) && $_GET['date_filter'] == '14') ? 'selected' : ''; ?>>Last 14 Days</option>
