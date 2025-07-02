@@ -543,10 +543,12 @@ table tbody tr:last-child td {
 table tbody tr:hover {
     background-color: #f3f3ff;
 }
-/* ====================== INPUT PAGE  ===================== */
+
 #incomeForm button, #expenseForm button{
   background-color: #117263;
 }
+
+/* ====================== INPUT PAGE  ===================== */
 
 /* ==================== OVERVIEW PAGE  ==================== */
 #overview h2 {
@@ -590,6 +592,11 @@ table tbody tr:hover {
   gap: 50px;
 }
 
+#category{
+  min-width: 300px; /* or any value that fits the longest option */
+  width: auto;
+}
+
 .filtergroup select {
   padding: 6px 12px;
   background-color: #e2fef5;
@@ -598,15 +605,6 @@ table tbody tr:hover {
   font-size: clamp(19px, 1.5vw, 21px);
   resize: vertical;
   transition: border-color 0.3s;
-}
-
-.filtergroup #transactionType,
-.filtergroup #date_filter {
-  width: clamp(150px, 10vw, 200px);
-}
-
-.filtergroup #category {
-  width: clamp(100px, 8vw, 150px);
 }
 
 .filtergroup select {
