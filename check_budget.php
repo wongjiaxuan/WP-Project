@@ -8,14 +8,15 @@ include 'includes/db.php';
 if (!isset($_SESSION['user_id'])) return;
 
 $user_id = $_SESSION['user_id'];
-$current_month = date('Y-m'); // Example: "2025-07"
+$selected_month = $_GET['month'] ?? date('Y-m');
 
 $sql = "SELECT b.category_id, b.amount_limit, b.month, c.name AS category_name
         FROM budgets b
         JOIN categories c ON b.category_id = c.category_id
         WHERE b.user_id = ? AND b.month = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("is", $user_id, $current_month);
+$stmt->bind_param("is", $user_id, $selected_month);
+
 $stmt->execute();
 $budgets = $stmt->get_result();
 
@@ -35,7 +36,8 @@ while ($row = $budgets->fetch_assoc()) {
                   AND type = 'expense' 
                   AND DATE_FORMAT(date, '%Y-%m') = ?";
     $stmt_spent = $conn->prepare($sql_spent);
-    $stmt_spent->bind_param("iis", $user_id, $category_id, $budget_month);
+   $stmt_spent->bind_param("iis", $user_id, $category_id, $selected_month);
+
     $stmt_spent->execute();
     $spent_result = $stmt_spent->get_result();
     $spent = (float)($spent_result->fetch_assoc()['total_spent'] ?? 0);

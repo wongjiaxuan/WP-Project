@@ -11,6 +11,7 @@
 <body>
     <?php
         session_start();
+        date_default_timezone_set('Asia/Kuala_Lumpur');
         if (!isset($_SESSION['user_id'])) {
             header("Location: index.php?error=Please log in first.");
             exit();
@@ -113,7 +114,7 @@
                     </select><br>
 
                     <label for="date">Date:</label>
-                    <input type="date" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
+                    <input type="date" name="date" max="<?php echo date('Y-m-d'); ?>" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
 
                     <label for="note">Note:</label>
                     <textarea name="note"><?php echo isset($_POST['note']) ? $_POST['note'] : ''; ?></textarea><br>
