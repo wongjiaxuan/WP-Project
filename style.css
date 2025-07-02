@@ -414,7 +414,7 @@ input:-webkit-autofill {
 /* ====================== LOGIN PAGE  ===================== */
 
 /* ====================== HOME PAGE  ===================== */
-/* Enhanced Dashboard Styles */
+
 .homepagemain {
   max-width: 100%;
   margin-bottom: 50px;
@@ -729,7 +729,6 @@ input:-webkit-autofill {
             100% { transform: translateX(100%); }
         }
 
-/* Piggy Bank Background Animation Styles */
 #piggy-bg {
     position: fixed;
     top: 0;
@@ -783,7 +782,6 @@ input:-webkit-autofill {
     }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .floating-piggy {
         opacity: 0.05;
@@ -794,7 +792,6 @@ input:-webkit-autofill {
     }
 }
 
-/* Respect user preferences */
 @media (prefers-reduced-motion: reduce) {
     .floating-piggy {
         animation: none;
@@ -802,7 +799,7 @@ input:-webkit-autofill {
 }
 
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding: 1.5rem;
@@ -832,7 +829,6 @@ input:-webkit-autofill {
 
             
 /* ====================== INPUT PAGE  ===================== */
-/* Center the form container on the page */
 .inputmain {
   display: flex;
   justify-content: center;
@@ -843,7 +839,6 @@ input:-webkit-autofill {
   margin: 0 auto;
 }
 
-/* Style the form box */
 .inputmain form {
   background-color: #ffffff;
   padding: 30px 40px;
@@ -856,7 +851,6 @@ input:-webkit-autofill {
   width: 100%;
 }
 
-/* Optional: Make inputs look nicer */
 .inputmain label {
   display: block;
   margin-top: 15px;
@@ -900,7 +894,6 @@ input:-webkit-autofill {
   background-color: #3a539b;
 }
 
-/* Table Styling */
 table {
     width: 60%;
     border-collapse: collapse;
@@ -912,14 +905,12 @@ table {
     overflow: hidden;
 }
 
-/* Table Header */
 table thead {
     background-color: #41a75c;
     color: white;
     text-align: left;
 }
 
-/* Table Cells */
 table th,
 table td {
     padding: 16px 20px;
@@ -930,12 +921,10 @@ table td {
     vertical-align: middle;
 }
 
-/* Last row border fix */
 table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Hover effect for rows */
 table tbody tr:hover {
     background-color: #f3f3ff;
 }
@@ -1045,14 +1034,12 @@ table tbody tr:hover {
     overflow: hidden;
 }
 
-/* Table Header */
 #overview table thead {
     background-color: #41a75c;
     color: white;
     text-align: left;
 }
 
-/* Table Cells */
 #overview table th,
 #overview table td {
     padding: 16px 20px;
@@ -1275,17 +1262,10 @@ table tbody tr:hover {
     max-width: 95%;
   }
 }
+/* ====================== SET BUDGET PAGE  ===================== */
 
-/* .alert {
-    background-color: #fff3cd;
-    color: #856404;
-    padding: 10px;
-    border-left: 6px solid #ffc107;
-    margin-bottom: 15px;
-    font-weight: bold;
-    border-radius: 4px;
-} */
 
+/* ====================== FINANCE DASHBOARD PAGE  ===================== */
 #dashboardmain {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -1325,7 +1305,6 @@ table tbody tr:hover {
   }
 }
 
-/* Month Dropdown */
 .card-month select {
   font-size: 16px;
   padding: 6px 12px;
@@ -1333,7 +1312,6 @@ table tbody tr:hover {
   border: 1px solid #ccc;
 }
 
-/* ===== LEFT SIDE ===== */
 .total-bar {
   background-color: #ffffff;
   padding: 16px 20px 25px;
@@ -1420,7 +1398,6 @@ table tbody tr:hover {
   font-weight: bold;
 }
 
-/* ===== RIGHT SIDE ===== */
 .expensesummary {
   display: grid;
   grid-template-rows: repeat(5, 2fr);
@@ -1512,3 +1489,4 @@ table tbody tr:hover {
 .bar-remain {
   background-color: #9e1b57;
 }
+/* ====================== FINANCE DASHBOARD PAGE  ===================== */
