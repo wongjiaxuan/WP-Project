@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <script src="script.js" defer></script>
 </head>
-
 <body>
     <?php
         session_start();
@@ -17,6 +16,9 @@
             exit();
         }
     ?>
+
+    <div id="piggy-bg"></div>
+    <div class="piggy-container" aria-hidden="true"></div>
 
     <header>
         <nav aria-label="Main Navigation">
@@ -132,6 +134,9 @@
     </footer>
 
     <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // Function to toggle between the Income and Expense panels based on selected type
         function togglePanels() {
             var selectedType = document.getElementById('transactionType').value;
@@ -151,7 +156,78 @@
         window.onload = function() {
             togglePanels();  // Toggle the panels based on the initial selection
         };
-    </script>
 
+        // Piggy bank background animation
+        window.addEventListener("load", function () {
+            setTimeout(() => {
+                const piggyCount = 60; // Reduced for input page
+                const spacing = 100;
+                const positions = [];
+
+                const piggyContainer = document.querySelector('.piggy-container');
+                const fullHeight = Math.max(
+                    document.documentElement.scrollHeight,
+                    document.body.scrollHeight
+                );
+
+                function isTooClose(x, y) {
+                    return positions.some(pos => {
+                        const dx = pos.x - x;
+                        const dy = pos.y - y;
+                        return Math.sqrt(dx * dx + dy * dy) < spacing;
+                    });
+                }
+
+                for (let i = 0; i < piggyCount; i++) {
+                    let x, y, attempts = 0;
+
+                    do {
+                        x = Math.random() * window.innerWidth;
+                        y = Math.random() * fullHeight;
+                        attempts++;
+                    } while (isTooClose(x, y) && attempts < 100);
+
+                    positions.push({ x, y });
+
+                    const piggy = document.createElement("div");
+                    piggy.className = "floating-piggy";
+
+                    const size = 2 + Math.random() * 3; // Slightly smaller for input page
+                    piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
+
+                    piggy.style.left = `${x}px`;
+                    piggy.style.top = `${y}px`;
+                    piggy.style.animationDelay = `${Math.random() * 6}s`;
+                    piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for form page
+
+                    piggyContainer.appendChild(piggy);
+                }
+
+                // Update piggy positions on scroll for infinite effect
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const scrollTop = window.pageYOffset;
+                            const piggies = document.querySelectorAll('.floating-piggy');
+                            piggies.forEach(piggy => {
+                                const currentTop = parseInt(piggy.style.top);
+                                const viewportTop = scrollTop - window.innerHeight;
+                                const viewportBottom = scrollTop + window.innerHeight * 2;
+                                
+                                if (currentTop < viewportTop) {
+                                    piggy.style.top = (viewportBottom + Math.random() * window.innerHeight) + 'px';
+                                } else if (currentTop > viewportBottom) {
+                                    piggy.style.top = (viewportTop - Math.random() * window.innerHeight) + 'px';
+                                }
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+            }, 500);
+        });
+    </script>
 </body>
 </html>

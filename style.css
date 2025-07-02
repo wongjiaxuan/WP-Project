@@ -727,62 +727,74 @@ input:-webkit-autofill {
             100% { transform: translateX(100%); }
         }
 
-        #piggy-bg {
+/* Piggy Bank Background Animation Styles */
+#piggy-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 0; /* BELOW content, but not too low */
-    pointer-events: none; /* prevent blocking clicks */
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
     overflow: hidden;
 }
 
-    .piggy-container {
-    position: absolute;
+.piggy-container {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: 100vh;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
 }
-
-
 
 .floating-piggy {
     position: absolute;
-    font-size: clamp(3rem, 6vw, 7rem);
     color: #117263;
     opacity: 0.1;
     animation: piggyFloat 6s ease-in-out infinite;
     pointer-events: none;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
-
-
-
 
 .floating-piggy i {
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(2rem, 4vw, 5rem);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-
-        .big-piggy:hover {
-            opacity: 0.3;
-        }
-
-        .big-piggy i {
-            font-size: clamp(8vw, 120px, 150px);
-            color: #117263;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-        }
-
-
-
-        @keyframes piggyFloat {
+@keyframes piggyFloat {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
     }
+    25% {
+        transform: translateY(-10px) rotate(5deg);
+    }
     50% {
         transform: translateY(-15px) rotate(10deg);
+    }
+    75% {
+        transform: translateY(-8px) rotate(-3deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-piggy {
+        opacity: 0.05;
+    }
+    
+    .floating-piggy i {
+        font-size: clamp(1.5rem, 3vw, 3rem);
+    }
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    .floating-piggy {
+        animation: none;
     }
 }
 

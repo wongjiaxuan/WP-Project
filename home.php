@@ -3,7 +3,6 @@
 session_start();
 include 'includes/db.php';
 
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=Please log in first.");
     exit();
@@ -55,7 +54,6 @@ $monthly_budget = $monthly_budget ?? 0;
 
 // Calculate Budget Usage
 $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budget) * 100 : 0;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,17 +67,11 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
     <meta property="og:description" content="Track your income, expenses, and achieve your financial goals with Jimat Master.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <!-- <script src="script.js" defer></script> -->
-
 </head>
-
-<div class="piggy-container" aria-hidden="true"></div>
-<div id="piggy-bg"></div>
-
-
 <body>
-<div class="piggy-container" aria-hidden="true"></div>
-<div id="piggy-bg"></div>
+    <div id="piggy-bg"></div>
+    <div class="piggy-container" aria-hidden="true"></div>
+
     <header>
         <nav aria-label="Main Navigation">
             <div class="headername">Jimat Master</div>
@@ -117,34 +109,24 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                     <i class="fas fa-arrow-up stat-icon income"></i>
                     <div class="stat-value" data-value="<?php echo $total_income; ?>">RM 0</div>
                     <div class="stat-label">Total Income</div>
-                    <div class="stat-change positive">
-                    </div>
                 </div>
 
                 <div class="stat-card" data-tooltip="Your total expenses this month">
                     <i class="fas fa-arrow-down stat-icon expense"></i>
                     <div class="stat-value" data-value="<?php echo $total_expenses; ?>">RM 0</div>
                     <div class="stat-label">Total Expenses</div>
-                    <div class="stat-change negative">
-
-                    </div>
                 </div>
 
                 <div class="stat-card" data-tooltip="Your current savings amount">
                     <i class="fas fa-piggy-bank stat-icon savings"></i>
                     <div class="stat-value" data-value="<?php echo $current_savings; ?>">RM 0</div>
                     <div class="stat-label">Current Savings</div>
-                    <div class="stat-change positive">
-
-                    </div>
                 </div>
 
                 <div class="stat-card" data-tooltip="Your monthly budget limit">
                     <i class="fas fa-chart-pie stat-icon budget"></i>
                     <div class="stat-value" data-value="<?php echo $monthly_budget; ?>">RM 0</div>
                     <div class="stat-label">Monthly Budget</div>
-                    <div class="stat-change <?php echo $budget_used_percentage > 80 ? 'negative' : 'positive'; ?>">
-                    </div>
                 </div>
             </div>
 
@@ -182,9 +164,6 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </a>
             </div>
 
-
-            
-
             <!-- Tooltip for onboarding -->
             <div class="onboarding-tooltip" id="tooltip"></div>
         </div>
@@ -200,7 +179,6 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
     </footer>
 
     <script>
-        // Enhanced JavaScript functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year
             document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -240,28 +218,25 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
             elementsWithTooltips.forEach(element => {
-    element.addEventListener('mouseenter', (e) => {
-        const tooltipText = element.getAttribute('data-tooltip');
-        tooltip.textContent = tooltipText;
-        tooltip.classList.add('show');
+                element.addEventListener('mouseenter', (e) => {
+                    const tooltipText = element.getAttribute('data-tooltip');
+                    tooltip.textContent = tooltipText;
+                    tooltip.classList.add('show');
 
-        // Allow tooltip to be visible before calculating width
-        requestAnimationFrame(() => {
-            const rect = element.getBoundingClientRect();
-            const tooltipRect = tooltip.getBoundingClientRect();
+                    requestAnimationFrame(() => {
+                        const rect = element.getBoundingClientRect();
+                        const tooltipRect = tooltip.getBoundingClientRect();
+                        tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
+                        tooltip.style.top = `${rect.bottom + 10}px`;
+                    });
+                });
 
-            tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
-            tooltip.style.top = `${rect.bottom + 10}px`;
-        });
-    });
+                element.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+            });
 
-    element.addEventListener('mouseleave', () => {
-        tooltip.classList.remove('show');
-    });
-});
-
-
-            // Enhanced menu toggle
+            // Menu toggle
             const menuIcon = document.getElementById('menuicon');
             const menu = document.querySelector('.menu');
             
@@ -271,15 +246,6 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                     menuIcon.classList.toggle('rotate');
                 });
             }
-
-            // Add subtle parallax effect to hero section
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const heroSection = document.querySelector('.hero-section');
-                if (heroSection) {
-                    heroSection.style.transform = `translateY(${scrolled * 0.1}px)`;
-                }
-            });
 
             // Intersection Observer for animations
             const observerOptions = {
@@ -305,57 +271,77 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
             });
         });
 
-         window.addEventListener("load", function () {
-    setTimeout(() => {
-        const piggyCount = 50;
-        const spacing = 100;
-        const positions = [];
+        // Piggy bank background animation
+        window.addEventListener("load", function () {
+            setTimeout(() => {
+                const piggyCount = 100;
+                const spacing = 100;
+                const positions = [];
 
-        const piggyContainer = document.querySelector('.piggy-container');
-        const fullHeight = document.documentElement.scrollHeight;
-        piggyContainer.style.height = fullHeight + 'px';
+                const piggyContainer = document.querySelector('.piggy-container');
+                const fullHeight = Math.max(
+                    document.documentElement.scrollHeight,
+                    document.body.scrollHeight
+                );
 
-        function isTooClose(x, y) {
-            return positions.some(pos => {
-                const dx = pos.x - x;
-                const dy = pos.y - y;
-                return Math.sqrt(dx * dx + dy * dy) < spacing;
-            });
-        }
+                function isTooClose(x, y) {
+                    return positions.some(pos => {
+                        const dx = pos.x - x;
+                        const dy = pos.y - y;
+                        return Math.sqrt(dx * dx + dy * dy) < spacing;
+                    });
+                }
 
-        for (let i = 0; i < piggyCount; i++) {
-            let x, y, attempts = 0;
+                for (let i = 0; i < piggyCount; i++) {
+                    let x, y, attempts = 0;
 
-            do {
-                x = Math.random() * window.innerWidth;
-                y = Math.random() * fullHeight;
-                attempts++;
-            } while (isTooClose(x, y) && attempts < 100);
+                    do {
+                        x = Math.random() * window.innerWidth;
+                        y = Math.random() * fullHeight;
+                        attempts++;
+                    } while (isTooClose(x, y) && attempts < 100);
 
-            positions.push({ x, y });
+                    positions.push({ x, y });
 
-            const piggy = document.createElement("div");
-            piggy.className = "floating-piggy";
+                    const piggy = document.createElement("div");
+                    piggy.className = "floating-piggy";
 
-            const size = 2 + Math.random() * 4; // 2rem to 6rem
-            piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
+                    const size = 2 + Math.random() * 4;
+                    piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
 
-            piggy.style.left = `${x}px`;
-            piggy.style.top = `${y}px`;
-            piggy.style.position = 'absolute';
-            piggy.style.animationDelay = `${Math.random() * 6}s`;
-            piggy.style.opacity = 0.1 + Math.random() * 0.2;
-            piggy.style.pointerEvents = 'none';
+                    piggy.style.left = `${x}px`;
+                    piggy.style.top = `${y}px`;
+                    piggy.style.animationDelay = `${Math.random() * 6}s`;
+                    piggy.style.opacity = 0.1 + Math.random() * 0.2;
 
-            piggyContainer.appendChild(piggy);
-        }
-    }, 500); // delay to ensure DOM height is final
-});
+                    piggyContainer.appendChild(piggy);
+                }
 
-
-
-
+                // Update piggy positions on scroll for infinite effect
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const scrollTop = window.pageYOffset;
+                            const piggies = document.querySelectorAll('.floating-piggy');
+                            piggies.forEach(piggy => {
+                                const currentTop = parseInt(piggy.style.top);
+                                const viewportTop = scrollTop - window.innerHeight;
+                                const viewportBottom = scrollTop + window.innerHeight * 2;
+                                
+                                if (currentTop < viewportTop) {
+                                    piggy.style.top = (viewportBottom + Math.random() * window.innerHeight) + 'px';
+                                } else if (currentTop > viewportBottom) {
+                                    piggy.style.top = (viewportTop - Math.random() * window.innerHeight) + 'px';
+                                }
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+            }, 500);
+        });
     </script>
-    
 </body>
 </html>
