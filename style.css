@@ -731,23 +731,22 @@ input:-webkit-autofill {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     z-index: 0; /* BELOW content, but not too low */
     pointer-events: none; /* prevent blocking clicks */
     overflow: hidden;
 }
 
-        .piggy-container {
-    position: fixed;
+    .piggy-container {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     pointer-events: none;
-    z-index: 0; /* behind everything */
-    overflow: hidden;
+    z-index: 0;
 }
+
+
 
 .floating-piggy {
     position: absolute;
@@ -776,10 +775,7 @@ input:-webkit-autofill {
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
         }
 
-        @keyframes piggyFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(3deg); }
-}
+
 
         @keyframes piggyFloat {
     0%, 100% {
