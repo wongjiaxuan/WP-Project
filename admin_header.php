@@ -35,8 +35,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <nav>
         <div class="headername">Admin Panel</div>
         <ul class="menu">
-            <li><a href="admin_dashboard.php" class="<?= $current_page === 'admin_dashboard.php' ? 'active' : '' ?>">Finance Statistics</a></li>
             <li><a href="admin_overview.php" class="<?= $current_page === 'admin_overview.php' ? 'active' : '' ?>">All Transactions</a></li>
+            <li><a href="admin_dashboard.php" class="<?= $current_page === 'admin_dashboard.php' ? 'active' : '' ?>">Finance Statistics</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
