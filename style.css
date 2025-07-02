@@ -192,7 +192,7 @@ main {
 }
 
 footer {
-    position: sticky;
+    position: static;
     left: 0;
     bottom: 0;
     flex-shrink: 0;
@@ -224,7 +224,7 @@ footer {
     }
 
     footer {
-        font-size: clamp(21.3px, 2.5vw, 22px);
+      font-size: clamp(21.3px, 2.5vw, 22px);
     }
 }
 
@@ -417,10 +417,10 @@ input:-webkit-autofill {
 /* Enhanced Dashboard Styles */
 .homepagemain {
   max-width: 100%;
-  flex: 1;
+  margin-bottom: 25px;
 }
         .dashboard-container {
-            max-width: 1400px;
+            width: 80%;
             margin: 0 auto;
             padding: 0 1rem;
             position: relative;
@@ -460,7 +460,7 @@ input:-webkit-autofill {
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 4.5vw, 3.2rem);
+            font-size: clamp(2.4rem, 4.5vw, 3.2rem);
             font-weight: bold;
             color: #083c5f;
             margin-bottom: 1rem;
@@ -468,7 +468,7 @@ input:-webkit-autofill {
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
             color: #0c6527;
             margin-bottom: 1rem;
             animation: slideInLeft 1s ease-out 0.2s both;
@@ -537,7 +537,7 @@ input:-webkit-autofill {
         .stat-icon.budget { color: #2caa41; }
 
         .stat-value {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-size: clamp(2rem, 3.3vw, 2.3rem);
             font-weight: bold;
             color: #083c5f;
             margin-bottom: 0.5rem;
@@ -545,7 +545,7 @@ input:-webkit-autofill {
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #0c6527;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -553,7 +553,7 @@ input:-webkit-autofill {
         }
 
         .stat-change {
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-top: 0.5rem;
             display: flex;
             align-items: center;
@@ -572,6 +572,7 @@ input:-webkit-autofill {
         }
 
         .action-btn {
+            font-size: clamp(19px, 1.2vw, 21px);
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -752,7 +753,7 @@ input:-webkit-autofill {
 .floating-piggy {
     position: absolute;
     font-size: clamp(3rem, 6vw, 7rem);
-    color: #117263;
+    color: #34d185;
     opacity: 0.1;
     animation: piggyFloat 6s ease-in-out infinite;
     pointer-events: none;
@@ -1265,14 +1266,12 @@ table tbody tr:hover {
     border-radius: 4px;
 } */
 
-
 #dashboardmain {
   display: grid;
   grid-template-rows: auto 1fr;
   max-width: 1200px; 
   margin: 0 auto;
   padding: 0 20px; 
-
 }
 
 #dashboardtitle {
@@ -1345,7 +1344,6 @@ table tbody tr:hover {
   color: darkblue;
 }
 
-
 .total-bar-fill {
   display: flex;
   height: 18px;
@@ -1403,13 +1401,11 @@ table tbody tr:hover {
 }
 
 /* ===== RIGHT SIDE ===== */
-
 .expensesummary {
   display: grid;
   grid-template-rows: repeat(5, 2fr);
   gap: 16px;
 }
-
 
 .bar-card {
   display: flex;
@@ -1421,7 +1417,6 @@ table tbody tr:hover {
   align-items: center;
   gap: 12px; 
 }
-
 
 .bar-card h3 {
   margin: 0;
@@ -1436,7 +1431,6 @@ table tbody tr:hover {
   margin-bottom: 4px;
   flex-shrink: 0;
 }
-
 
 .category-bar {
   display: flex;
@@ -1470,9 +1464,6 @@ table tbody tr:hover {
   width: 100%;
 }
 
-
-
-
 .bar-fill {
   display: flex;
   width: 100%;
@@ -1481,9 +1472,6 @@ table tbody tr:hover {
   border-radius: 20px;
   overflow: hidden;
 }
-
-
-
 
 .bar-expense {
   background-color: #134ec0;
