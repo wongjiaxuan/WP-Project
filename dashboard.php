@@ -108,6 +108,7 @@ if ($result_income) {
         }
     }
 }
+include 'check_budget.php';   
 ?>
 
 
