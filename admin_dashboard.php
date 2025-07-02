@@ -4,13 +4,13 @@ require_once 'includes/db.php';
 
 $selected_month_str = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 $timestamp = strtotime($selected_month_str);
-$selected_month = (int)date('n', $timestamp); // e.g. 7
-$selected_year = (int)date('Y', $timestamp);  // e.g. 2025
+$selected_month = (int)date('n', $timestamp);
+$selected_year = (int)date('Y', $timestamp);
 
 $income = 0;
 $expense = 0;
 
-// Total income and expenses (for all users)
+
 $sql_summary = "SELECT type, SUM(amount) AS total 
                 FROM transactions 
                 WHERE MONTH(date) = $selected_month 
@@ -25,7 +25,7 @@ while ($row = $result->fetch_assoc()) {
 
 $spentPercentage = $income > 0 ? ($expense / $income) * 100 : 0;
 
-// Get expense categories with budget data (aggregated for all users)
+
 $sql_expense = "SELECT c.name,
                        COALESCE(SUM(t.amount), 0) AS spent, 
                        COALESCE(SUM(b.amount_limit), 0) AS budget_limit
@@ -76,7 +76,7 @@ while ($row = $result_expense->fetch_assoc()) {
     }
 }
 
-// Get income categories (aggregated for all users)
+
 $salary_total = 0;
 $bonus_total = 0;
 $investment_total = 0;
@@ -284,7 +284,7 @@ if ($result_income) {
     </footer>
 
 <script>
-// Set current year in footer
+
 document.addEventListener('DOMContentLoaded', function() {
     const yearElement = document.getElementById('current-year');
     if (yearElement) {
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Piggy bank background animation
+
 window.addEventListener("load", function () {
     setTimeout(() => {
         const piggyCount = 90; 
@@ -333,7 +333,7 @@ window.addEventListener("load", function () {
             piggyContainer.appendChild(piggy);
         }
 
-        // Update piggy positions on scroll for infinite effect
+
         let ticking = false;
         window.addEventListener('scroll', () => {
             if (!ticking) {

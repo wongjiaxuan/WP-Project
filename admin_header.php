@@ -32,7 +32,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </head>
 <body>
 
-<!-- Unified header for all admin pages (dashboard-style layout) -->
+
 <header>
     <nav>
         <div class="headername">Admin Panel</div>

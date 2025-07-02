@@ -1,11 +1,11 @@
 <?php
-// Include admin header (which handles session and auth)
+
 require_once 'admin_header.php';
 require_once 'includes/db.php';
 
 $admin_id = $_SESSION['user_id'];
 
-// Get admin username
+
 $sql = "SELECT username FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $admin_id);
@@ -14,28 +14,28 @@ $stmt->bind_result($admin_username);
 $stmt->fetch();
 $stmt->close();
 
-// Get Total Income (all users)
+
 $sql = "SELECT SUM(amount) FROM transactions WHERE type = 'income' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $result = $conn->query($sql);
 $total_income = $result->fetch_row()[0] ?? 0;
 
-// Get Total Expenses (all users)
+
 $sql = "SELECT SUM(amount) FROM transactions WHERE type = 'expense' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $result = $conn->query($sql);
 $total_expenses = $result->fetch_row()[0] ?? 0;
 
-// Calculate Current Savings (all users)
+
 $current_savings = $total_income - $total_expenses;
 
-// Get Monthly Budget (all users)
+
 $sql = "SELECT SUM(amount_limit) FROM budgets WHERE month = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
 $result = $conn->query($sql);
 $monthly_budget = $result->fetch_row()[0] ?? 0;
 
-// Calculate Budget Usage
+
 $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budget) * 100 : 0;
 
-// Get additional admin stats
+
 $sql = "SELECT COUNT(*) FROM users WHERE role = 'user'";
 $result = $conn->query($sql);
 $total_users = $result->fetch_row()[0] ?? 0;
@@ -49,13 +49,13 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
 
     <main class="homepagemain">
         <div class="dashboard-container">
-            <!-- Welcome Section -->
+
             <div class="welcome-back">
                 <div class="welcome-text">Welcome back, <?php echo htmlspecialchars($admin_username); ?>! 👋</div>
                 <div class="welcome-subtitle">Here's the system-wide financial overview for today</div>
             </div>
 
-            <!-- Hero Section -->
+
             <section class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-title">System Financial Overview</h1>
@@ -63,7 +63,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </div>
             </section>
 
-            <!-- Stats Grid -->
+
             <div class="stats-grid">
                 <div class="stat-card" data-tooltip="Total income from all users this month">
                     <i class="fas fa-arrow-up stat-icon income"></i>
@@ -102,7 +102,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </div>
             </div>
 
-            <!-- Budget Progress -->
+
             <div class="progress-overviewhm">
                 <h3 class="progress-titlehm">System-wide Budget Progress</h3>
                 <div class="budget-progress">
@@ -116,7 +116,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </div>
             </div>
 
-            <!-- Quick Actions -->
+
             <div class="quick-actions">
                 <a href="admin_overview.php" class="action-btn" data-tooltip="View all user transactions">
                     <i class="fas fa-list action-icon"></i>
@@ -128,7 +128,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </a>
             </div>
 
-            <!-- Tooltip for onboarding -->
+
             <div class="onboarding-tooltip" id="tooltip"></div>
         </div>
     </main>
@@ -144,10 +144,10 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year
+
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Animate counter values
+
             function animateValue(element, start, end, duration) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
@@ -155,7 +155,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     const value = Math.floor(progress * (end - start) + start);
                     
-                    // Check if element contains RM (currency values)
+
                     if (element.textContent.includes('RM')) {
                         element.textContent = 'RM ' + value.toLocaleString();
                     } else {
@@ -169,16 +169,16 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 window.requestAnimationFrame(step);
             }
 
-            // Animate all stat values
+
             document.querySelectorAll('.stat-value[data-value]').forEach((element) => {
                 const targetValue = parseInt(element.getAttribute('data-value'));
-                // Only animate currency values, not user/transaction counts
+
                 if (element.textContent.includes('RM')) {
                     animateValue(element, 0, targetValue, 2000);
                 }
             });
 
-            // Animate progress bar
+
             setTimeout(() => {
                 const progressFill = document.querySelector('.progress-fillhm');
                 if (progressFill) {
@@ -187,7 +187,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 }
             }, 1000);
 
-            // Tooltip functionality
+
             const tooltip = document.getElementById('tooltip');
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
@@ -197,7 +197,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                     tooltip.textContent = tooltipText;
                     tooltip.classList.add('show');
 
-                    // Allow tooltip to be visible before calculating width
+
                     requestAnimationFrame(() => {
                         const rect = element.getBoundingClientRect();
                         const tooltipRect = tooltip.getBoundingClientRect();
@@ -212,7 +212,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 });
             });
 
-            // Enhanced menu toggle - Check if elements exist first
+
             const menuIcon = document.getElementById('menuicon');
             const menu = document.querySelector('.menu');
             
@@ -223,7 +223,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 });
             }
 
-            // Intersection Observer for animations
+
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -238,7 +238,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 });
             }, observerOptions);
 
-            // Observe stat cards for staggered animation
+
             document.querySelectorAll('.stat-card').forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
@@ -247,10 +247,10 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
             });
         });
 
-        // Piggy bank background animation
+
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 90; // Reduced count for admin pages
+                const piggyCount = 90; 
                 const spacing = 100;
                 const positions = [];
 
@@ -282,18 +282,18 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                     const piggy = document.createElement("div");
                     piggy.className = "floating-piggy";
 
-                    const size = 2 + Math.random() * 3; // Slightly smaller for admin pages
+                    const size = 2 + Math.random() * 3; 
                     piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
 
                     piggy.style.left = `${x}px`;
                     piggy.style.top = `${y}px`;
                     piggy.style.animationDelay = `${Math.random() * 6}s`;
-                    piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for admin pages
+                    piggy.style.opacity = 0.08 + Math.random() * 0.15; 
 
                     piggyContainer.appendChild(piggy);
                 }
 
-                // Update piggy positions on scroll for infinite effect
+
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {
