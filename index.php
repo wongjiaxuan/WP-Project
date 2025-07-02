@@ -46,7 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $_SESSION['email'] = $row['email'];
                         $_SESSION['role'] = $row['role'];
     
-                        header("Location: home.php");
+                        // Role-based redirection
+                        if ($row['role'] === 'admin') {
+                            header("Location: admin_overview.php");
+                        } else {
+                            header("Location: home.php");
+                        }
                         exit();
                     } else {
                         header("Location: index.php?error=Incorrect role selected.");
