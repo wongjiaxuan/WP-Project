@@ -189,7 +189,9 @@ main {
 }
 
 footer {
-    position: sticky;
+    position: fixed;
+    left: 0;
+    bottom: 0;
     flex-shrink: 0;
     font-size: 19px;
     width: 100%;
