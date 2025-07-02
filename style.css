@@ -14,13 +14,16 @@ html, body {
     /* background: linear-gradient(to left, #D0C0F0, #A0BFF2); */
     background: linear-gradient(to left, #c3f9e2, #bfdafa);
     overflow-x: hidden;
-    height: 100vh; 
+    height: 100%; 
     display: flex;
     flex-direction: column;
+    
 }
 
 body {
     flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .wrapper {
@@ -417,6 +420,8 @@ input:-webkit-autofill {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-section {
@@ -717,15 +722,44 @@ input:-webkit-autofill {
             100% { transform: translateX(100%); }
         }
 
-        .big-piggy {
-            position: fixed;
-            bottom: 100px;
-            right: 40px;
-            z-index: 5;
-            opacity: 0.15;
-            animation: piggyFloat 6s ease-in-out infinite;
-            transition: opacity 0.3s ease;
-        }
+        #piggy-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* BELOW content, but not too low */
+    pointer-events: none; /* prevent blocking clicks */
+    overflow: hidden;
+}
+
+        .piggy-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0; /* behind everything */
+    overflow: hidden;
+}
+
+.floating-piggy {
+    position: absolute;
+    font-size: clamp(3rem, 6vw, 7rem);
+    color: #117263;
+    opacity: 0.1;
+    animation: piggyFloat 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+
+
+
+.floating-piggy i {
+    font-size: clamp(3rem, 6vw, 5rem);
+}
+
 
         .big-piggy:hover {
             opacity: 0.3;
@@ -738,10 +772,19 @@ input:-webkit-autofill {
         }
 
         @keyframes piggyFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(2deg); }
-            66% { transform: translateY(-5px) rotate(-1deg); }
-        }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+        @keyframes piggyFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(10deg);
+    }
+}
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
