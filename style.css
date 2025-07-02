@@ -9,8 +9,6 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    /* background: linear-gradient(to left, #C4FFF9, #92FFC0); green */
-    /* background: linear-gradient(to left, #D0C0F0, #A0BFF2); */
     background: linear-gradient(to left, #c3f9e2, #bfdafa);
     overflow-x: hidden;
     height: 100%; 
