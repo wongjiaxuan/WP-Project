@@ -182,9 +182,6 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </a>
             </div>
 
-
-            
-
             <!-- Tooltip for onboarding -->
             <div class="onboarding-tooltip" id="tooltip"></div>
         </div>
@@ -240,26 +237,25 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
             elementsWithTooltips.forEach(element => {
-    element.addEventListener('mouseenter', (e) => {
-        const tooltipText = element.getAttribute('data-tooltip');
-        tooltip.textContent = tooltipText;
-        tooltip.classList.add('show');
+                element.addEventListener('mouseenter', (e) => {
+                    const tooltipText = element.getAttribute('data-tooltip');
+                    tooltip.textContent = tooltipText;
+                    tooltip.classList.add('show');
 
-        // Allow tooltip to be visible before calculating width
-        requestAnimationFrame(() => {
-            const rect = element.getBoundingClientRect();
-            const tooltipRect = tooltip.getBoundingClientRect();
+                    // Allow tooltip to be visible before calculating width
+                    requestAnimationFrame(() => {
+                        const rect = element.getBoundingClientRect();
+                        const tooltipRect = tooltip.getBoundingClientRect();
 
-            tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
-            tooltip.style.top = `${rect.bottom + 10}px`;
-        });
-    });
+                        tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
+                        tooltip.style.top = `${rect.bottom + 10}px`;
+                    });
+                });
 
-    element.addEventListener('mouseleave', () => {
-        tooltip.classList.remove('show');
-    });
-});
-
+                element.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+            });
 
             // Enhanced menu toggle
             const menuIcon = document.getElementById('menuicon');

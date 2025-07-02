@@ -417,7 +417,7 @@ input:-webkit-autofill {
 /* Enhanced Dashboard Styles */
 .homepagemain {
   max-width: 100%;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
         .dashboard-container {
             width: 80%;
@@ -817,8 +817,6 @@ input:-webkit-autofill {
             animation: shimmer 1.5s infinite;}
 
             
-
-
 /* ====================== INPUT PAGE  ===================== */
 /* Center the form container on the page */
 .inputmain {
@@ -826,6 +824,9 @@ input:-webkit-autofill {
   justify-content: center;
   align-items: center;
   height: 100vh; /* full screen height */
+  width: 90%;
+  max-width: 1400px;  
+  margin: 0 auto;
 }
 
 /* Style the form box */
@@ -834,20 +835,26 @@ input:-webkit-autofill {
   padding: 30px 40px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1400px;  
   margin: 0 auto;
 }
 
 #input, #incomeForm, #expenseForm{
   width: 100%;
-  max-width: 1400px;  
-  margin: 0 auto;
 }
+
 /* Optional: Make inputs look nicer */
 .inputmain label {
   display: block;
   margin-top: 15px;
+  font-size: clamp(21px, 1.6vw, 23px);
+  font-weight: bold;
+  color: #093a21;
+  margin-bottom: 2.5px;
+}
+
+.inputmain .transactiontypelabel {
+  font-size: clamp(27px, 2.2vw, 30px);
+  color: #095a29;
   font-weight: bold;
 }
 
@@ -857,14 +864,17 @@ input:-webkit-autofill {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: 1.5px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
+  font-size: clamp(19px, 1.5vw, 21px);
+  margin-bottom: 18px;
 }
 
 .inputmain button {
+  font-size: clamp(19px, 1.5vw, 21px);
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background-color: #4b6cb7;
   color: white;
   border: none;
