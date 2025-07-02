@@ -963,7 +963,9 @@ table tbody tr:hover {
   gap: 50px;
 }
 
-#category{
+#Odate_filter, 
+#OtransactionType, 
+#Ocategory{
   width: 180px;
 }
 
