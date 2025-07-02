@@ -215,20 +215,26 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
             elementsWithTooltips.forEach(element => {
-                element.addEventListener('mouseenter', (e) => {
-                    const tooltipText = e.target.getAttribute('data-tooltip');
-                    tooltip.textContent = tooltipText;
-                    tooltip.classList.add('show');
-                    
-                    const rect = e.target.getBoundingClientRect();
-                    tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
-                    tooltip.style.top = rect.bottom + 10 + 'px';
-                });
+    element.addEventListener('mouseenter', (e) => {
+        const tooltipText = element.getAttribute('data-tooltip');
+        tooltip.textContent = tooltipText;
+        tooltip.classList.add('show');
 
-                element.addEventListener('mouseleave', () => {
-                    tooltip.classList.remove('show');
-                });
-            });
+        // Allow tooltip to be visible before calculating width
+        requestAnimationFrame(() => {
+            const rect = element.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
+            tooltip.style.top = `${rect.bottom + 10}px`;
+        });
+    });
+
+    element.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+    });
+});
+
 
             // Enhanced menu toggle
             const menuIcon = document.getElementById('menuicon');
@@ -274,10 +280,13 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
             });
         });
 
-         document.addEventListener("DOMContentLoaded", function () {
+         window.addEventListener("load", function () {
+    setTimeout(() => {
         const piggyCount = 50;
-        const spacing = 100; // minimum distance between piggies (in px)
+        const spacing = 100;
         const positions = [];
+
+        const fullHeight = document.documentElement.scrollHeight;
 
         function isTooClose(x, y) {
             return positions.some(pos => {
@@ -292,7 +301,7 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
 
             do {
                 x = Math.random() * window.innerWidth;
-                y = Math.random() * window.innerHeight;
+                y = Math.random() * fullHeight;
                 attempts++;
             } while (isTooClose(x, y) && attempts < 100);
 
@@ -306,12 +315,21 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
 
             piggy.style.left = `${x}px`;
             piggy.style.top = `${y}px`;
+            piggy.style.position = 'absolute';
             piggy.style.animationDelay = `${Math.random() * 6}s`;
             piggy.style.opacity = 0.1 + Math.random() * 0.2;
+            piggy.style.pointerEvents = 'none';
 
             document.body.appendChild(piggy);
         }
-    });
+
+        // Make sure body is tall enough for the absolute piggies to stay
+        document.body.style.position = 'relative';
+
+    }, 500); // slight delay to ensure full scroll height is measured
+});
+
+
 
     </script>
     
