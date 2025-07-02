@@ -26,7 +26,7 @@ body {
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* full viewport height */
+    min-height: 100vh; 
 }
 
 main {
@@ -45,8 +45,6 @@ nav {
 }
 
 header {
-    /* background: linear-gradient(to right, #37d492, #9df7de); green */
-    /* background: linear-gradient(to right, #f5e8ff, #e2f2ff); */
     background: linear-gradient(to left, #bcf7c4, #ace8fb);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -102,7 +100,6 @@ header {
     list-style-type: none;
     font-size: clamp(20px, 2.5vw, 22px);
     gap: 18px;
-    /* background: linear-gradient(to right, rgba(245, 232, 255, 0.8), rgba(226, 242, 255, 0.8)); */
     background: linear-gradient(to left, rgba(188, 247, 196, 0.8), rgba(172, 232, 251, 0.8));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     top: 70px;
@@ -134,10 +131,10 @@ header {
     color: #117263;
 }
 
-.menu a:not(.active)::after { /* Line */
+.menu a:not(.active)::after { 
     content: '';
     position: absolute;
-    height: 3px; /* Line Thickness */
+    height: 3px; 
     bottom: -4px;
     left: 0;
     width: 0;
@@ -180,7 +177,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1; /* Make sure main content takes up available space */
+    flex: 1; 
     padding: 0 clamp(2rem, 1vw, 6rem);
 }
 
@@ -199,7 +196,6 @@ footer {
     padding: 15px 0;
     padding-top: 20px;
     z-index: 5;
-    /* background: linear-gradient(to right, #F2E6FF, #E6D9F7);  */
     background: linear-gradient(to left, #99e7b7, #a7d0ff);
 }
 
@@ -816,7 +812,8 @@ input:-webkit-autofill {
 .loading-shimmer {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;}
+    animation: shimmer 1.5s infinite;
+}
 /* ====================== HOME PAGE  ===================== */
 
             
@@ -825,7 +822,7 @@ input:-webkit-autofill {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* full screen height */
+    height: 100vh; 
     width: 90%;
     max-width: 1400px;  
     margin: 0 auto;
@@ -1260,7 +1257,6 @@ table tbody tr:hover {
     max-width: 95%;
   }
 }
-    
 /* ====================== SET BUDGET PAGE  ===================== */
 
 
