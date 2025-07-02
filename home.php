@@ -3,6 +3,7 @@
 session_start();
 include 'includes/db.php';
 
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=Please log in first.");
     exit();
@@ -39,9 +40,13 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
     <meta property="og:description" content="Track your income, expenses, and achieve your financial goals with Jimat Master.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
 
 </head>
+
+<div class="piggy-container" aria-hidden="true"></div>
+<div id="piggy-bg"></div>
+
 
 <body>
     <header>
@@ -152,10 +157,8 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                 </a>
             </div>
 
-            <!-- Floating Piggy Bank -->
-            <div class="big-piggy">
-                <i class="fas fa-piggy-bank"></i>
-            </div>
+
+            
 
             <!-- Tooltip for onboarding -->
             <div class="onboarding-tooltip" id="tooltip"></div>
@@ -270,6 +273,46 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                 observer.observe(card);
             });
         });
+
+         document.addEventListener("DOMContentLoaded", function () {
+        const piggyCount = 50;
+        const spacing = 100; // minimum distance between piggies (in px)
+        const positions = [];
+
+        function isTooClose(x, y) {
+            return positions.some(pos => {
+                const dx = pos.x - x;
+                const dy = pos.y - y;
+                return Math.sqrt(dx * dx + dy * dy) < spacing;
+            });
+        }
+
+        for (let i = 0; i < piggyCount; i++) {
+            let x, y, attempts = 0;
+
+            do {
+                x = Math.random() * window.innerWidth;
+                y = Math.random() * window.innerHeight;
+                attempts++;
+            } while (isTooClose(x, y) && attempts < 100);
+
+            positions.push({ x, y });
+
+            const piggy = document.createElement("div");
+            piggy.className = "floating-piggy";
+
+            const size = 2 + Math.random() * 4; // 2rem to 6rem
+            piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
+
+            piggy.style.left = `${x}px`;
+            piggy.style.top = `${y}px`;
+            piggy.style.animationDelay = `${Math.random() * 6}s`;
+            piggy.style.opacity = 0.1 + Math.random() * 0.2;
+
+            document.body.appendChild(piggy);
+        }
+    });
+
     </script>
     
 </body>
