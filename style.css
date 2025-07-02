@@ -593,8 +593,7 @@ table tbody tr:hover {
 }
 
 #category{
-  min-width: 300px; /* or any value that fits the longest option */
-  width: auto;
+  width: 180px;
 }
 
 .filtergroup select {
