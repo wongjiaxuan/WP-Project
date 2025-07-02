@@ -60,11 +60,11 @@ Stored in: `inserteddatasample.txt`
 
 | Username | Email               | Password     | Role  |
 |----------|---------------------|--------------|-------|
-| admin    | admin@example.com   | admin1234    | admin |
-| sara     | sara@gmail.com      | sara4321     | user  |
-| john     | john.doe@gmail.com  | johnpass     | user  |
-| fatimah  | fatimah@gmail.com   | fatimah88    | user  |
-| azmi     | azmi@hotmail.com    | azmi321      | user  |
+| admin    | admin@example.com   | Admin@1234   | admin |
+| sara     | sara@gmail.com      | Sara@4321    | user  |
+| john     | john.doe@gmail.com  | John#Pass1   | user  |
+| fatimah  | fatimah@gmail.com   | Fatimah88!   | user  |
+| azmi     | azmi@hotmail.com    | Azmi321@     | user  |
 
 Passwords are securely hashed using `password_hash()` in SQL.
 
