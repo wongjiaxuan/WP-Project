@@ -96,7 +96,7 @@
                     <input type="hidden" name="type" value="expense"> <!-- Hidden field for type -->
 
                     <label for="amount">Amount:</label>
-                    <input type="number" name="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
+                    <input type="number" name="amount" max="<?php echo date('Y-m-d'); ?>" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
                     
                     <label for="category_id">Category:</label>
                     <select name="category_id" id="category_id" required>
