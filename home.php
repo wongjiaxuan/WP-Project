@@ -39,7 +39,7 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
     <meta property="og:description" content="Track your income, expenses, and achieve your financial goals with Jimat Master.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
 
 </head>
 

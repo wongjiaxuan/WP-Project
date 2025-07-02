@@ -8,13 +8,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    padding-bottom: 30px;
     width: 100%;
     /* background: linear-gradient(to left, #C4FFF9, #92FFC0); green */
     /* background: linear-gradient(to left, #D0C0F0, #A0BFF2); */
     background: linear-gradient(to left, #c3f9e2, #bfdafa);
     overflow-x: hidden;
-    height: 100vh; 
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
 }
@@ -190,7 +189,7 @@ main {
 }
 
 footer {
-    position: fixed;
+    position: sticky;
     left: 0;
     bottom: 0;
     flex-shrink: 0;
@@ -413,6 +412,10 @@ input:-webkit-autofill {
 
 /* ====================== HOME PAGE  ===================== */
 /* Enhanced Dashboard Styles */
+.homepagemain {
+  max-width: 100%;
+  flex: 1;
+}
         .dashboard-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -452,7 +455,7 @@ input:-webkit-autofill {
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 4.5vw, 3.2rem);
             font-weight: bold;
             color: #083c5f;
             margin-bottom: 1rem;
@@ -460,9 +463,9 @@ input:-webkit-autofill {
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.4rem);
             color: #0c6527;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             animation: slideInLeft 1s ease-out 0.2s both;
         }
 
@@ -655,7 +658,7 @@ input:-webkit-autofill {
 
         .welcome-subtitle {
             color: #0c6527;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
         .progress-overviewhm {
@@ -870,8 +873,15 @@ table tbody tr:hover {
 /* ====================== INPUT PAGE  ===================== */
 
 /* ==================== OVERVIEW PAGE  ==================== */
+.overviewmain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+}
+
 #overview h2 {
-  font-size: clamp(29px, 2.5vw, 32px);
+  font-size: clamp(27px, 2.2vw, 30px);
   color: #095a29;
   margin-bottom: clamp(16px, 1vw, 20px);
 }
@@ -882,39 +892,24 @@ table tbody tr:hover {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 #overview .filtergroup {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
-}
-
-@media (min-width: 1200px)  {
-  #overview form {
-    flex-direction: row;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .filterbtn {
-    margin-left: 10px;
-  }
-
-  #overview .filtergroup {
-    margin-bottom: 20px;
-  }
+  gap: 8px;
 }
 
 #overview h3 {
-  font-size: clamp(23px, 2vw, 25px);
+  font-size: clamp(24px, 1.8vw, 27px);
   font-weight: bold;
   color: #093a21;
 }
 
 .filtergroup label {
-  font-size: clamp(23px, 2vw, 25px);
+  font-size: clamp(21px, 1.6vw, 23px);
   font-weight: bold;
   color: #093a21;
   white-space: nowrap;
@@ -951,7 +946,7 @@ table tbody tr:hover {
 .filterbtn {
   background-color: #1aca2e;
   padding: 11px 18px;
-  font-size: clamp(20px, 2vw, 21px);
+  font-size: clamp(21px, 1.6vw, 23px);
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s;
@@ -960,6 +955,56 @@ table tbody tr:hover {
 
 .filterbtn:hover {
   background-color: #72eb97;
+}
+
+#overview table {
+    width: clamp(500px, 80vw, 1200px);
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: clamp(16px, 2vw, 20px);
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table Header */
+#overview table thead {
+    background-color: #41a75c;
+    color: white;
+    text-align: left;
+}
+
+/* Table Cells */
+#overview table th,
+#overview table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #ddd;
+    min-width: 120px; /* Ensures consistent width */
+    height: 60px;      /* Ensures consistent height */
+    text-align: left;
+    vertical-align: middle;
+}
+
+@media (min-width: 1030px)  {
+  #overview form {
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .filterbtn {
+    margin-left: 10px;
+  }
+
+  #overview .filtergroup {
+    margin-bottom: 20px;
+  }
+
+  .filterbtn {
+    margin-bottom: 0;
+  }
 }
 
 .action-buttons {
@@ -1001,9 +1046,6 @@ table tbody tr:hover {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
-        
-
-
 /* ==================== OVERVIEW PAGE  ==================== */
 
 /* =================== SET BUDGET PAGE  =================== */
@@ -1023,7 +1065,6 @@ table tbody tr:hover {
   max-width: 1400px;  
   margin: 0 auto;
 }
-
 
 .set-budget-page .intro-card {
   background: linear-gradient(135deg, #81c784, #388e3c);
@@ -1053,7 +1094,6 @@ table tbody tr:hover {
   margin-top: 10px;
   font-size: 1.1em;
 }
-
 
 .set-budget-page .form-card {
   background: white;
@@ -1120,7 +1160,6 @@ table tbody tr:hover {
 .set-budget-page .tips-card li {
   margin-bottom: 10px;
 }
-
 
 .set-budget-page .content {
   /**flex: 1;**/
