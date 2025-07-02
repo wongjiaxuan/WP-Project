@@ -13,13 +13,16 @@ html, body {
     /* background: linear-gradient(to left, #D0C0F0, #A0BFF2); */
     background: linear-gradient(to left, #c3f9e2, #bfdafa);
     overflow-x: hidden;
-    min-height: 100vh; 
+    height: 100%; 
     display: flex;
     flex-direction: column;
+    
 }
 
 body {
     flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .wrapper {
@@ -420,6 +423,8 @@ input:-webkit-autofill {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-section {
@@ -609,35 +614,37 @@ input:-webkit-autofill {
         }
 
         .onboarding-tooltip {
-            position: absolute;
-            background: #083c5f;
-            color: white;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+  position: fixed; /* Use fixed so it follows the viewport, not scrolled container */
+  background: #083c5f;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 9999; /* Ensure it's on top */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .onboarding-tooltip::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 5px solid #083c5f;
-        }
+.onboarding-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        .onboarding-tooltip.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.onboarding-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #083c5f;
+}
+
 
         .welcome-back {
             background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
@@ -720,15 +727,44 @@ input:-webkit-autofill {
             100% { transform: translateX(100%); }
         }
 
-        .big-piggy {
-            position: fixed;
-            bottom: 100px;
-            right: 40px;
-            z-index: 5;
-            opacity: 0.15;
-            animation: piggyFloat 6s ease-in-out infinite;
-            transition: opacity 0.3s ease;
-        }
+        #piggy-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* BELOW content, but not too low */
+    pointer-events: none; /* prevent blocking clicks */
+    overflow: hidden;
+}
+
+        .piggy-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0; /* behind everything */
+    overflow: hidden;
+}
+
+.floating-piggy {
+    position: absolute;
+    font-size: clamp(3rem, 6vw, 7rem);
+    color: #117263;
+    opacity: 0.1;
+    animation: piggyFloat 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+
+
+
+.floating-piggy i {
+    font-size: clamp(3rem, 6vw, 5rem);
+}
+
 
         .big-piggy:hover {
             opacity: 0.3;
@@ -741,10 +777,19 @@ input:-webkit-autofill {
         }
 
         @keyframes piggyFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(2deg); }
-            66% { transform: translateY(-5px) rotate(-1deg); }
-        }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+        @keyframes piggyFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(10deg);
+    }
+}
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -774,6 +819,8 @@ input:-webkit-autofill {
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;}
 
+            
+
 
 /* ====================== INPUT PAGE  ===================== */
 /* Center the form container on the page */
@@ -791,9 +838,15 @@ input:-webkit-autofill {
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 1000px;
+  max-width: 1400px;  
+  margin: 0 auto;
 }
 
+#input, #incomeForm, #expenseForm{
+  width: 100%;
+  max-width: 1400px;  
+  margin: 0 auto;
+}
 /* Optional: Make inputs look nicer */
 .inputmain label {
   display: block;
@@ -916,7 +969,9 @@ table tbody tr:hover {
   gap: 50px;
 }
 
-#category{
+#Odate_filter, 
+#OtransactionType, 
+#Ocategory{
   width: 180px;
 }
 

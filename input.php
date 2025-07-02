@@ -49,8 +49,9 @@
                     <input type="hidden" name="type" value="income"> <!-- Hidden field for type -->
 
                     <label for="amount">Amount:</label>
-                    <input type="number" name="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
-                    
+                    <input type="number" name="amount" min="0.01" step="0.01" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required 
+                    oninvalid="this.setCustomValidity('Invalid amount. Please enter a number greater than 0.')"><br>
+                
                     <label for="category_id">Category:</label>
                     <select name="category_id" id="category_id" required>
                         <?php
@@ -66,7 +67,18 @@
                     </select><br>
 
                     <label for="date">Date:</label>
-                    <input type="date" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
+                    <input type="date" name="date" max="<?php echo date('Y-m-d'); ?>" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required><br>
+
+                        <?php
+                            if (isset($_POST['date'])) {
+                                $inputDate = $_POST['date'];
+                                $today = date('Y-m-d');
+
+                                if ($inputDate > $today) {
+                                    echo "Invalid date. You cannot select a future date.";
+                                } 
+                            }
+                        ?>
 
                     <label for="note">Note:</label>
                     <textarea name="note"><?php echo isset($_POST['note']) ? $_POST['note'] : ''; ?></textarea><br>

@@ -3,6 +3,7 @@
 session_start();
 include 'includes/db.php';
 
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=Please log in first.");
     exit();
@@ -42,6 +43,10 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
     <!-- <script src="script.js" defer></script> -->
 
 </head>
+
+<div class="piggy-container" aria-hidden="true"></div>
+<div id="piggy-bg"></div>
+
 
 <body>
     <header>
@@ -152,10 +157,8 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                 </a>
             </div>
 
-            <!-- Floating Piggy Bank -->
-            <div class="big-piggy">
-                <i class="fas fa-piggy-bank"></i>
-            </div>
+
+            
 
             <!-- Tooltip for onboarding -->
             <div class="onboarding-tooltip" id="tooltip"></div>
@@ -212,20 +215,26 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
             elementsWithTooltips.forEach(element => {
-                element.addEventListener('mouseenter', (e) => {
-                    const tooltipText = e.target.getAttribute('data-tooltip');
-                    tooltip.textContent = tooltipText;
-                    tooltip.classList.add('show');
-                    
-                    const rect = e.target.getBoundingClientRect();
-                    tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
-                    tooltip.style.top = rect.bottom + 10 + 'px';
-                });
+    element.addEventListener('mouseenter', (e) => {
+        const tooltipText = element.getAttribute('data-tooltip');
+        tooltip.textContent = tooltipText;
+        tooltip.classList.add('show');
 
-                element.addEventListener('mouseleave', () => {
-                    tooltip.classList.remove('show');
-                });
-            });
+        // Allow tooltip to be visible before calculating width
+        requestAnimationFrame(() => {
+            const rect = element.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
+            tooltip.style.top = `${rect.bottom + 10}px`;
+        });
+    });
+
+    element.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+    });
+});
+
 
             // Enhanced menu toggle
             const menuIcon = document.getElementById('menuicon');
@@ -270,6 +279,58 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                 observer.observe(card);
             });
         });
+
+         window.addEventListener("load", function () {
+    setTimeout(() => {
+        const piggyCount = 50;
+        const spacing = 100;
+        const positions = [];
+
+        const fullHeight = document.documentElement.scrollHeight;
+
+        function isTooClose(x, y) {
+            return positions.some(pos => {
+                const dx = pos.x - x;
+                const dy = pos.y - y;
+                return Math.sqrt(dx * dx + dy * dy) < spacing;
+            });
+        }
+
+        for (let i = 0; i < piggyCount; i++) {
+            let x, y, attempts = 0;
+
+            do {
+                x = Math.random() * window.innerWidth;
+                y = Math.random() * fullHeight;
+                attempts++;
+            } while (isTooClose(x, y) && attempts < 100);
+
+            positions.push({ x, y });
+
+            const piggy = document.createElement("div");
+            piggy.className = "floating-piggy";
+
+            const size = 2 + Math.random() * 4; // 2rem to 6rem
+            piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
+
+            piggy.style.left = `${x}px`;
+            piggy.style.top = `${y}px`;
+            piggy.style.position = 'absolute';
+            piggy.style.animationDelay = `${Math.random() * 6}s`;
+            piggy.style.opacity = 0.1 + Math.random() * 0.2;
+            piggy.style.pointerEvents = 'none';
+
+            document.body.appendChild(piggy);
+        }
+
+        // Make sure body is tall enough for the absolute piggies to stay
+        document.body.style.position = 'relative';
+
+    }, 500); // slight delay to ensure full scroll height is measured
+});
+
+
+
     </script>
     
 </body>
