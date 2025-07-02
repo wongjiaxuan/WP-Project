@@ -614,35 +614,37 @@ input:-webkit-autofill {
         }
 
         .onboarding-tooltip {
-            position: absolute;
-            background: #083c5f;
-            color: white;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+  position: fixed; /* Use fixed so it follows the viewport, not scrolled container */
+  background: #083c5f;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 9999; /* Ensure it's on top */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .onboarding-tooltip::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 5px solid #083c5f;
-        }
+.onboarding-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        .onboarding-tooltip.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.onboarding-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #083c5f;
+}
+
 
         .welcome-back {
             background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
@@ -816,6 +818,8 @@ input:-webkit-autofill {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;}
+
+            
 
 
 /* ====================== INPUT PAGE  ===================== */
