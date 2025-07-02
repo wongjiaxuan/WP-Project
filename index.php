@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
                         // Role-based redirection
                         if ($row['role'] === 'admin') {
-                            header("Location: admin_overview.php");
+                            header("Location: admin_home.php");
                         } else {
                             header("Location: home.php");
                         }
