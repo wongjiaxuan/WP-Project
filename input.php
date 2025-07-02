@@ -38,7 +38,7 @@
     <main class="inputmain">
         <section id="input">
             <!-- Dropdown to choose between Income and Expense -->
-            <label for="type">Select Transaction Type:</label>
+            <label for="type" class="transactiontypelabel">Select Transaction Type:</label>
             <select id="transactionType" onchange="togglePanels()">
                 <option value="income" <?php echo (isset($_POST['type']) && $_POST['type'] == 'income') ? 'selected' : ''; ?>>Income</option>
                 <option value="expense" <?php echo (isset($_POST['type']) && $_POST['type'] == 'expense') ? 'selected' : ''; ?>>Expense</option>

@@ -8,8 +8,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$selected_month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
-$month_name = date('F', mktime(0, 0, 0, $selected_month, 1));
+
+$selected_month_str = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+$timestamp = strtotime($selected_month_str);
+$selected_month = (int)date('n', $timestamp); // e.g. 7
+$selected_year = (int)date('Y', $timestamp);  // e.g. 2025
 
 $income = 0;
 $expense = 0;
@@ -18,9 +21,9 @@ $sql_summary = "SELECT type, SUM(amount) AS total
                 FROM transactions 
                 WHERE user_id = $user_id 
                 AND MONTH(date) = $selected_month 
+                AND YEAR(date) = $selected_year
                 GROUP BY type";
 $result = $conn->query($sql_summary);
-if (!$result) die("Query failed: " . $conn->error);
 
 while ($row = $result->fetch_assoc()) {
     if ($row['type'] === 'income') $income = $row['total'];
@@ -29,7 +32,7 @@ while ($row = $result->fetch_assoc()) {
 
 $spentPercentage = $income > 0 ? ($expense / $income) * 100 : 0;
 
-$sql_expense = "SELECT c.name, c.type,
+$sql_expense = "SELECT c.name,
                        COALESCE(SUM(t.amount), 0) AS spent, 
                        COALESCE(b.amount_limit, 0) AS budget_limit
                 FROM categories AS c
@@ -37,16 +40,16 @@ $sql_expense = "SELECT c.name, c.type,
                     ON t.category_id = c.category_id 
                     AND t.user_id = $user_id 
                     AND t.type = 'expense' 
-                    AND MONTH(t.date) = $selected_month 
+                    AND MONTH(t.date) = $selected_month
+                    AND YEAR(t.date) = $selected_year
                 LEFT JOIN budgets AS b 
                     ON b.category_id = c.category_id 
                     AND b.user_id = $user_id 
-                    AND b.month = '$month_name'
+                    AND b.month = '$selected_month_str'
                 WHERE c.type = 'expense'
-                GROUP BY c.name, c.type";
+                GROUP BY c.name";
 
 $result_expense = $conn->query($sql_expense);
-if (!$result_expense) die("Query failed: " . $conn->error);
 
 $defaultCategory = [
     'spent' => '0.00',
@@ -143,10 +146,10 @@ if ($result_income) {
             <div class="card-month">
                 <form id="monthForm" method="GET" action="dashboard.php">
                     <select name="month" id="month-select" onchange="document.getElementById('monthForm').submit()">
-                        <option value="7" <?= $selected_month == 7 ? 'selected' : '' ?>>July</option>    
-                        <option value="6" <?= $selected_month == 6 ? 'selected' : '' ?>>June</option>
-                        <option value="5" <?= $selected_month == 5 ? 'selected' : '' ?>>May</option>
-                        <option value="4" <?= $selected_month == 4 ? 'selected' : '' ?>>April</option>
+                        <option value="2025-07" <?= $selected_month_str == '2025-07' ? 'selected' : '' ?>>July</option>
+                        <option value="2025-06" <?= $selected_month_str == '2025-06' ? 'selected' : '' ?>>June</option>
+                        <option value="2025-05" <?= $selected_month_str == '2025-05' ? 'selected' : '' ?>>May</option>
+                        <option value="2025-04" <?= $selected_month_str == '2025-04' ? 'selected' : '' ?>>April</option>
                     </select>
                 </form>
             </div>

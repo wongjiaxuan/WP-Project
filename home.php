@@ -223,20 +223,23 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                     tooltip.textContent = tooltipText;
                     tooltip.classList.add('show');
 
-                    requestAnimationFrame(() => {
-                        const rect = element.getBoundingClientRect();
-                        const tooltipRect = tooltip.getBoundingClientRect();
-                        tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
-                        tooltip.style.top = `${rect.bottom + 10}px`;
-                    });
-                });
+        // Allow tooltip to be visible before calculating width
+        requestAnimationFrame(() => {
+            const rect = element.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
 
-                element.addEventListener('mouseleave', () => {
-                    tooltip.classList.remove('show');
-                });
-            });
+            tooltip.style.left = `${rect.left + (rect.width - tooltipRect.width) / 2}px`;
+            tooltip.style.top = `${rect.bottom + 10}px`;
+        });
+    });
 
-            // Menu toggle
+    element.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+    });
+});
+
+
+            // Enhanced menu toggle
             const menuIcon = document.getElementById('menuicon');
             const menu = document.querySelector('.menu');
             

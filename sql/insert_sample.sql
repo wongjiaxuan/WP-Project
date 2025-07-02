@@ -29,8 +29,8 @@ INSERT INTO transactions (user_id, category_id, type, amount, note, date) VALUES
 
 -- BUDGETS TABLE (5 sample entries)
 INSERT INTO budgets (user_id, category_id, month, amount_limit) VALUES
-(1, 1, 'June', 300.00),
-(2, 2, 'June', 100.00),
-(3, 3, 'June', 150.00),
-(4, 4, 'June', 200.00),
-(5, 5, 'June', 180.00);
+(1, 1, '2025-07', 300.00),
+(2, 2, '2025-07', 100.00),
+(3, 3, '2025-07', 150.00),
+(4, 4, '2025-07', 200.00),
+(5, 5, '2025-07', 180.00);
