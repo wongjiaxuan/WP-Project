@@ -2,16 +2,13 @@
 session_start();
 include 'includes/db.php';
 
-// Set content type to JSON
 header('Content-Type: application/json');
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
 
-// Check if all required fields are provided
 if (!isset($_POST['transaction_id']) || !isset($_POST['date']) || 
     !isset($_POST['category_id']) || !isset($_POST['amount']) || 
     !isset($_POST['note'])) {
@@ -26,20 +23,17 @@ $category_id = intval($_POST['category_id']);
 $amount = floatval($_POST['amount']);
 $note = $_POST['note'];
 
-// Validate inputs
 if (empty($date) || $category_id <= 0 || $amount <= 0) {
     echo json_encode(['success' => false, 'message' => 'Invalid input values']);
     exit;
 }
 
-// Validate date format
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
     echo json_encode(['success' => false, 'message' => 'Invalid date format']);
     exit;
 }
 
 try {
-    // First, verify that the transaction belongs to the logged-in user
     $checkStmt = $conn->prepare("SELECT user_id FROM transactions WHERE transaction_id = ?");
     $checkStmt->bind_param("i", $transaction_id);
     $checkStmt->execute();
@@ -62,7 +56,6 @@ try {
     
     $checkStmt->close();
     
-    // Verify that the category exists
     $categoryStmt = $conn->prepare("SELECT type FROM categories WHERE category_id = ?");
     $categoryStmt->bind_param("i", $category_id);
     $categoryStmt->execute();
@@ -77,7 +70,6 @@ try {
     
     $categoryStmt->close();
     
-    // Update the transaction
     $updateStmt = $conn->prepare("UPDATE transactions SET date = ?, category_id = ?, amount = ?, note = ? WHERE transaction_id = ? AND user_id = ?");
     $updateStmt->bind_param("sidsii", $date, $category_id, $amount, $note, $transaction_id, $user_id);
     

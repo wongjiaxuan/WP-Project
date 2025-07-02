@@ -2,16 +2,16 @@
 session_start();
 include 'includes/db.php';
 
-// Set content type to JSON
+
 header('Content-Type: application/json');
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'User not logged in']);
     exit;
 }
 
-// Check if transaction_id is provided
+
 if (!isset($_POST['transaction_id'])) {
     echo json_encode(['success' => false, 'message' => 'Transaction ID not provided']);
     exit;
@@ -21,7 +21,7 @@ $user_id = $_SESSION['user_id'];
 $transaction_id = intval($_POST['transaction_id']);
 
 try {
-    // First, verify that the transaction belongs to the logged-in user
+
     $checkStmt = $conn->prepare("SELECT user_id FROM transactions WHERE transaction_id = ?");
     $checkStmt->bind_param("i", $transaction_id);
     $checkStmt->execute();
@@ -44,7 +44,7 @@ try {
     
     $checkStmt->close();
     
-    // Delete the transaction
+  
     $deleteStmt = $conn->prepare("DELETE FROM transactions WHERE transaction_id = ? AND user_id = ?");
     $deleteStmt->bind_param("ii", $transaction_id, $user_id);
     

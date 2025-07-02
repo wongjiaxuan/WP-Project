@@ -16,7 +16,6 @@ menuIcon.addEventListener('click', () => {
 
 document.addEventListener('click', (event) => {
     if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
-        // Hide the menu if the click is outside of the menu and icon
         menu.classList.remove('show');
         menuIcon.classList.remove('rotate');
     }

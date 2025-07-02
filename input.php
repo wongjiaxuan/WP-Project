@@ -38,18 +38,18 @@
         
     <main class="inputmain">
         <section id="input">
-            <!-- Dropdown to choose between Income and Expense -->
+  
             <label for="type" class="transactiontypelabel">Select Transaction Type:</label>
             <select id="transactionType" onchange="togglePanels()">
                 <option value="income" <?php echo (isset($_POST['type']) && $_POST['type'] == 'income') ? 'selected' : ''; ?>>Income</option>
                 <option value="expense" <?php echo (isset($_POST['type']) && $_POST['type'] == 'expense') ? 'selected' : ''; ?>>Expense</option>
             </select>
 
-            <!-- Income Form Panel -->
+
             <div id="incomeForm" style="display: none;">
                 <br>
                 <form method="POST" action="insert_transaction.php">
-                    <input type="hidden" name="type" value="income"> <!-- Hidden field for type -->
+                    <input type="hidden" name="type" value="income"> 
 
                     <label for="amount">Amount:</label>
                     <input type="number" name="amount" min="0.01" step="0.01" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required 
@@ -60,7 +60,7 @@
                         <?php
                         include 'includes/db.php';
 
-                        // Fetch categories based on 'income'
+
                         $result = $conn->query("SELECT * FROM categories WHERE type = 'income'");
                         while ($row = $result->fetch_assoc()) {
                             $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';
@@ -90,11 +90,10 @@
                 </form>
             </div>
 
-            <!-- Expense Form Panel -->
             <div id="expenseForm" style="display: none;">
                 <br>
                 <form method="POST" action="insert_transaction.php">
-                    <input type="hidden" name="type" value="expense"> <!-- Hidden field for type -->
+                    <input type="hidden" name="type" value="expense"> 
 
                     <label for="amount">Amount:</label>
                     <input type="number" name="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : ''; ?>" required><br>
@@ -104,7 +103,7 @@
                         <?php
                         include 'includes/db.php';
 
-                        // Fetch categories based on 'expense'
+       
                         $result = $conn->query("SELECT * FROM categories WHERE type = 'expense'");
                         while ($row = $result->fetch_assoc()) {
                             $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';
@@ -135,10 +134,10 @@
     </footer>
 
     <script>
-        // Set current year
+       
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Function to toggle between the Income and Expense panels based on selected type
+        
         function togglePanels() {
             var selectedType = document.getElementById('transactionType').value;
             var incomeForm = document.getElementById('incomeForm');
@@ -153,15 +152,15 @@
             }
         }
 
-        // Initialize by showing the correct form based on the default or selected type
+        
         window.onload = function() {
-            togglePanels();  // Toggle the panels based on the initial selection
+            togglePanels();  
         };
 
-        // Piggy bank background animation
+        
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 60; // Reduced for input page
+                const piggyCount = 60; 
                 const spacing = 100;
                 const positions = [];
 
@@ -193,18 +192,18 @@
                     const piggy = document.createElement("div");
                     piggy.className = "floating-piggy";
 
-                    const size = 2 + Math.random() * 3; // Slightly smaller for input page
+                    const size = 2 + Math.random() * 3; 
                     piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
 
                     piggy.style.left = `${x}px`;
                     piggy.style.top = `${y}px`;
                     piggy.style.animationDelay = `${Math.random() * 6}s`;
-                    piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for form page
+                    piggy.style.opacity = 0.08 + Math.random() * 0.15; 
 
                     piggyContainer.appendChild(piggy);
                 }
 
-                // Update piggy positions on scroll for infinite effect
+                
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {

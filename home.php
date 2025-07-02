@@ -1,5 +1,4 @@
 <?php
-// Start session and include DB - MUST be at the very top
 session_start();
 include 'includes/db.php';
 
@@ -10,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Get username
+
 $sql = "SELECT username FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -19,7 +18,7 @@ $stmt->bind_result($username);
 $stmt->fetch();
 $stmt->close();
 
-// Get Total Income
+
 $sql = "SELECT SUM(amount) FROM transactions WHERE user_id = ? AND type = 'income' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -29,7 +28,7 @@ $stmt->fetch();
 $stmt->close();
 $total_income = $total_income ?? 0;
 
-// Get Total Expenses
+
 $sql = "SELECT SUM(amount) FROM transactions WHERE user_id = ? AND type = 'expense' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -39,10 +38,10 @@ $stmt->fetch();
 $stmt->close();
 $total_expenses = $total_expenses ?? 0;
 
-// Calculate Current Savings
+
 $current_savings = $total_income - $total_expenses;
 
-// Get Monthly Budget
+
 $sql = "SELECT SUM(amount_limit) FROM budgets WHERE user_id = ? AND month = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -52,7 +51,7 @@ $stmt->fetch();
 $stmt->close();
 $monthly_budget = $monthly_budget ?? 0;
 
-// Calculate Budget Usage
+
 $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budget) * 100 : 0;
 ?>
 <!DOCTYPE html>
@@ -89,13 +88,13 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
 
     <main class="homepagemain">
         <div class="dashboard-container">
-            <!-- Welcome Section -->
+
             <div class="welcome-back">
                 <div class="welcome-text">Welcome back, <?php echo htmlspecialchars($username); ?>! 👋</div>
                 <div class="welcome-subtitle">Here's your financial overview for today</div>
             </div>
 
-            <!-- Hero Section -->
+
             <section class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-title">Your Financial Journey</h1>
@@ -103,7 +102,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </div>
             </section>
 
-            <!-- Stats Grid -->
+
             <div class="stats-grid">
                 <div class="stat-card" data-tooltip="Your total income this month">
                     <i class="fas fa-arrow-up stat-icon income"></i>
@@ -130,7 +129,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </div>
             </div>
 
-            <!-- Budget Progress -->
+     
             <div class="progress-overviewhm">
                 <h3 class="progress-titlehm">Monthly Budget Progress</h3>
                 <div class="budget-progress">
@@ -144,7 +143,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </div>
             </div>
 
-            <!-- Quick Actions -->
+ 
             <div class="quick-actions">
                 <a href="input.php" class="action-btn" data-tooltip="Add a new income or expense transaction">
                     <i class="fas fa-plus action-icon"></i>
@@ -164,7 +163,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 </a>
             </div>
 
-            <!-- Tooltip for onboarding -->
+
             <div class="onboarding-tooltip" id="tooltip"></div>
         </div>
     </main>
@@ -180,10 +179,10 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year
+
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Animate counter values
+  
             function animateValue(element, start, end, duration) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
@@ -198,13 +197,13 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 window.requestAnimationFrame(step);
             }
 
-            // Animate all stat values
+  
             document.querySelectorAll('.stat-value[data-value]').forEach((element) => {
                 const targetValue = parseInt(element.getAttribute('data-value'));
                 animateValue(element, 0, targetValue, 2000);
             });
 
-            // Animate progress bar
+       
             setTimeout(() => {
                 const progressFill = document.querySelector('.progress-fillhm');
                 if (progressFill) {
@@ -213,7 +212,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 }
             }, 1000);
 
-            // Tooltip functionality
+   
             const tooltip = document.getElementById('tooltip');
             const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
@@ -223,7 +222,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                     tooltip.textContent = tooltipText;
                     tooltip.classList.add('show');
 
-        // Allow tooltip to be visible before calculating width
+
         requestAnimationFrame(() => {
             const rect = element.getBoundingClientRect();
             const tooltipRect = tooltip.getBoundingClientRect();
@@ -239,7 +238,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
 });
 
 
-            // Enhanced menu toggle
+
             const menuIcon = document.getElementById('menuicon');
             const menu = document.querySelector('.menu');
             
@@ -250,7 +249,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 });
             }
 
-            // Intersection Observer for animations
+
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -265,7 +264,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                 });
             }, observerOptions);
 
-            // Observe stat cards for staggered animation
+
             document.querySelectorAll('.stat-card').forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
@@ -274,7 +273,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
             });
         });
 
-        // Piggy bank background animation
+
         window.addEventListener("load", function () {
             setTimeout(() => {
                 const piggyCount = 100;
@@ -320,7 +319,7 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
                     piggyContainer.appendChild(piggy);
                 }
 
-                // Update piggy positions on scroll for infinite effect
+  
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {
