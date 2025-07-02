@@ -366,7 +366,7 @@ if ($result_income) {
                     piggyContainer.appendChild(piggy);
                 }
 
-                
+                // Update piggy positions on scroll for infinite effect
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {
