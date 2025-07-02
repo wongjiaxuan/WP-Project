@@ -9,7 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$selected_month_str = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+$selected_month_str = $_GET['month'] ?? date('Y-m');
+$_GET['month'] = $selected_month_str;
+include 'check_budget.php';
 $timestamp = strtotime($selected_month_str);
 $selected_month = (int)date('n', $timestamp); // e.g. 7
 $selected_year = (int)date('Y', $timestamp);  // e.g. 2025
@@ -108,7 +110,6 @@ if ($result_income) {
         }
     }
 }
-include 'check_budget.php';   
 ?>
 
 
