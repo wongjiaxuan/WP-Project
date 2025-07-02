@@ -226,7 +226,7 @@
                         ticking = true;
                     }
                 });
-            }, 500);
+            }, 100);
         });
     </script>
 </body>

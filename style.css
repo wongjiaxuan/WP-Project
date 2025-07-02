@@ -201,7 +201,7 @@ footer {
     width: 100%;
     padding: 15px 0;
     padding-top: 20px;
-    z-index: 20;
+    z-index: 5;
     /* background: linear-gradient(to right, #F2E6FF, #E6D9F7);  */
     background: linear-gradient(to left, #99e7b7, #a7d0ff);
 }
@@ -417,6 +417,7 @@ input:-webkit-autofill {
 /* Enhanced Dashboard Styles */
 .homepagemain {
   max-width: 100%;
+  margin-bottom: 50px;
   /* margin-bottom: 25px; */
 }
         .dashboard-container {
@@ -615,13 +616,13 @@ input:-webkit-autofill {
         }
 
         .onboarding-tooltip {
-  position: fixed; /* Use fixed so it follows the viewport, not scrolled container */
+  position: fixed;
   background: #083c5f;
   color: white;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   font-size: 0.9rem;
-  z-index: 9999; /* Ensure it's on top */
+  z-index: 10000;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.2s ease, transform 0.2s ease;
