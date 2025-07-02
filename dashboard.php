@@ -13,8 +13,8 @@ $selected_month_str = $_GET['month'] ?? date('Y-m');
 $_GET['month'] = $selected_month_str;
 include 'check_budget.php';
 $timestamp = strtotime($selected_month_str);
-$selected_month = (int)date('n', $timestamp); // e.g. 7
-$selected_year = (int)date('Y', $timestamp);  // e.g. 2025
+$selected_month = (int)date('n', $timestamp); 
+$selected_year = (int)date('Y', $timestamp);  
 
 $income = 0;
 $expense = 0;
@@ -326,7 +326,6 @@ if ($result_income) {
     </footer>
 
     <script>
-        // Piggy bank background animation
         window.addEventListener("load", function () {
             setTimeout(() => {
                 const piggyCount = 90; 
@@ -367,7 +366,6 @@ if ($result_income) {
                     piggyContainer.appendChild(piggy);
                 }
 
-                // Update piggy positions on scroll for infinite effect
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {
