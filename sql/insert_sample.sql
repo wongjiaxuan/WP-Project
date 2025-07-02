@@ -1,10 +1,10 @@
--- USERS TABLE (5 sample users with unique passwords)
+-- USERS TABLE (5 users with updated strong passwords)
 INSERT INTO users (username, email, password, role) VALUES
-('admin', 'admin@example.com', '$2y$10$GQRoUXz2Q9sXYYf.R5kvq.29d3AWrh1.a9bcyxji7rjqqbXxDcRVK', 'admin'),
-('sara', 'sara@gmail.com', '$2y$10$F/XZt43z6oVjtWRF8nGB0ei0bPdo5MuoyvQro3q/50xp6Ijr.Hzkm', 'user'),
-('john', 'john.doe@gmail.com', '$2y$10$ikb7XRkTIVkAFxKA7OLsHOqebd7OjONdBXlbP9H92gir9Q8IFmXvO', 'user'),
-('fatimah', 'fatimah@gmail.com', '$2y$10$tg1L0W2mlV1sLyAC1Ehgzu8m7QkqHz.xVfe2EhhS8rEyzGQo38OPW', 'user'),
-('azmi', 'azmi@hotmail.com', '$2y$10$zUmbBCaUVx65nfEkvueY0uSwQJQfdbobrMaD9k4IwukGQdHSrf3Du', 'user');
+('admin', 'admin@example.com', '$2y$10$/c0ilPMeYvZtadKtcqgkTOWiwFmOeB9T2Bkz9IEqxebIo8vlfLBhi', 'admin'),  
+('sara', 'sara@gmail.com', '$2y$10$88kQWNDdoj8zjH5cIqiykuXCMMUMPpHQWsIb1s8Tg05BcIhEqmq8G', 'user'),       
+('john', 'john.doe@gmail.com', '$2y$10$6UZCqIz8V1RgCW.PN6aUguwGGpM43ysIgXziDl7.lNAW7nH2Jsg2y', 'user'),    
+('fatimah', 'fatimah@gmail.com', '$2y$10$DYrnlh0Ly1U1ddGZyxVaAOa.uNT5RmtMni99HKCn9RYzDYS6vgBva', 'user'),   
+('azmi', 'azmi@hotmail.com', '$2y$10$SEImMWtrvquWWdJ.utLHzelz9PRoY7i2yIZypb4q/vswaNovMeZwa', 'user');    
 
 -- Insert into categories table with updated type values
 INSERT INTO categories (name, type) VALUES

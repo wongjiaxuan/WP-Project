@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $result = $stmt->get_result();
 
             if ($result->num_rows === 1) {
-
                 $row = $result->fetch_assoc();
 
                 if (password_verify($password, $row['password'])) {
@@ -58,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         exit();
                     }
                 } else {
-                    header("Location: index.php?error=Inccorect email or password.");
+                    header("Location: index.php?error=Incorrect email or password.");
                     exit();
                 }
             } else {
-                header("Location: index.php?error=Inccorect email or password.");
+                header("Location: index.php?error=Incorrect email or password.");
                 exit();
             }
         }
@@ -103,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="formgroup">
                     <label for="role">Role</label>
                     <select id="role" name="role">
-                        <option value="" disable selected hidden>Select Your Role</option>
+                        <option value="" disabled selected hidden>Select Your Role</option>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
                     </select>
