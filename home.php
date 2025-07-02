@@ -20,13 +20,42 @@ $stmt->bind_result($username);
 $stmt->fetch();
 $stmt->close();
 
-// Get user statistics (you'll need to implement these queries based on your database structure)
-// For demo purposes, using placeholder values
-$total_income = 5000; // Get from database
-$total_expenses = 3200; //   Get from database
-$current_savings = 1800; // Get from database
-$monthly_budget = 4000; // Get from database
-$budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
+// Get Total Income
+$sql = "SELECT SUM(amount) FROM transactions WHERE user_id = ? AND type = 'income' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($total_income);
+$stmt->fetch();
+$stmt->close();
+$total_income = $total_income ?? 0;
+
+// Get Total Expenses
+$sql = "SELECT SUM(amount) FROM transactions WHERE user_id = ? AND type = 'expense' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($total_expenses);
+$stmt->fetch();
+$stmt->close();
+$total_expenses = $total_expenses ?? 0;
+
+// Calculate Current Savings
+$current_savings = $total_income - $total_expenses;
+
+// Get Monthly Budget
+$sql = "SELECT SUM(amount_limit) FROM budgets WHERE user_id = ? AND month = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($monthly_budget);
+$stmt->fetch();
+$stmt->close();
+$monthly_budget = $monthly_budget ?? 0;
+
+// Calculate Budget Usage
+$budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budget) * 100 : 0;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +78,8 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
 
 
 <body>
+<div class="piggy-container" aria-hidden="true"></div>
+<div id="piggy-bg"></div>
     <header>
         <nav aria-label="Main Navigation">
             <div class="headername">Jimat Master</div>
@@ -87,8 +118,6 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                     <div class="stat-value" data-value="<?php echo $total_income; ?>">RM 0</div>
                     <div class="stat-label">Total Income</div>
                     <div class="stat-change positive">
-                        <i class="fas fa-arrow-up"></i>
-                        +12% from last month
                     </div>
                 </div>
 
@@ -97,8 +126,7 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                     <div class="stat-value" data-value="<?php echo $total_expenses; ?>">RM 0</div>
                     <div class="stat-label">Total Expenses</div>
                     <div class="stat-change negative">
-                        <i class="fas fa-arrow-down"></i>
-                        +8% from last month
+
                     </div>
                 </div>
 
@@ -107,8 +135,7 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                     <div class="stat-value" data-value="<?php echo $current_savings; ?>">RM 0</div>
                     <div class="stat-label">Current Savings</div>
                     <div class="stat-change positive">
-                        <i class="fas fa-arrow-up"></i>
-                        +15% from last month
+
                     </div>
                 </div>
 
@@ -117,8 +144,6 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
                     <div class="stat-value" data-value="<?php echo $monthly_budget; ?>">RM 0</div>
                     <div class="stat-label">Monthly Budget</div>
                     <div class="stat-change <?php echo $budget_used_percentage > 80 ? 'negative' : 'positive'; ?>">
-                        <i class="fas fa-info-circle"></i>
-                        <?php echo round($budget_used_percentage, 1); ?>% used
                     </div>
                 </div>
             </div>
@@ -286,7 +311,9 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
         const spacing = 100;
         const positions = [];
 
+        const piggyContainer = document.querySelector('.piggy-container');
         const fullHeight = document.documentElement.scrollHeight;
+        piggyContainer.style.height = fullHeight + 'px';
 
         function isTooClose(x, y) {
             return positions.some(pos => {
@@ -320,14 +347,11 @@ $budget_used_percentage = ($total_expenses / $monthly_budget) * 100;
             piggy.style.opacity = 0.1 + Math.random() * 0.2;
             piggy.style.pointerEvents = 'none';
 
-            document.body.appendChild(piggy);
+            piggyContainer.appendChild(piggy);
         }
-
-        // Make sure body is tall enough for the absolute piggies to stay
-        document.body.style.position = 'relative';
-
-    }, 500); // slight delay to ensure full scroll height is measured
+    }, 500); // delay to ensure DOM height is final
 });
+
 
 
 
