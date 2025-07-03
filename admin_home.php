@@ -5,7 +5,6 @@ require_once 'includes/db.php';
 
 $admin_id = $_SESSION['user_id'];
 
-
 $sql = "SELECT username FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $admin_id);
@@ -14,27 +13,21 @@ $stmt->bind_result($admin_username);
 $stmt->fetch();
 $stmt->close();
 
-
 $sql = "SELECT SUM(amount) FROM transactions WHERE type = 'income' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $result = $conn->query($sql);
 $total_income = $result->fetch_row()[0] ?? 0;
-
 
 $sql = "SELECT SUM(amount) FROM transactions WHERE type = 'expense' AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 $result = $conn->query($sql);
 $total_expenses = $result->fetch_row()[0] ?? 0;
 
-
 $current_savings = $total_income - $total_expenses;
-
 
 $sql = "SELECT SUM(amount_limit) FROM budgets WHERE month = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
 $result = $conn->query($sql);
 $monthly_budget = $result->fetch_row()[0] ?? 0;
 
-
 $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budget) * 100 : 0;
-
 
 $sql = "SELECT COUNT(*) FROM users WHERE role = 'user'";
 $result = $conn->query($sql);
@@ -55,14 +48,12 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 <div class="welcome-subtitle">Here's the system-wide financial overview for today</div>
             </div>
 
-
             <section class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-title">System Financial Overview</h1>
                     <p class="hero-subtitle">Monitor and manage all users' financial activities</p>
                 </div>
             </section>
-
 
             <div class="stats-grid">
                 <div class="stat-card" data-tooltip="Total income from all users this month">
@@ -102,7 +93,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </div>
             </div>
 
-
             <div class="progress-overviewhm">
                 <h3 class="progress-titlehm">System-wide Budget Progress</h3>
                 <div class="budget-progress">
@@ -116,7 +106,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 </div>
             </div>
 
-
             <div class="quick-actions">
                 <a href="admin_overview.php" class="action-btn" data-tooltip="View all user transactions">
                     <i class="fas fa-list action-icon"></i>
@@ -127,7 +116,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                     <span>Finance Statistics</span>
                 </a>
             </div>
-
 
             <div class="onboarding-tooltip" id="tooltip"></div>
         </div>
@@ -144,9 +132,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
             document.getElementById('current-year').textContent = new Date().getFullYear();
-
 
             function animateValue(element, start, end, duration) {
                 let startTimestamp = null;
@@ -155,7 +141,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     const value = Math.floor(progress * (end - start) + start);
                     
-
                     if (element.textContent.includes('RM')) {
                         element.textContent = 'RM ' + value.toLocaleString();
                     } else {
@@ -169,15 +154,12 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 window.requestAnimationFrame(step);
             }
 
-
             document.querySelectorAll('.stat-value[data-value]').forEach((element) => {
                 const targetValue = parseInt(element.getAttribute('data-value'));
-
                 if (element.textContent.includes('RM')) {
                     animateValue(element, 0, targetValue, 2000);
                 }
             });
-
 
             setTimeout(() => {
                 const progressFill = document.querySelector('.progress-fillhm');
@@ -212,18 +194,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 });
             });
 
-
-            const menuIcon = document.getElementById('menuicon');
-            const menu = document.querySelector('.menu');
-            
-            if (menuIcon && menu) {
-                menuIcon.addEventListener('click', () => {
-                    menu.classList.toggle('show');
-                    menuIcon.classList.toggle('rotate');
-                });
-            }
-
-
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -238,7 +208,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 });
             }, observerOptions);
 
-
             document.querySelectorAll('.stat-card').forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
@@ -246,7 +215,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
                 observer.observe(card);
             });
         });
-
 
         window.addEventListener("load", function () {
             setTimeout(() => {
@@ -292,7 +260,6 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
 
                     piggyContainer.appendChild(piggy);
                 }
-
 
                 let ticking = false;
                 window.addEventListener('scroll', () => {

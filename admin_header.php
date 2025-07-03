@@ -29,13 +29,23 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        @media (max-width: 1499px) {
+            .menu {
+                display: none;
+            }
+            .menu.show {
+                display: flex;
+            }
+        }
+    </style>
 </head>
 <body>
 
-
 <header>
-    <nav>
+    <nav aria-label="Main Navigation">
         <div class="headername">Admin Panel</div>
+        <i class="fa-solid fa-bars" id="menuicon"></i>
         <ul class="menu">
             <li><a href="admin_home.php" class="<?= $current_page === 'admin_home.php' ? 'active' : '' ?>">Home</a></li>
             <li><a href="admin_overview.php" class="<?= $current_page === 'admin_overview.php' ? 'active' : '' ?>">All Transactions</a></li>
@@ -44,3 +54,33 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
     </nav>
 </header>
+
+<script>
+(function() {
+    function initMobileMenu() {
+        const menuIcon = document.getElementById('menuicon');
+        const menu = document.querySelector('.menu');
+        
+        if (menuIcon && menu) {
+            menuIcon.removeEventListener('click', toggleMenu);
+            menuIcon.addEventListener('click', toggleMenu);
+        }
+    }
+    
+    function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        const menuIcon = document.getElementById('menuicon');
+        
+        if (menu && menuIcon) {
+            menu.classList.toggle('show');
+            menuIcon.classList.toggle('rotate');
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+        initMobileMenu();
+    }
+})();
+</script>
