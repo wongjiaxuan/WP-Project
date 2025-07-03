@@ -92,15 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <form method="post" class="loginform" action="">
                 <div class="formgroup">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" placeholder="Your Email">
+                    <input type="text" id="email" name="email" placeholder="Your Email" required>
                 </div>
                 <div class="formgroup">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Your Password">
+                    <input type="password" id="password" name="password" placeholder="Your Password" required>
                 </div>
                 <div class="formgroup">
                     <label for="role">Role</label>
-                    <select id="role" name="role">
+                    <select id="role" name="role" required>
                         <option value="" disabled selected hidden>Select Your Role</option>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
