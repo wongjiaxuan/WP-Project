@@ -180,7 +180,7 @@ main {
     flex: 1; 
     padding: 0 clamp(2rem, 1vw, 6rem);
 }
-
+}
 #overview {
     width: 100%;
 }
@@ -228,6 +228,7 @@ footer {
 
 .footercontainer p {
     padding-bottom: 8px;
+}
 }
 
 /* ====================== LOGIN PAGE  ===================== */
@@ -1484,3 +1485,5 @@ table tbody tr:hover {
     background-color: #9e1b57;
 }
 /* ====================== FINANCE DASHBOARD PAGE  ===================== */
+
+
