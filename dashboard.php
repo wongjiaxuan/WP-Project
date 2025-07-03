@@ -13,8 +13,8 @@ $selected_month_str = $_GET['month'] ?? date('Y-m');
 $_GET['month'] = $selected_month_str;
 include 'check_budget.php';
 $timestamp = strtotime($selected_month_str);
-$selected_month = (int)date('n', $timestamp); // e.g. 7
-$selected_year = (int)date('Y', $timestamp);  // e.g. 2025
+$selected_month = (int)date('n', $timestamp); 
+$selected_year = (int)date('Y', $timestamp);  
 
 $income = 0;
 $expense = 0;
@@ -326,7 +326,6 @@ if ($result_income) {
     </footer>
 
     <script>
-        // Piggy bank background animation
         window.addEventListener("load", function () {
             setTimeout(() => {
                 const piggyCount = 90; 
@@ -358,12 +357,12 @@ if ($result_income) {
 
                     const piggy = document.createElement("div");
                     piggy.className = "floating-piggy";
-                    const size = 2 + Math.random() * 3; // Slightly smaller for input page
+                    const size = 2 + Math.random() * 3; 
                     piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
                     piggy.style.left = `${x}px`;
                     piggy.style.top = `${y}px`;
                     piggy.style.animationDelay = `${Math.random() * 6}s`;
-                    piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for form page
+                    piggy.style.opacity = 0.08 + Math.random() * 0.15; 
                     piggyContainer.appendChild(piggy);
                 }
 

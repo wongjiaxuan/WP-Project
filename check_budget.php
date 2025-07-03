@@ -25,10 +25,10 @@ $messages = [];
 while ($row = $budgets->fetch_assoc()) {
     $category_id = $row['category_id'];
     $limit = (float)$row['amount_limit'];
-    $budget_month = $row['month']; // Format: "YYYY-MM"
+    $budget_month = $row['month']; 
     $category_name = $row['category_name'];
 
-    // Calculate total spent in this category for the month
+
     $sql_spent = "SELECT SUM(amount) AS total_spent
                   FROM transactions
                   WHERE user_id = ? 
@@ -44,7 +44,7 @@ while ($row = $budgets->fetch_assoc()) {
 
     if ($limit > 0 && $spent >= 0.8 * $limit) {
         $percent = ($spent / $limit) * 100;
-        $monthName = DateTime::createFromFormat('Y-m', $budget_month)->format('F'); // e.g., "July"
+        $monthName = DateTime::createFromFormat('Y-m', $budget_month)->format('F');
 
         if ($percent >= 100) {
             $messages[] = "❗ You’ve exceeded 100% of your \"$category_name\" budget for $monthName.";

@@ -91,14 +91,11 @@
   <script src="set_budget.js"></script>
 
   <script>
-    // Set current year
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Piggy bank background animation
     window.addEventListener("load", function () {
         setTimeout(() => {
-            const piggyCount = 80; // Reduced for input page
-            const spacing = 100;
+            const piggyCount = 80; 
             const positions = [];
 
             const piggyContainer = document.querySelector('.piggy-container');
@@ -129,18 +126,17 @@
                 const piggy = document.createElement("div");
                 piggy.className = "floating-piggy";
 
-                const size = 2 + Math.random() * 3; // Slightly smaller for input page
+                const size = 2 + Math.random() * 3; 
                 piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
 
                 piggy.style.left = `${x}px`;
                 piggy.style.top = `${y}px`;
                 piggy.style.animationDelay = `${Math.random() * 6}s`;
-                piggy.style.opacity = 0.08 + Math.random() * 0.15; // More subtle for form page
+                piggy.style.opacity = 0.08 + Math.random() * 0.15; 
 
                 piggyContainer.appendChild(piggy);
             }
 
-            // Update piggy positions on scroll for infinite effect
             let ticking = false;
             window.addEventListener('scroll', () => {
                 if (!ticking) {

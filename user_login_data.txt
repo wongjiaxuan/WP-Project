@@ -1,0 +1,11 @@
+User can directly log in (without registering new account) by inserting any of the user data below. 
+
+| Username | Email                  | Password    | Role  |
+| -------- | ---------------------- | ----------- | ----- |
+| admin    | admin@example.com      | Admin\@1234 | admin |
+| sara     | sara@gmail.com         | Sara\@4321  | user  |
+| john     | john.doe@gmail.com     | John#Pass1  | user  |
+| fatimah  | fatimah@gmail.com      | Fatimah88!  | user  |
+| azmi     | azmi@hotmail.com       | Azmi321@    | user  |
+
+
