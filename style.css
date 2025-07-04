@@ -822,11 +822,11 @@ input:-webkit-autofill {
 .inputmain {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; 
     width: 90%;
     max-width: 1400px;  
-    margin: 0 auto;
+    margin: 5px auto 0 auto; 
+    padding: 20px 0; 
+    flex-direction: column; 
 }
 
 .inputmain form {
@@ -838,6 +838,7 @@ input:-webkit-autofill {
 }
 
 #input, #incomeForm, #expenseForm{
+    margin-top: 10px;
     width: 100%;
 }
 
@@ -855,6 +856,11 @@ input:-webkit-autofill {
     color: #095a29;
     font-weight: bold;
 }
+
+.transactiontypelabel {
+    margin-top: 80px; /* adjust as needed */
+}
+
 
 .inputmain input,
 .inputmain select,
