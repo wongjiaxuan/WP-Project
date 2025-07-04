@@ -1,4 +1,4 @@
--- USERS TABLE (5 users with updated strong passwords)
+
 INSERT INTO users (username, email, password, role) VALUES
 ('admin', 'admin@example.com', '$2y$10$/c0ilPMeYvZtadKtcqgkTOWiwFmOeB9T2Bkz9IEqxebIo8vlfLBhi', 'admin'),  
 ('sara', 'sara@gmail.com', '$2y$10$88kQWNDdoj8zjH5cIqiykuXCMMUMPpHQWsIb1s8Tg05BcIhEqmq8G', 'user'),       
@@ -6,7 +6,7 @@ INSERT INTO users (username, email, password, role) VALUES
 ('fatimah', 'fatimah@gmail.com', '$2y$10$DYrnlh0Ly1U1ddGZyxVaAOa.uNT5RmtMni99HKCn9RYzDYS6vgBva', 'user'),   
 ('azmi', 'azmi@hotmail.com', '$2y$10$SEImMWtrvquWWdJ.utLHzelz9PRoY7i2yIZypb4q/vswaNovMeZwa', 'user');    
 
--- Insert into categories table with updated type values
+
 INSERT INTO categories (name, type) VALUES
 ('Food', 'expense'),
 ('Transport', 'expense'),

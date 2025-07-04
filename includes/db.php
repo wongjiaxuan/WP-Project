@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$pass = ''; // XAMPP default is no password
+$pass = ''; 
 $dbname = 'jimatmaster';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
