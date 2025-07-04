@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jimat Master Set Budget – Budget Planner Page</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e0e6a30e.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Jimat Master Set Budget – Budget Planner Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a30e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <script src="script.js" defer></script>
 </head>
 <body class="set-budget-page">
-  <div id="piggy-bg"></div>
-  <div class="piggy-container" aria-hidden="true"></div>
+    <div id="piggy-bg"></div>
+    <div class="piggy-container" aria-hidden="true"></div>
 
-  <header>
+    <header>
         <nav aria-label="Main Navigation">
             <div class="headername">Jimat Master</div>
             <i class="fa-solid fa-bars" id="menuicon"></i>
@@ -24,144 +24,143 @@
                 <li><a href="overview.php">Transaction Overview</a></li>
                 <li><a href="dashboard.php">Finance Dashboard</a></li>
                 <li><a href="logout.php">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
+            </ul>
+        </nav>
+    </header>
 
-  <main class="content">
-    <div class="layout"> 
+    <main class="content">
+        <div class="layout"> 
+            <section class="intro-card">
+                <div class="intro-content">
+                    <h1>Set Your Monthly Budget</h1>
+                    <p>Plan smarter, save more. Assign your budget across categories below.</p>
+                </div>
+            </section>
 
-      <section class="intro-card">
-        <div class="intro-content">
-          <h1>Set Your Monthly Budget</h1>
-          <p>Plan smarter, save more. Assign your budget across categories below.</p>
+            <section class="form-card">
+                <div id="alert-box" style="display:none; padding:10px; margin-bottom:15px; border-left:5px solid green; background:#e9ffe9; color:#333; font-weight: 500;"></div>
+                <form action="set_budget.php" method="POST">
+                    <div class="form-group">
+                        <label for="category">Choose Category:</label>
+                        <select name="category_id" id="category" required>
+                            <option disabled selected>Select one</option>
+                            <option value="1">🍔 Food</option>
+                            <option value="2">🚗 Transport</option>
+                            <option value="3">💡 Utilities</option>
+                            <option value="4">🎮 Entertainment</option>
+                            <option value="5">🧑‍⚕️ Healthcare</option>
+                            <option value="6">🗂️ Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Budget Amount (RM):</label>
+                        <input type="number" name="amount" id="amount" min="0" placeholder="Enter amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="month">Select Month:</label>
+                        <input type="month" name="month" id="month" value="2025-06" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary"><i class="fas fa-check-circle"></i> Save Budget</button>
+                </form>
+            </section>
+
+            <section class="tips-card">
+                <h3>💡 Tips for Smart Budgeting</h3>
+                <ul>
+                    <li>Limit entertainment spending to max 30% of your income.</li>
+                    <li>Keep at least 20% for savings or emergencies.</li>
+                    <li>Track small expenses—they sneak up fast!</li>
+                </ul>
+            </section>
+        </div> 
+    </main>
+
+    <footer>
+        <div class="footercontainer">
+            <p>
+                <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
+                <span class="footergroup">Web Programming Group 4</span>
+            </p>
         </div>
-      </section>
+    </footer>
 
-      <section class="form-card">
-        <div id="alert-box" style="display:none; padding:10px; margin-bottom:15px; border-left:5px solid green; background:#e9ffe9; color:#333; font-weight: 500;"></div>
-        <form action="set_budget.php" method="POST">
-          <div class="form-group">
-            <label for="category">Choose Category:</label>
-            <select name="category_id" id="category" required>
-              <option disabled selected>Select one</option>
-              <option value="1">🍔 Food</option>
-              <option value="2">🚗 Transport</option>
-              <option value="3">💡 Utilities</option>
-              <option value="4">🎮 Entertainment</option>
-              <option value="5">🧑‍⚕️ Healthcare</option>
-              <option value="6">🗂️ Others</option>
-            </select>
-          </div>
+    <script src="set_budget.js"></script>
 
-          <div class="form-group">
-            <label for="amount">Budget Amount (RM):</label>
-            <input type="number" name="amount" id="amount" min="0" placeholder="Enter amount" required>
-          </div>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-          <div class="form-group">
-           <label for="month">Select Month:</label>
-           <input type="month" name="month" id="month" value="2025-06" required>
-          </div>
+        window.addEventListener("load", function () {
+            setTimeout(() => {
+                const piggyCount = 100; 
+                const spacing = 100;
+                const positions = [];
 
-          <button type="submit" class="btn-primary"><i class="fas fa-check-circle"></i> Save Budget</button>
-        </form>
-      </section>
+                const piggyContainer = document.querySelector('.piggy-container');
+                const fullHeight = Math.max(
+                    document.documentElement.scrollHeight,
+                    document.body.scrollHeight
+                );
 
-      <section class="tips-card">
-        <h3>💡 Tips for Smart Budgeting</h3>
-        <ul>
-          <li>Limit entertainment spending to max 30% of your income.</li>
-          <li>Keep at least 20% for savings or emergencies.</li>
-          <li>Track small expenses—they sneak up fast!</li>
-        </ul>
-      </section>
-
-    </div> 
-  </main>
-
-  <footer>
-      <div class="footercontainer">
-          <p>
-              <span class="footeryear">&copy; <span id="current-year"></span> SECV2223-05</span>
-              <span class="footergroup">Web Programming Group 4</span>
-          </p>
-      </div>
-  </footer>
-  <script src="set_budget.js"></script>
-
-  <script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    window.addEventListener("load", function () {
-        setTimeout(() => {
-            const piggyCount = 80; 
-            const positions = [];
-
-            const piggyContainer = document.querySelector('.piggy-container');
-            const fullHeight = Math.max(
-                document.documentElement.scrollHeight,
-                document.body.scrollHeight
-            );
-
-            function isTooClose(x, y) {
-                return positions.some(pos => {
-                    const dx = pos.x - x;
-                    const dy = pos.y - y;
-                    return Math.sqrt(dx * dx + dy * dy) < spacing;
-                });
-            }
-
-            for (let i = 0; i < piggyCount; i++) {
-                let x, y, attempts = 0;
-
-                do {
-                    x = Math.random() * window.innerWidth;
-                    y = Math.random() * fullHeight;
-                    attempts++;
-                } while (isTooClose(x, y) && attempts < 100);
-
-                positions.push({ x, y });
-
-                const piggy = document.createElement("div");
-                piggy.className = "floating-piggy";
-
-                const size = 2 + Math.random() * 3; 
-                piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
-
-                piggy.style.left = `${x}px`;
-                piggy.style.top = `${y}px`;
-                piggy.style.animationDelay = `${Math.random() * 6}s`;
-                piggy.style.opacity = 0.08 + Math.random() * 0.15; 
-
-                piggyContainer.appendChild(piggy);
-            }
-
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        const scrollTop = window.pageYOffset;
-                        const piggies = document.querySelectorAll('.floating-piggy');
-                        piggies.forEach(piggy => {
-                            const currentTop = parseInt(piggy.style.top);
-                            const viewportTop = scrollTop - window.innerHeight;
-                            const viewportBottom = scrollTop + window.innerHeight * 2;
-                            
-                            if (currentTop < viewportTop) {
-                                piggy.style.top = (viewportBottom + Math.random() * window.innerHeight) + 'px';
-                            } else if (currentTop > viewportBottom) {
-                                piggy.style.top = (viewportTop - Math.random() * window.innerHeight) + 'px';
-                            }
-                        });
-                        ticking = false;
+                function isTooClose(x, y) {
+                    return positions.some(pos => {
+                        const dx = pos.x - x;
+                        const dy = pos.y - y;
+                        return Math.sqrt(dx * dx + dy * dy) < spacing;
                     });
-                    ticking = true;
                 }
-            });
-        }, 0);
-    });
-  </script>
 
+                for (let i = 0; i < piggyCount; i++) {
+                    let x, y, attempts = 0;
+
+                    do {
+                        x = Math.random() * window.innerWidth;
+                        y = Math.random() * fullHeight;
+                        attempts++;
+                    } while (isTooClose(x, y) && attempts < 100);
+
+                    positions.push({ x, y });
+
+                    const piggy = document.createElement("div");
+                    piggy.className = "floating-piggy";
+
+                    const size = 2 + Math.random() * 3; 
+                    piggy.innerHTML = `<i class="fas fa-piggy-bank" style="font-size: ${size}rem;"></i>`;
+
+                    piggy.style.left = `${x}px`;
+                    piggy.style.top = `${y}px`;
+                    piggy.style.animationDelay = `${Math.random() * 6}s`;
+                    piggy.style.opacity = 0.08 + Math.random() * 0.15; 
+
+                    piggyContainer.appendChild(piggy);
+                }
+
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const scrollTop = window.pageYOffset;
+                            const piggies = document.querySelectorAll('.floating-piggy');
+                            piggies.forEach(piggy => {
+                                const currentTop = parseInt(piggy.style.top);
+                                const viewportTop = scrollTop - window.innerHeight;
+                                const viewportBottom = scrollTop + window.innerHeight * 2;
+                                
+                                if (currentTop < viewportTop) {
+                                    piggy.style.top = (viewportBottom + Math.random() * window.innerHeight) + 'px';
+                                } else if (currentTop > viewportBottom) {
+                                    piggy.style.top = (viewportTop - Math.random() * window.innerHeight) + 'px';
+                                }
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+            }, 0);
+        });
+    </script>
 </body>
 </html>

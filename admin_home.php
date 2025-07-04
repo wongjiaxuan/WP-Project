@@ -218,7 +218,7 @@ $total_transactions = $result->fetch_row()[0] ?? 0;
 
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 90; 
+                const piggyCount = 100; 
                 const spacing = 100;
                 const positions = [];
 

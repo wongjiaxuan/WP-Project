@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.addEventListener("load", function () {
     setTimeout(() => {
-        const piggyCount = 90; 
+        const piggyCount = 100; 
         const spacing = 100;
         const positions = [];
         const piggyContainer = document.querySelector('.piggy-container');

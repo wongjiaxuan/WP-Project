@@ -443,7 +443,7 @@
 
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 60; 
+                const piggyCount = 200; 
                 const spacing = 100;
                 const positions = [];
                 const piggyContainer = document.querySelector('.piggy-container');

@@ -160,7 +160,7 @@
         
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 60; 
+                const piggyCount = 100; 
                 const spacing = 100;
                 const positions = [];
 

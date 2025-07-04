@@ -328,7 +328,7 @@ if ($result_income) {
     <script>
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 90; 
+                const piggyCount = 80; 
                 const spacing = 100;
                 const positions = [];
                 const piggyContainer = document.querySelector('.piggy-container');
