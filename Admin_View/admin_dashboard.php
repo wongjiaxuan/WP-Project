@@ -1,6 +1,6 @@
 <?php
 require_once 'admin_header.php';
-require_once 'includes/db.php';
+require_once '../includes/db.php';
 
 $selected_month_str = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 $timestamp = strtotime($selected_month_str);
@@ -142,7 +142,7 @@ if ($result_income) {
                     <div class="incomesummarycards">
 
                         <div class="income-card">
-                            <img src="img/Salary_income.png" alt="Salary total">
+                            <img src="../img/Salary_income.png" alt="Salary total">
                             <div class="income-info">
                                 <h3>Salary</h3>
                                 <p>RM<?= number_format($salary_total, 2) ?></p>
@@ -150,7 +150,7 @@ if ($result_income) {
                         </div>
 
                         <div class="income-card">
-                            <img src="img/Bonus_income.png" alt="Bonus total">
+                            <img src="../img/Bonus_income.png" alt="Bonus total">
                             <div class="income-info">
                                 <h3>Bonus</h3>
                                 <p>RM<?= number_format($bonus_total, 2) ?></p>
@@ -158,7 +158,7 @@ if ($result_income) {
                         </div>
 
                         <div class="income-card">
-                            <img src="img/Investment_income.png" alt="Investment total">
+                            <img src="../img/Investment_income.png" alt="Investment total">
                             <div class="income-info">
                                 <h3>Investment</h3>
                                 <p>RM<?= number_format($investment_total, 2) ?></p>
@@ -166,7 +166,7 @@ if ($result_income) {
                         </div>
 
                         <div class="income-card">
-                            <img src="img/Others_income.png" alt="Other income">
+                            <img src="../img/Others_income.png" alt="Other income">
                             <div class="income-info">
                                 <h3>Others</h3>
                                 <p>RM<?= number_format($others_total, 2) ?></p>
@@ -181,7 +181,7 @@ if ($result_income) {
                 <h2>Total Expenses (All Users)</h2>
                 <div class="expensesummary">
                     <div class="bar-card">
-                        <img src="img/Food.png" alt="Food summary">
+                        <img src="../img/Food.png" alt="Food summary">
                         <h3>Food</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">
@@ -196,7 +196,7 @@ if ($result_income) {
                     </div>
 
                     <div class="bar-card">
-                        <img src="img/Transport.png" alt="Transport summary">
+                        <img src="../img/Transport.png" alt="Transport summary">
                         <h3>Transport</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">
@@ -211,7 +211,7 @@ if ($result_income) {
                     </div>
 
                     <div class="bar-card">
-                        <img src="img/Utilities.png" alt="Utilities summary">
+                        <img src="../img/Utilities.png" alt="Utilities summary">
                         <h3>Utilities</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">
@@ -226,7 +226,7 @@ if ($result_income) {
                     </div>
 
                     <div class="bar-card">
-                        <img src="img/Entertainment.png" alt="Entertainment summary">
+                        <img src="../img/Entertainment.png" alt="Entertainment summary">
                         <h3>Entertainment</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">
@@ -241,7 +241,7 @@ if ($result_income) {
                     </div>
 
                     <div class="bar-card">
-                        <img src="img/Healthcare.png" alt="Healthcare summary">
+                        <img src="../img/Healthcare.png" alt="Healthcare summary">
                         <h3>Healthcare</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">
@@ -256,7 +256,7 @@ if ($result_income) {
                     </div>
 
                     <div class="bar-card">
-                        <img src="img/Others.png" alt="Others summary">
+                        <img src="../img/Others.png" alt="Others summary">
                         <h3>Others</h3>
                         <div class="category-bar">
                             <div class="category-bar-labels">

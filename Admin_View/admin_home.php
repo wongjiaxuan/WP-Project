@@ -1,7 +1,7 @@
 <?php
 
 require_once 'admin_header.php';
-require_once 'includes/db.php';
+require_once '../includes/db.php';
 
 $admin_id = $_SESSION['user_id'];
 

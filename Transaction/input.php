@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <title>Jimat Master Input</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An online budget tracker simplifies user's work on managing income, expenses and savings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <script src="script.js" defer></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
     <?php
     session_start();
     date_default_timezone_set('Asia/Kuala_Lumpur');
     if (!isset($_SESSION['user_id'])) {
-        header("Location: index.php?error=Please log in first.");
+        header("Location: ../index.php?error=Please log in first.");
         exit();
     }
     
@@ -38,12 +38,12 @@
             <div class="headername">Jimat Master</div>
             <i class="fa-solid fa-bars" id="menuicon"></i>
             <ul class="menu">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="input.php" class="active">Transaction Input</a></li>
-                <li><a href="set_budget.html">Monthly Budget</a></li>
-                <li><a href="overview.php">Transaction Overview</a></li>
-                <li><a href="dashboard.php">Finance Dashboard</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="../home.php">Home</a></li>
+                <li><a href="../Transaction/input.php" class="active">Transaction Input</a></li>
+                <li><a href="../Set_Budget/set_budget.html">Monthly Budget</a></li>
+                <li><a href="../Transaction/overview.php">Transaction Overview</a></li>
+                <li><a href="../Dashboard/dashboard.php">Finance Dashboard</a></li>
+                <li><a href="../logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -68,7 +68,7 @@
                     <label for="category_id">Category:</label>
                     <select name="category_id" id="category_id" required>
                         <?php
-                        include 'includes/db.php';
+                        include '../includes/db.php';
                         $result = $conn->query("SELECT * FROM categories WHERE type = 'income'");
                         while ($row = $result->fetch_assoc()) {
                             $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';
@@ -100,7 +100,7 @@
                     <label for="category_id">Category:</label>
                     <select name="category_id" id="category_id" required>
                         <?php
-                        include 'includes/db.php';
+                        include '../includes/db.php';
                         $result = $conn->query("SELECT * FROM categories WHERE type = 'expense'");
                         while ($row = $result->fetch_assoc()) {
                             $selected = (isset($_POST['category_id']) && $_POST['category_id'] == $row['category_id']) ? 'selected' : '';

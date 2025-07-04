@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             !preg_match('/[A-Z]/', $password) ||
             !preg_match('/[a-z]/', $password) ||
             !preg_match('/[0-9]/', $password) ||
-            !preg_match('/[\W]/', $password) // \W checks for any non-word character (i.e., special symbol)
+            !preg_match('/[\W]/', $password) 
         ) {
             header("Location: signup.php?error=Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number and one special character.");
             exit();

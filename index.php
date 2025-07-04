@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $_SESSION['role'] = $row['role'];
     
                         if ($row['role'] === 'admin') {
-                            header("Location: admin_home.php");
+                            header("Location: Admin_View/admin_home.php");
                         } else {
                             header("Location: home.php");
                         }

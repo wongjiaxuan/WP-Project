@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <title>Jimat Master Overview</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An online budget tracker simplifies user's work on managing income, expenses and savings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <script src="script.js" defer></script>
+    <script src="../script.js" defer></script>
 </head>
 
 <body>
@@ -16,11 +16,11 @@
     <?php
 
     session_start();
-    include 'includes/db.php';
+    include '../includes/db.php';
 
  
     if (!isset($_SESSION['user_id'])) {
-        header("Location: index.php?error=Please log in first.");
+        header("Location: ../index.php?error=Please log in first.");
         exit();
     }
 
@@ -32,12 +32,12 @@
             <div class="headername">Jimat Master</div>
             <i class="fa-solid fa-bars" id="menuicon"></i>
             <ul class="menu">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="input.php">Transaction Input</a></li>
-                <li><a href="set_budget.html">Monthly Budget</a></li>
-                <li><a href="overview.php" class="active">Transaction Overview</a></li>
-                <li><a href="dashboard.php">Finance Dashboard</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="../home.php">Home</a></li>
+                <li><a href="../Transaction/input.php">Transaction Input</a></li>
+                <li><a href="../Set_Budget/set_budget.html">Monthly Budget</a></li>
+                <li><a href="../Transaction/overview.php" class="active">Transaction Overview</a></li>
+                <li><a href="../Dashboard/dashboard.php">Finance Dashboard</a></li>
+                <li><a href="../logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -443,7 +443,7 @@
 
         window.addEventListener("load", function () {
             setTimeout(() => {
-                const piggyCount = 200; 
+                const piggyCount = 100; 
                 const spacing = 100;
                 const positions = [];
                 const piggyContainer = document.querySelector('.piggy-container');

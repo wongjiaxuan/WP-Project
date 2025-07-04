@@ -77,10 +77,10 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
             <i class="fa-solid fa-bars" id="menuicon"></i>
             <ul class="menu">
                 <li><a href="home.php" class="active">Home</a></li>
-                <li><a href="input.php">Transaction Input</a></li>
-                <li><a href="set_budget.html">Monthly Budget</a></li>
-                <li><a href="overview.php">Transaction Overview</a></li>
-                <li><a href="dashboard.php">Finance Dashboard</a></li>
+                <li><a href="Transaction/input.php">Transaction Input</a></li>
+                <li><a href="Set_Budget/set_budget.html">Monthly Budget</a></li>
+                <li><a href="Transaction/overview.php">Transaction Overview</a></li>
+                <li><a href="Dashboard/dashboard.php">Finance Dashboard</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
@@ -145,19 +145,19 @@ $budget_used_percentage = $monthly_budget > 0 ? ($total_expenses / $monthly_budg
 
  
             <div class="quick-actions">
-                <a href="input.php" class="action-btn" data-tooltip="Add a new income or expense transaction">
+                <a href="Transaction/input.php" class="action-btn" data-tooltip="Add a new income or expense transaction">
                     <i class="fas fa-plus action-icon"></i>
                     <span>Add Transaction</span>
                 </a>
-                <a href="set_budget.html" class="action-btn" data-tooltip="Set or update your monthly budget">
-                    <i class="fas fa-target action-icon"></i>
+                <a href="Set_Budget/set_budget.html" class="action-btn" data-tooltip="Set or update your monthly budget">
+                    <i class="fas fa-bullseye action-icon"></i>
                     <span>Set Budget</span>
                 </a>
-                <a href="overview.php" class="action-btn" data-tooltip="View all your transactions">
+                <a href="Transaction/overview.php" class="action-btn" data-tooltip="View all your transactions">
                     <i class="fas fa-list action-icon"></i>
                     <span>View Transactions</span>
                 </a>
-                <a href="dashboard.php" class="action-btn" data-tooltip="See detailed financial analytics">
+                <a href="Dashboard/dashboard.php" class="action-btn" data-tooltip="See detailed financial analytics">
                     <i class="fas fa-chart-bar action-icon"></i>
                     <span>Analytics</span>
                 </a>

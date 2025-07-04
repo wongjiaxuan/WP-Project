@@ -1,6 +1,6 @@
 <?php
 require_once 'admin_header.php';
-require_once 'includes/db.php';
+require_once '../includes/db.php';
 
 
 $transaction_type = $_GET['type'] ?? 'all';

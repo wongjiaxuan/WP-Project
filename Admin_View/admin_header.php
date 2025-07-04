@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         ?>
     </title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
         @media (max-width: 1499px) {
@@ -50,7 +50,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="admin_home.php" class="<?= $current_page === 'admin_home.php' ? 'active' : '' ?>">Home</a></li>
             <li><a href="admin_overview.php" class="<?= $current_page === 'admin_overview.php' ? 'active' : '' ?>">All Transactions</a></li>
             <li><a href="admin_dashboard.php" class="<?= $current_page === 'admin_dashboard.php' ? 'active' : '' ?>">Finance Statistics</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="../logout.php">Logout</a></li>
         </ul>
     </nav>
 </header>
