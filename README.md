@@ -19,8 +19,8 @@ Jimat Master is an online personal finance and budget tracking application desig
 
 ## 🛠️ Technologies Used
 
-* **Frontend**: HTML5, CSS3, Vanilla JavaScript
-* **Backend**: PHP (Session Management, MySQLi)
+* **Frontend**: HTML, CSS3, JavaScript
+* **Backend**: PHP 
 * **Database**: MySQL
 * **Assets/Icons**: FontAwesome 6
 
